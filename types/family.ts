@@ -1,3 +1,11 @@
+export interface MediaItem {
+  id: string;
+  url: string;
+  type: "photo" | "document";
+  /** Original uploaded filename, shown for documents and used as photo alt text. */
+  filename: string;
+}
+
 export interface Person {
   id: string;
   firstName: string;
@@ -12,4 +20,6 @@ export interface Person {
   children: string[];
   /** Marriage date per spouse id, e.g. { p2: "1990-05-01" }. Missing key = unknown date. */
   marriageDates: Record<string, string>;
+  /** Extra photos and documents, shown in the person's detail view. */
+  gallery: MediaItem[];
 }

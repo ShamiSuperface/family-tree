@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import type { Person } from "@/types/family";
 import { ageWord } from "@/lib/dateUtils";
+import { hebrewDateOf } from "@/lib/hebrewDate";
 import { buildEvents, type FamilyEvent } from "@/lib/events";
 
 const TYPE_ICON: Record<FamilyEvent["type"], string> = {
@@ -29,9 +30,11 @@ function eventYearsLabel(event: FamilyEvent, byId: Map<string, Person>): string 
 
 function formatWhen(daysUntil: number, date: Date): string {
   const dateStr = date.toLocaleDateString("he-IL", { day: "numeric", month: "long" });
-  if (daysUntil === 0) return `היום! (${dateStr})`;
-  if (daysUntil === 1) return `מחר (${dateStr})`;
-  return `בעוד ${daysUntil} ימים (${dateStr})`;
+  const hebrewStr = hebrewDateOf(date);
+  const full = `${dateStr}, ${hebrewStr}`;
+  if (daysUntil === 0) return `היום! (${full})`;
+  if (daysUntil === 1) return `מחר (${full})`;
+  return `בעוד ${daysUntil} ימים (${full})`;
 }
 
 export default function CalendarPage() {

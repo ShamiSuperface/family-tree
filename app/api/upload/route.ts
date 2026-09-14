@@ -8,6 +8,7 @@ const ALLOWED_TYPES: Record<string, string> = {
   "image/png": "png",
   "image/webp": "webp",
   "image/gif": "gif",
+  "application/pdf": "pdf",
 };
 const MAX_SIZE = 5 * 1024 * 1024;
 
@@ -24,7 +25,7 @@ export async function POST(request: Request) {
 
   const ext = ALLOWED_TYPES[file.type];
   if (!ext) {
-    return NextResponse.json({ error: "סוג קובץ לא נתמך (רק תמונות)" }, { status: 400 });
+    return NextResponse.json({ error: "סוג קובץ לא נתמך (רק תמונות או PDF)" }, { status: 400 });
   }
   if (file.size > MAX_SIZE) {
     return NextResponse.json({ error: "הקובץ גדול מדי (מקסימום 5MB)" }, { status: 400 });

@@ -1,6 +1,6 @@
 import { readFile, writeFile } from "fs/promises";
 import path from "path";
-import type { Person } from "@/types/family";
+import type { MediaItem, Person } from "@/types/family";
 
 const DATA_PATH = path.join(process.cwd(), "data", "family.json");
 
@@ -16,13 +16,18 @@ export interface PersonInput {
   spouses: string[];
   children: string[];
   marriageDates: Record<string, string>;
+  gallery: MediaItem[];
 }
 
 export async function readPeople(): Promise<Person[]> {
   const raw = await readFile(DATA_PATH, "utf-8");
   const people = JSON.parse(raw) as Person[];
-  // Backward-compatible with records saved before marriageDates existed.
-  return people.map((person) => ({ ...person, marriageDates: person.marriageDates ?? {} }));
+  // Backward-compatible with records saved before marriageDates/gallery existed.
+  return people.map((person) => ({
+    ...person,
+    marriageDates: person.marriageDates ?? {},
+    gallery: person.gallery ?? [],
+  }));
 }
 
 async function writePeople(people: Person[]): Promise<void> {

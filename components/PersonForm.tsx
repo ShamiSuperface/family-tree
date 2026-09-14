@@ -1,7 +1,7 @@
 "use client";
 
 import { useId, useState, type ChangeEvent, type FormEvent } from "react";
-import type { Person } from "@/types/family";
+import type { MediaItem, Person } from "@/types/family";
 import type { PersonInput } from "@/lib/peopleStore";
 import PartialDateInput from "./PartialDateInput";
 
@@ -26,6 +26,7 @@ function toInput(person?: Person): PersonInput {
     spouses: person?.spouses ?? [],
     children: person?.children ?? [],
     marriageDates: person?.marriageDates ?? {},
+    gallery: person?.gallery ?? [],
   };
 }
 
@@ -131,6 +132,8 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
+  const [galleryUploading, setGalleryUploading] = useState(false);
+  const [galleryError, setGalleryError] = useState<string | null>(null);
   const uid = useId();
 
   const otherPeople = people.filter((p) => p.id !== initial?.id);
@@ -166,6 +169,39 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
       setUploading(false);
       e.target.value = "";
     }
+  };
+
+  const handleGalleryChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files ?? []);
+    if (files.length === 0) return;
+    setGalleryUploading(true);
+    setGalleryError(null);
+    try {
+      const uploaded: MediaItem[] = [];
+      for (const file of files) {
+        const formData = new FormData();
+        formData.append("file", file);
+        const res = await fetch("/api/upload", { method: "POST", body: formData });
+        const data = (await res.json()) as { path?: string; error?: string };
+        if (!res.ok || !data.path) throw new Error(data.error ?? `שגיאה בהעלאת ${file.name}`);
+        uploaded.push({
+          id: crypto.randomUUID(),
+          url: data.path,
+          type: file.type === "application/pdf" ? "document" : "photo",
+          filename: file.name,
+        });
+      }
+      setInput((prev) => ({ ...prev, gallery: [...prev.gallery, ...uploaded] }));
+    } catch (err) {
+      setGalleryError(err instanceof Error ? err.message : "שגיאה בהעלאת קבצים");
+    } finally {
+      setGalleryUploading(false);
+      e.target.value = "";
+    }
+  };
+
+  const removeGalleryItem = (id: string) => {
+    setInput((prev) => ({ ...prev, gallery: prev.gallery.filter((item) => item.id !== id) }));
   };
 
   return (
@@ -264,6 +300,60 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
             rows={4}
             className="w-full resize-none rounded-lg border-2 border-amber-400 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-600"
           />
+        </div>
+
+        <div>
+          <label className="mb-1 block text-sm font-medium text-stone-700">
+            גלריה (תמונות ומסמכים נוספים)
+          </label>
+          {input.gallery.length > 0 && (
+            <ul className="mb-2 grid grid-cols-3 gap-2">
+              {input.gallery.map((item) => (
+                <li key={item.id} className="relative rounded-lg border-2 border-amber-300 p-1">
+                  {item.type === "photo" ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={item.url}
+                      alt={item.filename}
+                      className="h-16 w-full rounded object-cover"
+                    />
+                  ) : (
+                    <a
+                      href={item.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex h-16 items-center justify-center rounded bg-amber-50 text-2xl"
+                    >
+                      📄
+                    </a>
+                  )}
+                  <p className="mt-1 truncate text-center text-xs text-stone-600" title={item.filename}>
+                    {item.filename}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => removeGalleryItem(item.id)}
+                    aria-label={`הסרת ${item.filename}`}
+                    className="absolute -top-1.5 -right-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-red-600 text-xs text-white hover:bg-red-700"
+                  >
+                    ✕
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+          <label className="inline-block cursor-pointer rounded-lg border-2 border-amber-500 px-3 py-2 text-sm font-medium text-amber-900 hover:bg-amber-50">
+            {galleryUploading ? "מעלה..." : "+ הוספת תמונות/מסמכים"}
+            <input
+              type="file"
+              accept="image/*,application/pdf"
+              multiple
+              onChange={handleGalleryChange}
+              disabled={galleryUploading}
+              className="hidden"
+            />
+          </label>
+          {galleryError && <p className="mt-1 text-sm text-red-600">{galleryError}</p>}
         </div>
 
         <RelationPicker

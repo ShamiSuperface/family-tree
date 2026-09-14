@@ -3,12 +3,19 @@
 import { useEffect } from "react";
 import type { Person } from "@/types/family";
 import { formatPersonDate } from "@/lib/dateUtils";
+import { toHebrewDateString } from "@/lib/hebrewDate";
 
 interface Props {
   person: Person | null;
   people: Person[];
   onClose: () => void;
   onEdit?: (person: Person) => void;
+}
+
+function formatDateLine(date: string | null): string {
+  const gregorian = formatPersonDate(date);
+  const hebrew = toHebrewDateString(date);
+  return hebrew ? `${gregorian} (${hebrew})` : gregorian;
 }
 
 export default function PersonDetailPanel({ person, people, onClose, onEdit }: Props) {
@@ -69,8 +76,8 @@ export default function PersonDetailPanel({ person, people, onClose, onEdit }: P
         </h2>
 
         <p className="mt-1 text-center text-sm font-medium text-amber-800">
-          {formatPersonDate(person.birthDate)}
-          {person.deathDate ? ` – ${formatPersonDate(person.deathDate)}` : ""}
+          {formatDateLine(person.birthDate)}
+          {person.deathDate ? ` – ${formatDateLine(person.deathDate)}` : ""}
         </p>
 
         {marriages.length > 0 && (
@@ -88,6 +95,46 @@ export default function PersonDetailPanel({ person, people, onClose, onEdit }: P
           <p className="mt-6 whitespace-pre-line leading-relaxed text-stone-700">
             {person.bio}
           </p>
+        )}
+
+        {person.gallery.length > 0 && (
+          <div className="mt-6">
+            <h3 className="mb-2 text-sm font-semibold text-amber-900">גלריה</h3>
+            <div className="grid grid-cols-3 gap-2">
+              {person.gallery.map((item) =>
+                item.type === "photo" ? (
+                  <a
+                    key={item.id}
+                    href={item.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    title={item.filename}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={item.url}
+                      alt={item.filename}
+                      className="h-20 w-full rounded-lg border-2 border-amber-300 object-cover"
+                    />
+                  </a>
+                ) : (
+                  <a
+                    key={item.id}
+                    href={item.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    title={item.filename}
+                    className="flex h-20 flex-col items-center justify-center gap-1 rounded-lg border-2 border-amber-300 bg-amber-50 px-1 text-amber-800"
+                  >
+                    <span className="text-2xl">📄</span>
+                    <span className="line-clamp-1 w-full text-center text-[10px]">
+                      {item.filename}
+                    </span>
+                  </a>
+                ),
+              )}
+            </div>
+          </div>
         )}
       </div>
     </div>
