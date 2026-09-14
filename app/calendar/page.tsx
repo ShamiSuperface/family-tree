@@ -11,16 +11,16 @@ const TYPE_ICON: Record<FamilyEvent["type"], string> = {
   anniversary: "💍",
 };
 
-const TYPE_LABEL: Record<FamilyEvent["type"], (years: number) => string> = {
-  birthday: (years) => `בן/בת ${years}`,
-  memorial: (years) => `${years} שנים`,
-  anniversary: (years) => `${years} שנות נישואין`,
+const TYPE_LABEL: Record<FamilyEvent["type"], (years: number | null) => string> = {
+  birthday: (years) => (years !== null ? `בן/בת ${years}` : ""),
+  memorial: (years) => (years !== null ? `${years} שנים` : ""),
+  anniversary: (years) => (years !== null ? `${years} שנות נישואין` : ""),
 };
 
 function formatWhen(daysUntil: number, date: Date): string {
-  if (daysUntil === 0) return "היום!";
-  if (daysUntil === 1) return "מחר";
   const dateStr = date.toLocaleDateString("he-IL", { day: "numeric", month: "long" });
+  if (daysUntil === 0) return `היום! (${dateStr})`;
+  if (daysUntil === 1) return `מחר (${dateStr})`;
   return `בעוד ${daysUntil} ימים (${dateStr})`;
 }
 
@@ -72,7 +72,8 @@ export default function CalendarPage() {
                 <div className="min-w-0 flex-1">
                   <p className="truncate font-medium text-stone-900">{event.title}</p>
                   <p className="text-sm text-amber-700">
-                    {formatWhen(event.daysUntil, event.nextDate)} · {TYPE_LABEL[event.type](event.yearsCount)}
+                    {formatWhen(event.daysUntil, event.nextDate)}
+                    {TYPE_LABEL[event.type](event.yearsCount) && ` · ${TYPE_LABEL[event.type](event.yearsCount)}`}
                   </p>
                 </div>
               </li>

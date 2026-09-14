@@ -1,12 +1,36 @@
-/** Dates are stored either as a full "YYYY-MM-DD" string, a year-only "YYYY" string, or null. */
+/**
+ * Dates are stored as one of:
+ * - "YYYY-MM-DD" — a full, exact date
+ * - "YYYY" — only the year is known (birth/death dates)
+ * - "MM-DD" — only the day and month are known, no year (marriage dates)
+ * - null — unknown
+ */
 
 export function isYearOnly(date: string | null): boolean {
   return !!date && /^\d{4}$/.test(date);
 }
 
+export function isMonthDayOnly(date: string | null): boolean {
+  return !!date && /^\d{2}-\d{2}$/.test(date);
+}
+
+/** The year to show on a compact card, or "?" when only day/month (no year) is known. */
+export function dateYear(date: string | null): string {
+  if (!date) return "?";
+  if (isMonthDayOnly(date)) return "?";
+  return date.slice(0, 4);
+}
+
 export function formatPersonDate(date: string | null): string {
   if (!date) return "לא ידוע";
   if (isYearOnly(date)) return date;
+  if (isMonthDayOnly(date)) {
+    const [month, day] = date.split("-").map(Number);
+    return new Date(2000, month - 1, day).toLocaleDateString("he-IL", {
+      day: "numeric",
+      month: "long",
+    });
+  }
   return new Date(date).toLocaleDateString("he-IL", {
     year: "numeric",
     month: "long",

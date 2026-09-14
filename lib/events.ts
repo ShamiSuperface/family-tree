@@ -1,5 +1,5 @@
 import type { Person } from "@/types/family";
-import { isYearOnly } from "@/lib/dateUtils";
+import { isYearOnly, isMonthDayOnly } from "@/lib/dateUtils";
 
 export type FamilyEventType = "birthday" | "memorial" | "anniversary";
 
@@ -10,7 +10,8 @@ export interface FamilyEvent {
   personIds: string[];
   nextDate: Date;
   daysUntil: number;
-  yearsCount: number;
+  /** null when only the day/month is known (e.g. a marriage date without a year). */
+  yearsCount: number | null;
 }
 
 function startOfDay(date: Date): Date {
@@ -64,7 +65,7 @@ export function buildEvents(people: Person[], now: Date = new Date()): FamilyEve
     for (const spouseId of person.spouses) {
       if (person.id < spouseId) {
         const dateStr = person.marriageDates[spouseId];
-        if (dateStr && !isYearOnly(dateStr)) {
+        if (dateStr) {
           const spouse = byId.get(spouseId);
           raw.push({
             type: "anniversary",
@@ -79,13 +80,21 @@ export function buildEvents(people: Person[], now: Date = new Date()): FamilyEve
 
   return raw
     .map((item) => {
-      const [yearStr, monthStr, dayStr] = item.dateStr.split("-");
-      const year = Number(yearStr);
-      const month = Number(monthStr);
-      const day = Number(dayStr);
+      let month: number;
+      let day: number;
+      let year: number | null;
+      if (isMonthDayOnly(item.dateStr)) {
+        [month, day] = item.dateStr.split("-").map(Number);
+        year = null;
+      } else {
+        const [yearStr, monthStr, dayStr] = item.dateStr.split("-");
+        year = Number(yearStr);
+        month = Number(monthStr);
+        day = Number(dayStr);
+      }
       const nextDate = nextOccurrence(month, day, today);
       const daysUntil = Math.round((nextDate.getTime() - today.getTime()) / 86400000);
-      const yearsCount = nextDate.getFullYear() - year;
+      const yearsCount = year !== null ? nextDate.getFullYear() - year : null;
       return {
         id: `${item.type}-${item.personIds.join("-")}`,
         type: item.type,

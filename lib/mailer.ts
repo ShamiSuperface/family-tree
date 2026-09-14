@@ -20,8 +20,14 @@ function escapeHtml(text: string): string {
     .replace(/>/g, "&gt;");
 }
 
+function formatEventDate(date: Date): string {
+  return date.toLocaleDateString("he-IL", { day: "numeric", month: "long" });
+}
+
 export function eventsEmailText(events: FamilyEvent[]): string {
-  const lines = events.map((event) => `• ${TYPE_LABEL[event.type]}: ${event.title}`);
+  const lines = events.map(
+    (event) => `• ${TYPE_LABEL[event.type]}: ${event.title} — ${formatEventDate(event.nextDate)}`,
+  );
   return `תזכורת לאירועים משפחתיים שחלים מחר:\n\n${lines.join("\n")}`;
 }
 
@@ -32,6 +38,7 @@ export function eventsEmailHtml(events: FamilyEvent[]): string {
         <li style="margin-bottom: 10px; font-size: 16px;">
           <span style="font-size: 20px;">${TYPE_ICON[event.type]}</span>
           <strong>${TYPE_LABEL[event.type]}:</strong> ${escapeHtml(event.title)}
+          <span style="color: #b45309;">— ${formatEventDate(event.nextDate)}</span>
         </li>`,
     )
     .join("");

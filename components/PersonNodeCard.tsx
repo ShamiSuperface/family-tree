@@ -2,6 +2,7 @@
 
 import type { ExtNode } from "relatives-tree/lib/types";
 import type { Person } from "@/types/family";
+import { dateYear } from "@/lib/dateUtils";
 
 interface Props {
   person: Person;
@@ -14,8 +15,8 @@ interface Props {
 const GAP = 10;
 
 export default function PersonNodeCard({ person, node, width, height, onClick }: Props) {
-  const birthYear = person.birthDate?.slice(0, 4) ?? "?";
-  const deathYear = person.deathDate?.slice(0, 4);
+  const birthYear = dateYear(person.birthDate);
+  const deathYear = person.deathDate ? dateYear(person.deathDate) : null;
   const fullName = `${person.firstName} ${person.lastName}`;
 
   return (

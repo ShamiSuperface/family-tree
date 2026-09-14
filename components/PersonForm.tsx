@@ -3,7 +3,7 @@
 import { useId, useState, type ChangeEvent, type FormEvent } from "react";
 import type { Person } from "@/types/family";
 import type { PersonInput } from "@/lib/peopleStore";
-import FlexibleDateInput from "./FlexibleDateInput";
+import PartialDateInput from "./PartialDateInput";
 
 interface Props {
   people: Person[];
@@ -108,15 +108,13 @@ function SpousePicker({
                   {person.firstName} {person.lastName}
                 </label>
                 {checked && (
-                  <span className="flex items-center gap-1 text-xs text-stone-500">
-                    תאריך נישואין:
-                    <input
-                      type="date"
-                      value={marriageDates[person.id] ?? ""}
-                      onChange={(e) => onChangeDate(person.id, e.target.value)}
-                      className="rounded border border-amber-200 bg-white px-1.5 py-0.5 text-xs text-stone-900 outline-none focus:border-amber-500"
-                    />
-                  </span>
+                  <PartialDateInput
+                    id={`marriage-date-${person.id}`}
+                    label="תאריך נישואין"
+                    compact
+                    value={marriageDates[person.id] ?? null}
+                    onChange={(date) => onChangeDate(person.id, date ?? "")}
+                  />
                 )}
               </div>
             );
@@ -241,13 +239,13 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
         </div>
 
         <div className="grid grid-cols-2 gap-3">
-          <FlexibleDateInput
+          <PartialDateInput
             id={`${uid}-birthDate`}
             label="תאריך לידה"
             value={input.birthDate}
             onChange={(value) => setInput({ ...input, birthDate: value })}
           />
-          <FlexibleDateInput
+          <PartialDateInput
             id={`${uid}-deathDate`}
             label="תאריך פטירה"
             value={input.deathDate}
