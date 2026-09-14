@@ -6,6 +6,7 @@ import type { Person } from "@/types/family";
 interface Props {
   person: Person | null;
   onClose: () => void;
+  onEdit: (person: Person) => void;
 }
 
 function formatDate(date: string | null): string {
@@ -17,7 +18,7 @@ function formatDate(date: string | null): string {
   });
 }
 
-export default function PersonDetailPanel({ person, onClose }: Props) {
+export default function PersonDetailPanel({ person, onClose, onEdit }: Props) {
   useEffect(() => {
     if (!person) return;
     const onKeyDown = (e: KeyboardEvent) => {
@@ -38,13 +39,22 @@ export default function PersonDetailPanel({ person, onClose }: Props) {
         className="h-full w-full max-w-md overflow-y-auto bg-white p-6 shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <button
-          type="button"
-          onClick={onClose}
-          className="mb-4 rounded-full px-3 py-1 text-sm text-neutral-500 hover:bg-neutral-100"
-        >
-          סגירה ✕
-        </button>
+        <div className="mb-4 flex items-center justify-between">
+          <button
+            type="button"
+            onClick={onClose}
+            className="rounded-full px-3 py-1 text-sm text-neutral-500 hover:bg-neutral-100"
+          >
+            סגירה ✕
+          </button>
+          <button
+            type="button"
+            onClick={() => onEdit(person)}
+            className="rounded-full border border-neutral-300 px-3 py-1 text-sm text-neutral-700 hover:bg-neutral-100"
+          >
+            עריכה ✎
+          </button>
+        </div>
 
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
