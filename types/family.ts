@@ -23,3 +23,12 @@ export interface Person {
   /** Extra photos and documents, shown in the person's detail view. */
   gallery: MediaItem[];
 }
+
+export interface Memory {
+  id: string;
+  authorName: string;
+  text: string;
+  /** The person this memory is about, or null for a memory about the family in general. */
+  personId: string | null;
+  createdAt: string;
+}

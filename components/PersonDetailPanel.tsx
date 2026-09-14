@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect } from "react";
-import type { Person } from "@/types/family";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import type { Memory, Person } from "@/types/family";
 import { formatPersonDate } from "@/lib/dateUtils";
 import { toHebrewDateString } from "@/lib/hebrewDate";
 
@@ -19,6 +20,8 @@ function formatDateLine(date: string | null): string {
 }
 
 export default function PersonDetailPanel({ person, people, onClose, onEdit }: Props) {
+  const [memories, setMemories] = useState<Memory[]>([]);
+
   useEffect(() => {
     if (!person) return;
     const onKeyDown = (e: KeyboardEvent) => {
@@ -27,6 +30,20 @@ export default function PersonDetailPanel({ person, people, onClose, onEdit }: P
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [person, onClose]);
+
+  useEffect(() => {
+    if (!person) return;
+    let cancelled = false;
+    fetch("/api/memories")
+      .then((res) => (res.ok ? (res.json() as Promise<Memory[]>) : []))
+      .then((all) => {
+        if (!cancelled) setMemories(all.filter((m) => m.personId === person.id));
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [person]);
 
   if (!person) return null;
 
@@ -136,6 +153,33 @@ export default function PersonDetailPanel({ person, people, onClose, onEdit }: P
             </div>
           </div>
         )}
+
+        <div className="mt-6">
+          <div className="mb-2 flex items-center justify-between">
+            <h3 className="text-sm font-semibold text-amber-900">💬 זיכרונות</h3>
+            <Link
+              href={`/memories?personId=${person.id}`}
+              className="text-xs font-medium text-amber-700 hover:underline"
+            >
+              + הוספת זיכרון
+            </Link>
+          </div>
+          {memories.length === 0 ? (
+            <p className="text-sm text-stone-400">עדיין אין זיכרונות על {person.firstName}</p>
+          ) : (
+            <ul className="space-y-2">
+              {memories.map((memory) => (
+                <li
+                  key={memory.id}
+                  className="rounded-lg border-2 border-amber-200 bg-amber-50 p-2 text-sm"
+                >
+                  <p className="whitespace-pre-line text-stone-700">{memory.text}</p>
+                  <p className="mt-1 text-xs font-medium text-amber-700">— {memory.authorName}</p>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -1,0 +1,210 @@
+"use client";
+
+import { Suspense, useEffect, useState, type FormEvent } from "react";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import type { Memory, Person } from "@/types/family";
+
+function formatMemoryDate(iso: string): string {
+  return new Date(iso).toLocaleDateString("he-IL", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
+async function fetchMemories(): Promise<{ memories: Memory[]; unavailable: boolean }> {
+  const res = await fetch("/api/memories");
+  if (res.ok) return { memories: (await res.json()) as Memory[], unavailable: false };
+  return { memories: [], unavailable: true };
+}
+
+function MemoriesPageContent() {
+  const searchParams = useSearchParams();
+  const [people, setPeople] = useState<Person[]>([]);
+  const [memories, setMemories] = useState<Memory[] | null>(null);
+  const [memoriesUnavailable, setMemoriesUnavailable] = useState(false);
+  const [authorName, setAuthorName] = useState("");
+  const [personId, setPersonId] = useState<string>(searchParams.get("personId") ?? "");
+  const [text, setText] = useState("");
+  const [website, setWebsite] = useState(""); // honeypot
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const loadMemories = async () => {
+    const { memories: data, unavailable } = await fetchMemories();
+    setMemories(data);
+    setMemoriesUnavailable(unavailable);
+  };
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/people")
+      .then((res) => res.json())
+      .then((data: Person[]) => {
+        if (!cancelled) setPeople(data);
+      });
+    fetchMemories().then(({ memories: data, unavailable }) => {
+      if (!cancelled) {
+        setMemories(data);
+        setMemoriesUnavailable(unavailable);
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const peopleById = new Map(people.map((p) => [p.id, p]));
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/memories", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          authorName,
+          text,
+          personId: personId || null,
+          website,
+        }),
+      });
+      if (!res.ok) {
+        const data = (await res.json()) as { error?: string };
+        throw new Error(data.error ?? "שגיאה בשליחה");
+      }
+      setAuthorName("");
+      setText("");
+      setPersonId("");
+      await loadMemories();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "שגיאה בשליחה");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-amber-100 to-orange-100">
+      <header className="flex items-center justify-between border-b-2 border-amber-400 bg-gradient-to-l from-amber-200 via-orange-100 to-amber-100 px-6 py-4 shadow-md">
+        <div>
+          <h1 className="text-xl font-semibold text-amber-950">פינת זיכרונות</h1>
+          <p className="text-sm font-medium text-amber-900">
+            כל בן משפחה מוזמן לשתף זיכרון, סיפור או אנקדוטה
+          </p>
+        </div>
+        <Link
+          href="/"
+          className="rounded-lg border-2 border-amber-500 bg-white px-4 py-2 text-sm font-medium text-amber-900 hover:bg-amber-50"
+        >
+          חזרה לעץ
+        </Link>
+      </header>
+
+      <main className="mx-auto max-w-2xl px-4 py-8">
+        {memoriesUnavailable && (
+          <p className="mb-4 rounded-lg border-2 border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700">
+            פינת הזיכרונות עדיין לא מוגדרת (חסר חיבור למסד נתונים). זו הגדרה חד-פעמית שצריך להשלים.
+          </p>
+        )}
+
+        <form
+          onSubmit={handleSubmit}
+          className="mb-8 space-y-3 rounded-2xl border-2 border-amber-400 bg-white p-4 shadow-md"
+        >
+          <h2 className="text-sm font-semibold text-amber-900">הוספת זיכרון</h2>
+
+          <div className="grid grid-cols-2 gap-3">
+            <input
+              type="text"
+              required
+              placeholder="השם שלך"
+              value={authorName}
+              onChange={(e) => setAuthorName(e.target.value)}
+              maxLength={60}
+              className="w-full rounded-lg border-2 border-amber-400 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-600"
+            />
+            <select
+              value={personId}
+              onChange={(e) => setPersonId(e.target.value)}
+              className="w-full rounded-lg border-2 border-amber-400 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-600"
+            >
+              <option value="">כלל המשפחה</option>
+              {people.map((p) => (
+                <option key={p.id} value={p.id}>
+                  {p.firstName} {p.lastName}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <textarea
+            required
+            placeholder="הזיכרון שלך..."
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            rows={4}
+            maxLength={2000}
+            className="w-full resize-none rounded-lg border-2 border-amber-400 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-600"
+          />
+
+          {/* Honeypot — hidden from real visitors, catches simple bots. */}
+          <input
+            type="text"
+            value={website}
+            onChange={(e) => setWebsite(e.target.value)}
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            className="hidden"
+          />
+
+          {error && <p className="text-sm text-red-600">{error}</p>}
+
+          <button
+            type="submit"
+            disabled={submitting || memoriesUnavailable}
+            className="rounded-lg bg-amber-800 px-4 py-2 text-sm font-medium text-white hover:bg-amber-900 disabled:opacity-50"
+          >
+            {submitting ? "שולח..." : "שליחת זיכרון"}
+          </button>
+        </form>
+
+        {!memories ? (
+          <p className="text-center text-amber-900">טוען...</p>
+        ) : memoriesUnavailable ? null : memories.length === 0 ? (
+          <p className="text-center text-amber-900">עדיין אין זיכרונות. היו הראשונים לשתף!</p>
+        ) : (
+          <ul className="space-y-3">
+            {memories.map((memory) => {
+              const person = memory.personId ? peopleById.get(memory.personId) : undefined;
+              return (
+                <li
+                  key={memory.id}
+                  className="rounded-2xl border-2 border-amber-400 bg-white px-4 py-3 shadow-md"
+                >
+                  <p className="whitespace-pre-line text-stone-800">{memory.text}</p>
+                  <p className="mt-2 text-sm font-medium text-amber-800">
+                    — {memory.authorName}, {formatMemoryDate(memory.createdAt)}
+                    {person ? ` · על ${person.firstName} ${person.lastName}` : ""}
+                  </p>
+                </li>
+              );
+            })}
+          </ul>
+        )}
+      </main>
+    </div>
+  );
+}
+
+export default function MemoriesPage() {
+  return (
+    <Suspense>
+      <MemoriesPageContent />
+    </Suspense>
+  );
+}

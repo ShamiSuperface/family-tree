@@ -120,6 +120,12 @@ export default function Home() {
           >
             📅 לוח אירועים
           </Link>
+          <Link
+            href="/memories"
+            className="rounded-lg border-2 border-amber-500 bg-white px-4 py-2 text-sm font-medium text-amber-900 hover:bg-amber-50"
+          >
+            💬 פינת זיכרונות
+          </Link>
           {people && people.length > 0 && (
             <button
               type="button"
