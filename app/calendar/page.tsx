@@ -11,11 +11,17 @@ const TYPE_ICON: Record<FamilyEvent["type"], string> = {
   anniversary: "💍",
 };
 
-const TYPE_LABEL: Record<FamilyEvent["type"], (years: number | null) => string> = {
-  birthday: (years) => (years !== null ? `בן/בת ${years}` : ""),
-  memorial: (years) => (years !== null ? `${years} שנים` : ""),
-  anniversary: (years) => (years !== null ? `${years} שנות נישואין` : ""),
-};
+function eventYearsLabel(event: FamilyEvent): string {
+  if (event.yearsCount === null) return "";
+  switch (event.type) {
+    case "birthday":
+      return event.deceased ? `נולד/ה לפני ${event.yearsCount} שנים` : `בן/בת ${event.yearsCount}`;
+    case "memorial":
+      return `${event.yearsCount} שנים`;
+    case "anniversary":
+      return `${event.yearsCount} שנות נישואין`;
+  }
+}
 
 function formatWhen(daysUntil: number, date: Date): string {
   const dateStr = date.toLocaleDateString("he-IL", { day: "numeric", month: "long" });
@@ -73,7 +79,7 @@ export default function CalendarPage() {
                   <p className="truncate font-medium text-stone-900">{event.title}</p>
                   <p className="text-sm text-amber-700">
                     {formatWhen(event.daysUntil, event.nextDate)}
-                    {TYPE_LABEL[event.type](event.yearsCount) && ` · ${TYPE_LABEL[event.type](event.yearsCount)}`}
+                    {eventYearsLabel(event) && ` · ${eventYearsLabel(event)}`}
                   </p>
                 </div>
               </li>
