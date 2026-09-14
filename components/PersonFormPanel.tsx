@@ -17,19 +17,19 @@ export default function PersonFormPanel({ open, people, editing, onClose, onSubm
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-black/40" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex justify-end bg-stone-900/40" onClick={onClose}>
       <div
-        className="flex h-full w-full max-w-md flex-col overflow-hidden bg-white p-6 shadow-xl"
+        className="flex h-full w-full max-w-md flex-col overflow-hidden bg-gradient-to-b from-amber-50 to-white p-6 shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="mb-4 flex shrink-0 items-center justify-between">
-          <h2 className="text-lg font-semibold text-neutral-900">
+          <h2 className="text-lg font-semibold text-amber-900">
             {editing ? `עריכת ${editing.firstName} ${editing.lastName}` : "הוספת קרוב משפחה"}
           </h2>
           <button
             type="button"
             onClick={onClose}
-            className="rounded-full px-3 py-1 text-sm text-neutral-500 hover:bg-neutral-100"
+            className="rounded-full px-3 py-1 text-sm text-amber-800 hover:bg-amber-100"
           >
             סגירה ✕
           </button>

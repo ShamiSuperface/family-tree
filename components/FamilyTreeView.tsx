@@ -8,8 +8,8 @@ import type { Person } from "@/types/family";
 import { buildTreeNodes } from "@/lib/familyTreeAdapter";
 import PersonNodeCard from "./PersonNodeCard";
 
-const NODE_WIDTH = 200;
-const NODE_HEIGHT = 100;
+const NODE_WIDTH = 230;
+const NODE_HEIGHT = 116;
 
 interface Props {
   people: Person[];
@@ -50,10 +50,10 @@ export default function FamilyTreeView({ people, rootId, onSelectPerson }: Props
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="חיפוש לפי שם..."
-                className="w-full rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm text-neutral-900 shadow-md outline-none focus:border-blue-400"
+                className="w-full rounded-xl border border-amber-200 bg-white px-3 py-2 text-sm text-stone-900 shadow-md outline-none focus:border-amber-500"
               />
               {matches.length > 0 && (
-                <ul className="mt-1 overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-md">
+                <ul className="mt-1 overflow-hidden rounded-xl border border-amber-200 bg-white shadow-md">
                   {matches.map((person) => (
                     <li key={person.id}>
                       <button
@@ -63,7 +63,7 @@ export default function FamilyTreeView({ people, rootId, onSelectPerson }: Props
                           onSelectPerson(person);
                           setQuery("");
                         }}
-                        className="block w-full px-3 py-2 text-start text-sm text-neutral-800 hover:bg-neutral-100"
+                        className="block w-full px-3 py-2 text-start text-sm text-stone-800 hover:bg-amber-50"
                       >
                         {person.firstName} {person.lastName}
                       </button>
@@ -73,12 +73,12 @@ export default function FamilyTreeView({ people, rootId, onSelectPerson }: Props
               )}
             </div>
 
-            <div className="absolute bottom-4 right-4 z-10 flex flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-md">
+            <div className="absolute bottom-4 right-4 z-10 flex flex-col overflow-hidden rounded-xl border border-amber-200 bg-white shadow-md">
               <button
                 type="button"
                 aria-label="הגדלה"
                 onClick={() => zoomIn()}
-                className="flex h-10 w-10 items-center justify-center text-lg text-neutral-700 hover:bg-neutral-100 active:bg-neutral-200"
+                className="flex h-10 w-10 items-center justify-center text-lg text-amber-800 hover:bg-amber-50 active:bg-amber-100"
               >
                 +
               </button>
@@ -86,7 +86,7 @@ export default function FamilyTreeView({ people, rootId, onSelectPerson }: Props
                 type="button"
                 aria-label="הקטנה"
                 onClick={() => zoomOut()}
-                className="flex h-10 w-10 items-center justify-center border-t border-neutral-200 text-lg text-neutral-700 hover:bg-neutral-100 active:bg-neutral-200"
+                className="flex h-10 w-10 items-center justify-center border-t border-amber-200 text-lg text-amber-800 hover:bg-amber-50 active:bg-amber-100"
               >
                 −
               </button>
@@ -97,7 +97,7 @@ export default function FamilyTreeView({ people, rootId, onSelectPerson }: Props
                   resetTransform();
                   centerView();
                 }}
-                className="flex h-10 w-10 items-center justify-center border-t border-neutral-200 text-xs text-neutral-700 hover:bg-neutral-100 active:bg-neutral-200"
+                className="flex h-10 w-10 items-center justify-center border-t border-amber-200 text-xs text-amber-800 hover:bg-amber-50 active:bg-amber-100"
               >
                 ⤢
               </button>
@@ -112,6 +112,7 @@ export default function FamilyTreeView({ people, rootId, onSelectPerson }: Props
                 rootId={rootId}
                 width={NODE_WIDTH}
                 height={NODE_HEIGHT}
+                className="family-tree-canvas"
                 renderNode={(node: ExtNode) => {
                   const person = byId.get(node.id);
                   if (!person) return null;

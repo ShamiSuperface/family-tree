@@ -40,11 +40,11 @@ function RelationPicker({
 }) {
   return (
     <fieldset>
-      <legend className="mb-1 text-sm font-medium text-neutral-700">{label}</legend>
+      <legend className="mb-1 text-sm font-medium text-stone-700">{label}</legend>
       {options.length === 0 ? (
-        <p className="text-sm text-neutral-400">אין עדיין אנשים אחרים במערכת</p>
+        <p className="text-sm text-stone-400">אין עדיין אנשים אחרים במערכת</p>
       ) : (
-        <div className="max-h-32 space-y-1 overflow-y-auto rounded-lg border border-neutral-200 p-2">
+        <div className="max-h-32 space-y-1 overflow-y-auto rounded-lg border border-amber-200 p-2">
           {options.map((person) => (
             <label key={person.id} className="flex items-center gap-2 text-sm">
               <input
@@ -93,7 +93,7 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
       <div className="min-h-0 flex-1 space-y-4 overflow-y-auto">
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label htmlFor={`${uid}-firstName`} className="mb-1 block text-sm font-medium text-neutral-700">
+            <label htmlFor={`${uid}-firstName`} className="mb-1 block text-sm font-medium text-stone-700">
               שם פרטי *
             </label>
             <input
@@ -102,11 +102,11 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
               type="text"
               value={input.firstName}
               onChange={(e) => setInput({ ...input, firstName: e.target.value })}
-              className="w-full rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-900 outline-none focus:border-blue-400"
+              className="w-full rounded-lg border border-amber-200 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-500"
             />
           </div>
           <div>
-            <label htmlFor={`${uid}-lastName`} className="mb-1 block text-sm font-medium text-neutral-700">
+            <label htmlFor={`${uid}-lastName`} className="mb-1 block text-sm font-medium text-stone-700">
               שם משפחה *
             </label>
             <input
@@ -115,20 +115,20 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
               type="text"
               value={input.lastName}
               onChange={(e) => setInput({ ...input, lastName: e.target.value })}
-              className="w-full rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-900 outline-none focus:border-blue-400"
+              className="w-full rounded-lg border border-amber-200 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-500"
             />
           </div>
         </div>
 
         <div>
-          <label htmlFor={`${uid}-gender`} className="mb-1 block text-sm font-medium text-neutral-700">
+          <label htmlFor={`${uid}-gender`} className="mb-1 block text-sm font-medium text-stone-700">
             מגדר
           </label>
           <select
             id={`${uid}-gender`}
             value={input.gender}
             onChange={(e) => setInput({ ...input, gender: e.target.value as "male" | "female" })}
-            className="w-full rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-900 outline-none focus:border-blue-400"
+            className="w-full rounded-lg border border-amber-200 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-500"
           >
             <option value="male">זכר</option>
             <option value="female">נקבה</option>
@@ -137,7 +137,7 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
 
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label htmlFor={`${uid}-birthDate`} className="mb-1 block text-sm font-medium text-neutral-700">
+            <label htmlFor={`${uid}-birthDate`} className="mb-1 block text-sm font-medium text-stone-700">
               תאריך לידה
             </label>
             <input
@@ -145,11 +145,11 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
               type="date"
               value={input.birthDate ?? ""}
               onChange={(e) => setInput({ ...input, birthDate: e.target.value || null })}
-              className="w-full rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-900 outline-none focus:border-blue-400"
+              className="w-full rounded-lg border border-amber-200 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-500"
             />
           </div>
           <div>
-            <label htmlFor={`${uid}-deathDate`} className="mb-1 block text-sm font-medium text-neutral-700">
+            <label htmlFor={`${uid}-deathDate`} className="mb-1 block text-sm font-medium text-stone-700">
               תאריך פטירה
             </label>
             <input
@@ -157,13 +157,13 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
               type="date"
               value={input.deathDate ?? ""}
               onChange={(e) => setInput({ ...input, deathDate: e.target.value || null })}
-              className="w-full rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-900 outline-none focus:border-blue-400"
+              className="w-full rounded-lg border border-amber-200 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-500"
             />
           </div>
         </div>
 
         <div>
-          <label htmlFor={`${uid}-bio`} className="mb-1 block text-sm font-medium text-neutral-700">
+          <label htmlFor={`${uid}-bio`} className="mb-1 block text-sm font-medium text-stone-700">
             סיפור / ביוגרפיה
           </label>
           <textarea
@@ -171,7 +171,7 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
             value={input.bio}
             onChange={(e) => setInput({ ...input, bio: e.target.value })}
             rows={4}
-            className="w-full resize-none rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-900 outline-none focus:border-blue-400"
+            className="w-full resize-none rounded-lg border border-amber-200 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-500"
           />
         </div>
 
@@ -197,18 +197,18 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
         {error && <p className="text-sm text-red-600">{error}</p>}
       </div>
 
-      <div className="mt-4 flex items-center gap-2 border-t border-neutral-200 pt-4">
+      <div className="mt-4 flex items-center gap-2 border-t border-amber-200 pt-4">
         <button
           type="submit"
           disabled={saving}
-          className="flex-1 rounded-lg bg-neutral-900 px-4 py-2 text-sm font-medium text-white hover:bg-neutral-800 disabled:opacity-50"
+          className="flex-1 rounded-lg bg-amber-700 px-4 py-2 text-sm font-medium text-white hover:bg-amber-800 disabled:opacity-50"
         >
           {saving ? "שומר..." : "שמירה"}
         </button>
         <button
           type="button"
           onClick={onCancel}
-          className="rounded-lg border border-neutral-300 px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-100"
+          className="rounded-lg border border-amber-300 px-4 py-2 text-sm text-amber-800 hover:bg-amber-50"
         >
           ביטול
         </button>
