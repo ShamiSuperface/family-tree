@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "עץ המשפחה שלנו",
+  title: "שבט יעקב - עץ המשפחה שלנו",
   description: "עץ משפחה אינטראקטיבי",
 };
 

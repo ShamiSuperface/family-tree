@@ -93,7 +93,7 @@ export default function Home() {
         <div className="flex items-center gap-3">
           <TreeIcon />
           <div>
-            <h1 className="text-xl font-semibold text-amber-900">עץ המשפחה שלנו</h1>
+            <h1 className="text-xl font-semibold text-amber-900">שבט יעקב - עץ המשפחה שלנו</h1>
             <p className="text-sm text-amber-700/80">
               גררו וזמזמו כדי לנווט, לחצו על צומת כדי לראות פרטים
             </p>
