@@ -15,6 +15,13 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "שבט יעקב - עץ המשפחה שלנו",
   description: "עץ משפחה אינטראקטיבי",
+  openGraph: {
+    title: "שבט יעקב - עץ המשפחה שלנו",
+    description: "עץ משפחה אינטראקטיבי",
+    siteName: "שבט יעקב",
+    locale: "he_IL",
+    type: "website",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
