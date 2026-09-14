@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import type { Person } from "@/types/family";
 import type { PersonInput } from "@/lib/peopleStore";
 import FamilyTreeView from "@/components/FamilyTreeView";
@@ -99,15 +100,23 @@ export default function Home() {
             </p>
           </div>
         </div>
-        {EDITING_ENABLED && (
-          <button
-            type="button"
-            onClick={openCreateForm}
-            className="rounded-lg bg-amber-700 px-4 py-2 text-sm font-medium text-white hover:bg-amber-800"
+        <div className="flex items-center gap-2">
+          <Link
+            href="/calendar"
+            className="rounded-lg border border-amber-300 px-4 py-2 text-sm text-amber-800 hover:bg-amber-100"
           >
-            + הוספת קרוב משפחה
-          </button>
-        )}
+            📅 לוח אירועים
+          </Link>
+          {EDITING_ENABLED && (
+            <button
+              type="button"
+              onClick={openCreateForm}
+              className="rounded-lg bg-amber-700 px-4 py-2 text-sm font-medium text-white hover:bg-amber-800"
+            >
+              + הוספת קרוב משפחה
+            </button>
+          )}
+        </div>
       </header>
 
       <main className="relative flex-1 overflow-hidden">
@@ -133,6 +142,7 @@ export default function Home() {
 
       <PersonDetailPanel
         person={selectedPerson}
+        people={people ?? []}
         onClose={() => setSelectedPerson(null)}
         onEdit={EDITING_ENABLED ? openEditForm : undefined}
       />

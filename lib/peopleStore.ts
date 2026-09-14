@@ -15,11 +15,14 @@ export interface PersonInput {
   parents: string[];
   spouses: string[];
   children: string[];
+  marriageDates: Record<string, string>;
 }
 
 export async function readPeople(): Promise<Person[]> {
   const raw = await readFile(DATA_PATH, "utf-8");
-  return JSON.parse(raw) as Person[];
+  const people = JSON.parse(raw) as Person[];
+  // Backward-compatible with records saved before marriageDates existed.
+  return people.map((person) => ({ ...person, marriageDates: person.marriageDates ?? {} }));
 }
 
 async function writePeople(people: Person[]): Promise<void> {
@@ -70,6 +73,33 @@ function syncRelations(
   });
 }
 
+/** Mirrors the marriage date this person recorded for a spouse onto that spouse's own record. */
+function syncMarriageDates(
+  people: Person[],
+  personId: string,
+  next: PersonInput,
+  previous?: PersonInput,
+): void {
+  const byId = new Map(people.map((person) => [person.id, person]));
+  const oldSpouses = previous?.spouses ?? [];
+
+  for (const otherId of oldSpouses.filter((id) => !next.spouses.includes(id))) {
+    const other = byId.get(otherId);
+    if (other) delete other.marriageDates[personId];
+  }
+
+  for (const otherId of next.spouses) {
+    const other = byId.get(otherId);
+    if (!other) continue;
+    const date = next.marriageDates[otherId];
+    if (date) {
+      other.marriageDates[personId] = date;
+    } else {
+      delete other.marriageDates[personId];
+    }
+  }
+}
+
 function validate(input: PersonInput, people: Person[], selfId?: string): string | null {
   if (!input.firstName.trim()) return "שם פרטי הוא שדה חובה";
   if (!input.lastName.trim()) return "שם משפחה הוא שדה חובה";
@@ -93,6 +123,7 @@ export async function createPerson(input: PersonInput): Promise<Person> {
   const person: Person = { id, ...input };
   people.push(person);
   syncRelations(people, id, input);
+  syncMarriageDates(people, id, input);
   await writePeople(people);
   return person;
 }
@@ -109,6 +140,7 @@ export async function updatePerson(id: string, input: PersonInput): Promise<Pers
   const updated: Person = { id, ...input };
   people[index] = updated;
   syncRelations(people, id, input, previous);
+  syncMarriageDates(people, id, input, previous);
   await writePeople(people);
   return updated;
 }
@@ -120,6 +152,7 @@ export async function deletePerson(id: string): Promise<void> {
     person.parents = person.parents.filter((x) => x !== id);
     person.children = person.children.filter((x) => x !== id);
     person.spouses = person.spouses.filter((x) => x !== id);
+    delete person.marriageDates[id];
   }
   await writePeople(remaining);
 }

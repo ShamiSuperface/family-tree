@@ -5,6 +5,7 @@ import type { Person } from "@/types/family";
 
 interface Props {
   person: Person | null;
+  people: Person[];
   onClose: () => void;
   onEdit?: (person: Person) => void;
 }
@@ -18,7 +19,7 @@ function formatDate(date: string | null): string {
   });
 }
 
-export default function PersonDetailPanel({ person, onClose, onEdit }: Props) {
+export default function PersonDetailPanel({ person, people, onClose, onEdit }: Props) {
   useEffect(() => {
     if (!person) return;
     const onKeyDown = (e: KeyboardEvent) => {
@@ -29,6 +30,12 @@ export default function PersonDetailPanel({ person, onClose, onEdit }: Props) {
   }, [person, onClose]);
 
   if (!person) return null;
+
+  const byId = new Map(people.map((p) => [p.id, p]));
+  const marriages = person.spouses
+    .map((spouseId) => byId.get(spouseId))
+    .filter((spouse): spouse is Person => Boolean(spouse))
+    .map((spouse) => ({ spouse, date: person.marriageDates[spouse.id] }));
 
   return (
     <div
@@ -73,6 +80,17 @@ export default function PersonDetailPanel({ person, onClose, onEdit }: Props) {
           {formatDate(person.birthDate)}
           {person.deathDate ? ` – ${formatDate(person.deathDate)}` : ""}
         </p>
+
+        {marriages.length > 0 && (
+          <div className="mt-3 space-y-1 text-center text-sm text-stone-600">
+            {marriages.map(({ spouse, date }) => (
+              <p key={spouse.id}>
+                💍 {spouse.firstName} {spouse.lastName}
+                {date ? ` — נישאו ב-${formatDate(date)}` : ""}
+              </p>
+            ))}
+          </div>
+        )}
 
         {person.bio && (
           <p className="mt-6 whitespace-pre-line leading-relaxed text-stone-700">

@@ -10,4 +10,6 @@ export interface Person {
   parents: string[];
   spouses: string[];
   children: string[];
+  /** Marriage date per spouse id, e.g. { p2: "1990-05-01" }. Missing key = unknown date. */
+  marriageDates: Record<string, string>;
 }

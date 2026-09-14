@@ -24,6 +24,7 @@ function toInput(person?: Person): PersonInput {
     parents: person?.parents ?? [],
     spouses: person?.spouses ?? [],
     children: person?.children ?? [],
+    marriageDates: person?.marriageDates ?? {},
   };
 }
 
@@ -61,6 +62,64 @@ function RelationPicker({
               {person.firstName} {person.lastName}
             </label>
           ))}
+        </div>
+      )}
+    </fieldset>
+  );
+}
+
+function SpousePicker({
+  options,
+  selected,
+  marriageDates,
+  onChangeSelected,
+  onChangeDate,
+}: {
+  options: Person[];
+  selected: string[];
+  marriageDates: Record<string, string>;
+  onChangeSelected: (ids: string[]) => void;
+  onChangeDate: (spouseId: string, date: string) => void;
+}) {
+  return (
+    <fieldset>
+      <legend className="mb-1 text-sm font-medium text-stone-700">בני/בנות זוג</legend>
+      {options.length === 0 ? (
+        <p className="text-sm text-stone-400">אין עדיין אנשים אחרים במערכת</p>
+      ) : (
+        <div className="max-h-40 space-y-1 overflow-y-auto rounded-lg border border-amber-200 p-2">
+          {options.map((person) => {
+            const checked = selected.includes(person.id);
+            return (
+              <div key={person.id} className="flex flex-wrap items-center gap-2 text-sm">
+                <label className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    checked={checked}
+                    onChange={(e) => {
+                      onChangeSelected(
+                        e.target.checked
+                          ? [...selected, person.id]
+                          : selected.filter((id) => id !== person.id),
+                      );
+                    }}
+                  />
+                  {person.firstName} {person.lastName}
+                </label>
+                {checked && (
+                  <span className="flex items-center gap-1 text-xs text-stone-500">
+                    תאריך נישואין:
+                    <input
+                      type="date"
+                      value={marriageDates[person.id] ?? ""}
+                      onChange={(e) => onChangeDate(person.id, e.target.value)}
+                      className="rounded border border-amber-200 bg-white px-1.5 py-0.5 text-xs text-stone-900 outline-none focus:border-amber-500"
+                    />
+                  </span>
+                )}
+              </div>
+            );
+          })}
         </div>
       )}
     </fieldset>
@@ -226,11 +285,21 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
           selected={input.parents}
           onChange={(ids) => setInput({ ...input, parents: ids })}
         />
-        <RelationPicker
-          label="בני/בנות זוג"
+        <SpousePicker
           options={otherPeople}
           selected={input.spouses}
-          onChange={(ids) => setInput({ ...input, spouses: ids })}
+          marriageDates={input.marriageDates}
+          onChangeSelected={(ids) => setInput({ ...input, spouses: ids })}
+          onChangeDate={(spouseId, date) =>
+            setInput((prev) => ({
+              ...prev,
+              marriageDates: date
+                ? { ...prev.marriageDates, [spouseId]: date }
+                : Object.fromEntries(
+                    Object.entries(prev.marriageDates).filter(([k]) => k !== spouseId),
+                  ),
+            }))
+          }
         />
         <RelationPicker
           label="ילדים"
