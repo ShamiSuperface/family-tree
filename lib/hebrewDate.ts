@@ -3,7 +3,6 @@ import { isMonthDayOnly, isYearOnly } from "@/lib/dateUtils";
 const hebrewFormatter = new Intl.DateTimeFormat("he-u-ca-hebrew", {
   day: "numeric",
   month: "long",
-  year: "numeric",
 });
 
 /** Hebrew-calendar equivalent of a concrete Gregorian date, e.g. "ה' בשבט תשפ״ד". */
