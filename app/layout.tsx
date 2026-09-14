@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://family-tree-black-one.vercel.app"),
   title: "שבט יעקב - עץ המשפחה שלנו",
   description: "עץ משפחה אינטראקטיבי",
   openGraph: {
