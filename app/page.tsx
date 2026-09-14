@@ -7,6 +7,10 @@ import FamilyTreeView from "@/components/FamilyTreeView";
 import PersonDetailPanel from "@/components/PersonDetailPanel";
 import PersonFormPanel from "@/components/PersonFormPanel";
 
+// Editing is only available when running the site locally (`npm run dev`).
+// The publicly deployed production build is view-only.
+const EDITING_ENABLED = process.env.NODE_ENV === "development";
+
 export default function Home() {
   const [people, setPeople] = useState<Person[] | null>(null);
   const [selectedPerson, setSelectedPerson] = useState<Person | null>(null);
@@ -81,13 +85,15 @@ export default function Home() {
             גררו וזמזמו כדי לנווט, לחצו על צומת כדי לראות פרטים
           </p>
         </div>
-        <button
-          type="button"
-          onClick={openCreateForm}
-          className="rounded-lg bg-neutral-900 px-4 py-2 text-sm font-medium text-white hover:bg-neutral-800"
-        >
-          + הוספת קרוב משפחה
-        </button>
+        {EDITING_ENABLED && (
+          <button
+            type="button"
+            onClick={openCreateForm}
+            className="rounded-lg bg-neutral-900 px-4 py-2 text-sm font-medium text-white hover:bg-neutral-800"
+          >
+            + הוספת קרוב משפחה
+          </button>
+        )}
       </header>
 
       <main className="relative flex-1 overflow-hidden">
@@ -96,13 +102,15 @@ export default function Home() {
         ) : people.length === 0 || !rootId ? (
           <div className="flex h-full flex-col items-center justify-center gap-3 text-neutral-500">
             <p>עדיין אין אנשים בעץ המשפחה</p>
-            <button
-              type="button"
-              onClick={openCreateForm}
-              className="rounded-lg bg-neutral-900 px-4 py-2 text-sm font-medium text-white hover:bg-neutral-800"
-            >
-              הוספת האדם הראשון
-            </button>
+            {EDITING_ENABLED && (
+              <button
+                type="button"
+                onClick={openCreateForm}
+                className="rounded-lg bg-neutral-900 px-4 py-2 text-sm font-medium text-white hover:bg-neutral-800"
+              >
+                הוספת האדם הראשון
+              </button>
+            )}
           </div>
         ) : (
           <FamilyTreeView people={people} rootId={rootId} onSelectPerson={setSelectedPerson} />
@@ -112,17 +120,19 @@ export default function Home() {
       <PersonDetailPanel
         person={selectedPerson}
         onClose={() => setSelectedPerson(null)}
-        onEdit={openEditForm}
+        onEdit={EDITING_ENABLED ? openEditForm : undefined}
       />
 
-      <PersonFormPanel
-        open={formOpen}
-        people={people ?? []}
-        editing={editingPerson}
-        onClose={closeForm}
-        onSubmit={handleSubmit}
-        onDelete={editingPerson ? handleDelete : undefined}
-      />
+      {EDITING_ENABLED && (
+        <PersonFormPanel
+          open={formOpen}
+          people={people ?? []}
+          editing={editingPerson}
+          onClose={closeForm}
+          onSubmit={handleSubmit}
+          onDelete={editingPerson ? handleDelete : undefined}
+        />
+      )}
     </div>
   );
 }

@@ -6,7 +6,7 @@ import type { Person } from "@/types/family";
 interface Props {
   person: Person | null;
   onClose: () => void;
-  onEdit: (person: Person) => void;
+  onEdit?: (person: Person) => void;
 }
 
 function formatDate(date: string | null): string {
@@ -47,13 +47,15 @@ export default function PersonDetailPanel({ person, onClose, onEdit }: Props) {
           >
             סגירה ✕
           </button>
-          <button
-            type="button"
-            onClick={() => onEdit(person)}
-            className="rounded-full border border-neutral-300 px-3 py-1 text-sm text-neutral-700 hover:bg-neutral-100"
-          >
-            עריכה ✎
-          </button>
+          {onEdit && (
+            <button
+              type="button"
+              onClick={() => onEdit(person)}
+              className="rounded-full border border-neutral-300 px-3 py-1 text-sm text-neutral-700 hover:bg-neutral-100"
+            >
+              עריכה ✎
+            </button>
+          )}
         </div>
 
         {/* eslint-disable-next-line @next/next/no-img-element */}

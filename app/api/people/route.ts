@@ -7,6 +7,9 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  if (process.env.NODE_ENV !== "development") {
+    return NextResponse.json({ error: "עריכה זמינה רק בהרצה מקומית" }, { status: 403 });
+  }
   const input = (await request.json()) as PersonInput;
   try {
     const person = await createPerson(input);
