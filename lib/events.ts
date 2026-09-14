@@ -1,4 +1,5 @@
 import type { Person } from "@/types/family";
+import { isYearOnly } from "@/lib/dateUtils";
 
 export type FamilyEventType = "birthday" | "memorial" | "anniversary";
 
@@ -44,7 +45,7 @@ export function buildEvents(people: Person[], now: Date = new Date()): FamilyEve
   const raw: RawEvent[] = [];
 
   for (const person of people) {
-    if (person.birthDate) {
+    if (person.birthDate && !isYearOnly(person.birthDate)) {
       raw.push({
         type: "birthday",
         title: `יום הולדת ל${fullName(person)}`,
@@ -52,7 +53,7 @@ export function buildEvents(people: Person[], now: Date = new Date()): FamilyEve
         dateStr: person.birthDate,
       });
     }
-    if (person.deathDate) {
+    if (person.deathDate && !isYearOnly(person.deathDate)) {
       raw.push({
         type: "memorial",
         title: `יום זיכרון ל${fullName(person)}`,
@@ -63,7 +64,7 @@ export function buildEvents(people: Person[], now: Date = new Date()): FamilyEve
     for (const spouseId of person.spouses) {
       if (person.id < spouseId) {
         const dateStr = person.marriageDates[spouseId];
-        if (dateStr) {
+        if (dateStr && !isYearOnly(dateStr)) {
           const spouse = byId.get(spouseId);
           raw.push({
             type: "anniversary",

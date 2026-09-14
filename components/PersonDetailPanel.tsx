@@ -2,21 +2,13 @@
 
 import { useEffect } from "react";
 import type { Person } from "@/types/family";
+import { formatPersonDate } from "@/lib/dateUtils";
 
 interface Props {
   person: Person | null;
   people: Person[];
   onClose: () => void;
   onEdit?: (person: Person) => void;
-}
-
-function formatDate(date: string | null): string {
-  if (!date) return "לא ידוע";
-  return new Date(date).toLocaleDateString("he-IL", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
 }
 
 export default function PersonDetailPanel({ person, people, onClose, onEdit }: Props) {
@@ -77,8 +69,8 @@ export default function PersonDetailPanel({ person, people, onClose, onEdit }: P
         </h2>
 
         <p className="mt-1 text-center text-sm text-amber-700">
-          {formatDate(person.birthDate)}
-          {person.deathDate ? ` – ${formatDate(person.deathDate)}` : ""}
+          {formatPersonDate(person.birthDate)}
+          {person.deathDate ? ` – ${formatPersonDate(person.deathDate)}` : ""}
         </p>
 
         {marriages.length > 0 && (
@@ -86,7 +78,7 @@ export default function PersonDetailPanel({ person, people, onClose, onEdit }: P
             {marriages.map(({ spouse, date }) => (
               <p key={spouse.id}>
                 💍 {spouse.firstName} {spouse.lastName}
-                {date ? ` — נישאו ב-${formatDate(date)}` : ""}
+                {date ? ` — נישאו ב-${formatPersonDate(date)}` : ""}
               </p>
             ))}
           </div>

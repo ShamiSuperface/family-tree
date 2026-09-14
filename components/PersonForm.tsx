@@ -3,6 +3,7 @@
 import { useId, useState, type ChangeEvent, type FormEvent } from "react";
 import type { Person } from "@/types/family";
 import type { PersonInput } from "@/lib/peopleStore";
+import FlexibleDateInput from "./FlexibleDateInput";
 
 interface Props {
   people: Person[];
@@ -240,30 +241,18 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
         </div>
 
         <div className="grid grid-cols-2 gap-3">
-          <div>
-            <label htmlFor={`${uid}-birthDate`} className="mb-1 block text-sm font-medium text-stone-700">
-              תאריך לידה
-            </label>
-            <input
-              id={`${uid}-birthDate`}
-              type="date"
-              value={input.birthDate ?? ""}
-              onChange={(e) => setInput({ ...input, birthDate: e.target.value || null })}
-              className="w-full rounded-lg border border-amber-200 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-500"
-            />
-          </div>
-          <div>
-            <label htmlFor={`${uid}-deathDate`} className="mb-1 block text-sm font-medium text-stone-700">
-              תאריך פטירה
-            </label>
-            <input
-              id={`${uid}-deathDate`}
-              type="date"
-              value={input.deathDate ?? ""}
-              onChange={(e) => setInput({ ...input, deathDate: e.target.value || null })}
-              className="w-full rounded-lg border border-amber-200 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-500"
-            />
-          </div>
+          <FlexibleDateInput
+            id={`${uid}-birthDate`}
+            label="תאריך לידה"
+            value={input.birthDate}
+            onChange={(value) => setInput({ ...input, birthDate: value })}
+          />
+          <FlexibleDateInput
+            id={`${uid}-deathDate`}
+            label="תאריך פטירה"
+            value={input.deathDate}
+            onChange={(value) => setInput({ ...input, deathDate: value })}
+          />
         </div>
 
         <div>
