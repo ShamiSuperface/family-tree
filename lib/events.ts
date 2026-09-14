@@ -12,6 +12,8 @@ export interface FamilyEvent {
   daysUntil: number;
   /** null when only the day/month is known (e.g. a marriage date without a year). */
   yearsCount: number | null;
+  /** True for a birthday event where the person has since passed away. */
+  deceased: boolean;
 }
 
 function startOfDay(date: Date): Date {
@@ -38,6 +40,7 @@ interface RawEvent {
   title: string;
   personIds: string[];
   dateStr: string;
+  deceased: boolean;
 }
 
 export function buildEvents(people: Person[], now: Date = new Date()): FamilyEvent[] {
@@ -52,6 +55,7 @@ export function buildEvents(people: Person[], now: Date = new Date()): FamilyEve
         title: `יום הולדת ל${fullName(person)}`,
         personIds: [person.id],
         dateStr: person.birthDate,
+        deceased: Boolean(person.deathDate),
       });
     }
     if (person.deathDate && !isYearOnly(person.deathDate)) {
@@ -60,6 +64,7 @@ export function buildEvents(people: Person[], now: Date = new Date()): FamilyEve
         title: `יום זיכרון ל${fullName(person)}`,
         personIds: [person.id],
         dateStr: person.deathDate,
+        deceased: true,
       });
     }
     for (const spouseId of person.spouses) {
@@ -72,6 +77,7 @@ export function buildEvents(people: Person[], now: Date = new Date()): FamilyEve
             title: `יום נישואין של ${fullName(person)}${spouse ? ` ו${fullName(spouse)}` : ""}`,
             personIds: [person.id, spouseId],
             dateStr,
+            deceased: false,
           });
         }
       }
@@ -103,6 +109,7 @@ export function buildEvents(people: Person[], now: Date = new Date()): FamilyEve
         nextDate,
         daysUntil,
         yearsCount,
+        deceased: item.deceased,
       };
     })
     .sort((a, b) => a.daysUntil - b.daysUntil);
