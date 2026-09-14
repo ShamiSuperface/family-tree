@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import type { Person } from "@/types/family";
+import { ageWord } from "@/lib/dateUtils";
 import { buildEvents, type FamilyEvent } from "@/lib/events";
 
 const TYPE_ICON: Record<FamilyEvent["type"], string> = {
@@ -11,11 +12,14 @@ const TYPE_ICON: Record<FamilyEvent["type"], string> = {
   anniversary: "💍",
 };
 
-function eventYearsLabel(event: FamilyEvent): string {
+function eventYearsLabel(event: FamilyEvent, byId: Map<string, Person>): string {
   if (event.yearsCount === null) return "";
   switch (event.type) {
-    case "birthday":
-      return event.deceased ? `נולד/ה לפני ${event.yearsCount} שנים` : `בן/בת ${event.yearsCount}`;
+    case "birthday": {
+      if (event.deceased) return `נולד/ה לפני ${event.yearsCount} שנים`;
+      const person = byId.get(event.personIds[0]);
+      return `${person ? ageWord(person.gender) : "בן/בת"} ${event.yearsCount}`;
+    }
     case "memorial":
       return `${event.yearsCount} שנים`;
     case "anniversary":
@@ -32,13 +36,17 @@ function formatWhen(daysUntil: number, date: Date): string {
 
 export default function CalendarPage() {
   const [events, setEvents] = useState<FamilyEvent[] | null>(null);
+  const [peopleById, setPeopleById] = useState<Map<string, Person>>(new Map());
 
   useEffect(() => {
     let cancelled = false;
     fetch("/api/people")
       .then((res) => res.json())
       .then((people: Person[]) => {
-        if (!cancelled) setEvents(buildEvents(people));
+        if (!cancelled) {
+          setEvents(buildEvents(people));
+          setPeopleById(new Map(people.map((p) => [p.id, p])));
+        }
       });
     return () => {
       cancelled = true;
@@ -79,7 +87,7 @@ export default function CalendarPage() {
                   <p className="truncate font-medium text-stone-900">{event.title}</p>
                   <p className="text-sm font-medium text-amber-800">
                     {formatWhen(event.daysUntil, event.nextDate)}
-                    {eventYearsLabel(event) && ` · ${eventYearsLabel(event)}`}
+                    {eventYearsLabel(event, peopleById) && ` · ${eventYearsLabel(event, peopleById)}`}
                   </p>
                 </div>
               </li>

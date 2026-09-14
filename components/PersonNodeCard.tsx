@@ -2,7 +2,7 @@
 
 import type { ExtNode } from "relatives-tree/lib/types";
 import type { Person } from "@/types/family";
-import { dateYear, livingAge } from "@/lib/dateUtils";
+import { ageWord, dateYear, livingAge } from "@/lib/dateUtils";
 
 interface Props {
   person: Person;
@@ -49,7 +49,7 @@ export default function PersonNodeCard({ person, node, width, height, onClick }:
           </p>
           <p className="mt-0.5 truncate text-xs font-medium text-amber-800">
             {birthYear}
-            {age !== null ? ` (בן/בת ${age})` : ""}
+            {age !== null ? ` (${ageWord(person.gender)} ${age})` : ""}
             {deathYear ? ` – ${deathYear}` : ""}
           </p>
         </div>

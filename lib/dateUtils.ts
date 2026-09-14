@@ -28,6 +28,11 @@ export function livingAge(birthDate: string | null, deathDate: string | null): n
   return new Date().getFullYear() - birthYear;
 }
 
+/** "בן" for a male, "בת" for a female — for phrases like "בן 42" / "בת 42". */
+export function ageWord(gender: "male" | "female"): string {
+  return gender === "female" ? "בת" : "בן";
+}
+
 export function formatPersonDate(date: string | null): string {
   if (!date) return "לא ידוע";
   if (isYearOnly(date)) return date;
