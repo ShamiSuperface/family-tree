@@ -1,0 +1,62 @@
+[
+  {
+    "id": "p1",
+    "firstName": "דוד",
+    "lastName": "כהן",
+    "birthDate": "1945-03-12",
+    "deathDate": "2019-11-02",
+    "photo": "/placeholder-avatar.svg",
+    "bio": "דוד נולד בירושלים וגדל בשכונת מקור ברוך. עבד כנגר במשך ארבעים שנה ואהב לספר סיפורים על ילדותו בשבתות המשפחתיות.",
+    "parents": [],
+    "spouses": ["p2"],
+    "children": ["p3"]
+  },
+  {
+    "id": "p2",
+    "firstName": "רינה",
+    "lastName": "כהן",
+    "birthDate": "1948-07-22",
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "רינה הייתה מורה לספרות במשך שלושים שנה. היא אוהבת לבשל ארוחות שבת גדולות ולפגוש את כל הנכדים סביב השולחן.",
+    "parents": [],
+    "spouses": ["p1"],
+    "children": ["p3"]
+  },
+  {
+    "id": "p3",
+    "firstName": "יוסי",
+    "lastName": "כהן",
+    "birthDate": "1972-01-30",
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "יוסי הוא הבן היחיד של דוד ורינה. עבד כמהנדס תוכנה ועבר לתל אביב בשנות ה-90. אוהב טיולים בטבע ובישול איטלקי.",
+    "parents": ["p1", "p2"],
+    "spouses": ["p4"],
+    "children": ["p5"]
+  },
+  {
+    "id": "p4",
+    "firstName": "מיכל",
+    "lastName": "כהן",
+    "birthDate": "1975-09-14",
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "מיכל נולדה בחיפה ועובדת כרופאת ילדים. נפגשה עם יוסי בטיול לפריז והם נישאו כעבור שנתיים.",
+    "parents": [],
+    "spouses": ["p3"],
+    "children": ["p5"]
+  },
+  {
+    "id": "p5",
+    "firstName": "נועה",
+    "lastName": "כהן",
+    "birthDate": "2005-05-19",
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "נועה היא הנכדה הבכורה של דוד ורינה. סטודנטית לעיצוב, ומקימת האתר הזה כדי לתעד את סיפור המשפחה לדורות הבאים.",
+    "parents": ["p3", "p4"],
+    "spouses": [],
+    "children": []
+  }
+]
