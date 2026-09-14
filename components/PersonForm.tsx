@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useState, type FormEvent } from "react";
+import { useId, useState, type ChangeEvent, type FormEvent } from "react";
 import type { Person } from "@/types/family";
 import type { PersonInput } from "@/lib/peopleStore";
 
@@ -71,6 +71,8 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
   const [input, setInput] = useState<PersonInput>(() => toInput(initial));
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
   const uid = useId();
 
   const otherPeople = people.filter((p) => p.id !== initial?.id);
@@ -88,9 +90,52 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
     }
   };
 
+  const handlePhotoChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    setUploadError(null);
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      const res = await fetch("/api/upload", { method: "POST", body: formData });
+      const data = (await res.json()) as { path?: string; error?: string };
+      if (!res.ok || !data.path) throw new Error(data.error ?? "שגיאה בהעלאת התמונה");
+      setInput((prev) => ({ ...prev, photo: data.path as string }));
+    } catch (err) {
+      setUploadError(err instanceof Error ? err.message : "שגיאה בהעלאת התמונה");
+    } finally {
+      setUploading(false);
+      e.target.value = "";
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit} className="flex min-h-0 flex-1 flex-col">
       <div className="min-h-0 flex-1 space-y-4 overflow-y-auto">
+        <div>
+          <label className="mb-1 block text-sm font-medium text-stone-700">תמונה</label>
+          <div className="flex items-center gap-3">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={input.photo}
+              alt=""
+              className="h-16 w-16 rounded-full bg-amber-50 object-cover ring-2 ring-amber-200"
+            />
+            <label className="cursor-pointer rounded-lg border border-amber-300 px-3 py-2 text-sm text-amber-800 hover:bg-amber-50">
+              {uploading ? "מעלה..." : "בחירת תמונה"}
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handlePhotoChange}
+                disabled={uploading}
+                className="hidden"
+              />
+            </label>
+          </div>
+          {uploadError && <p className="mt-1 text-sm text-red-600">{uploadError}</p>}
+        </div>
+
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label htmlFor={`${uid}-firstName`} className="mb-1 block text-sm font-medium text-stone-700">
