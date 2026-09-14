@@ -19,6 +19,7 @@ export default function PersonNodeCard({ person, node, width, height, onClick }:
 
   return (
     <div
+      id={person.id}
       className="absolute"
       style={{
         width,

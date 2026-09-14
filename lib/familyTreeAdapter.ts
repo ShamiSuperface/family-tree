@@ -12,7 +12,7 @@ export interface TreeNode {
 export function buildTreeNodes(people: Person[]): TreeNode[] {
   const byId = new Map(people.map((person) => [person.id, person]));
 
-  return people.map((person, index) => {
+  return people.map((person) => {
     const siblingIds = new Set<string>();
     for (const parentId of person.parents) {
       byId.get(parentId)?.children.forEach((childId) => {
@@ -22,7 +22,7 @@ export function buildTreeNodes(people: Person[]): TreeNode[] {
 
     return {
       id: person.id,
-      gender: index % 2 === 0 ? "male" : "female",
+      gender: person.gender,
       parents: person.parents.map((id) => ({ id, type: "blood" as const })),
       children: person.children.map((id) => ({ id, type: "blood" as const })),
       siblings: Array.from(siblingIds).map((id) => ({ id, type: "blood" as const })),

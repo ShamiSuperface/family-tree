@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo, useState } from "react";
 import ReactFamilyTree from "react-family-tree";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import type { ExtNode, Node } from "relatives-tree/lib/types";
@@ -19,6 +20,15 @@ interface Props {
 export default function FamilyTreeView({ people, rootId, onSelectPerson }: Props) {
   const nodes = buildTreeNodes(people) as unknown as Node[];
   const byId = new Map(people.map((person) => [person.id, person]));
+  const [query, setQuery] = useState("");
+
+  const matches = useMemo(() => {
+    const q = query.trim();
+    if (!q) return [];
+    return people
+      .filter((person) => `${person.firstName} ${person.lastName}`.includes(q))
+      .slice(0, 6);
+  }, [people, query]);
 
   return (
     <div dir="ltr" className="relative h-full w-full">
@@ -29,10 +39,41 @@ export default function FamilyTreeView({ people, rootId, onSelectPerson }: Props
         centerOnInit
         wheel={{ step: 0.15 }}
       >
-        {({ zoomIn, zoomOut, resetTransform, centerView }) => (
+        {({ zoomIn, zoomOut, resetTransform, centerView, zoomToElement }) => (
           <>
-            <div className="absolute bottom-4 right-4 z-10 flex flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-md">
+            <div
+              dir="rtl"
+              className="absolute top-4 right-4 z-10 w-56 sm:w-64"
+            >
+              <input
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="חיפוש לפי שם..."
+                className="w-full rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm shadow-md outline-none focus:border-blue-400"
+              />
+              {matches.length > 0 && (
+                <ul className="mt-1 overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-md">
+                  {matches.map((person) => (
+                    <li key={person.id}>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          zoomToElement(person.id, 1, 400);
+                          onSelectPerson(person);
+                          setQuery("");
+                        }}
+                        className="block w-full px-3 py-2 text-start text-sm text-neutral-800 hover:bg-neutral-100"
+                      >
+                        {person.firstName} {person.lastName}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
 
+            <div className="absolute bottom-4 right-4 z-10 flex flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-md">
               <button
                 type="button"
                 aria-label="הגדלה"
