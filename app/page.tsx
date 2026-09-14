@@ -4,9 +4,11 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import type { Person } from "@/types/family";
 import type { PersonInput } from "@/lib/peopleStore";
+import { computeFamilyStats } from "@/lib/stats";
 import FamilyTreeView from "@/components/FamilyTreeView";
 import PersonDetailPanel from "@/components/PersonDetailPanel";
 import PersonFormPanel from "@/components/PersonFormPanel";
+import StatsBar from "@/components/StatsBar";
 
 // Editing is only available when running the site locally (`npm run dev`).
 // The publicly deployed production build is view-only.
@@ -88,6 +90,17 @@ export default function Home() {
 
   const rootId = people?.find((person) => person.parents.length === 0)?.id ?? people?.[0]?.id;
 
+  const handleBackup = () => {
+    if (!people) return;
+    const blob = new Blob([JSON.stringify(people, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `family-tree-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="flex h-screen w-screen flex-col bg-gradient-to-b from-amber-100 to-orange-100">
       <header className="flex items-center justify-between border-b-2 border-amber-400 bg-gradient-to-l from-amber-200 via-orange-100 to-amber-100 px-6 py-4 shadow-md">
@@ -107,6 +120,15 @@ export default function Home() {
           >
             📅 לוח אירועים
           </Link>
+          {people && people.length > 0 && (
+            <button
+              type="button"
+              onClick={handleBackup}
+              className="rounded-lg border-2 border-amber-500 bg-white px-4 py-2 text-sm font-medium text-amber-900 hover:bg-amber-50"
+            >
+              💾 גיבוי JSON
+            </button>
+          )}
           {EDITING_ENABLED && (
             <button
               type="button"
@@ -118,6 +140,8 @@ export default function Home() {
           )}
         </div>
       </header>
+
+      {people && people.length > 0 && <StatsBar stats={computeFamilyStats(people)} />}
 
       <main className="relative flex-1 overflow-hidden">
         {!people ? (
