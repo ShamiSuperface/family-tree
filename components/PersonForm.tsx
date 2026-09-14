@@ -102,7 +102,7 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
               type="text"
               value={input.firstName}
               onChange={(e) => setInput({ ...input, firstName: e.target.value })}
-              className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm outline-none focus:border-blue-400"
+              className="w-full rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-900 outline-none focus:border-blue-400"
             />
           </div>
           <div>
@@ -115,7 +115,7 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
               type="text"
               value={input.lastName}
               onChange={(e) => setInput({ ...input, lastName: e.target.value })}
-              className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm outline-none focus:border-blue-400"
+              className="w-full rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-900 outline-none focus:border-blue-400"
             />
           </div>
         </div>
@@ -128,7 +128,7 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
             id={`${uid}-gender`}
             value={input.gender}
             onChange={(e) => setInput({ ...input, gender: e.target.value as "male" | "female" })}
-            className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm outline-none focus:border-blue-400"
+            className="w-full rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-900 outline-none focus:border-blue-400"
           >
             <option value="male">זכר</option>
             <option value="female">נקבה</option>
@@ -145,7 +145,7 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
               type="date"
               value={input.birthDate ?? ""}
               onChange={(e) => setInput({ ...input, birthDate: e.target.value || null })}
-              className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm outline-none focus:border-blue-400"
+              className="w-full rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-900 outline-none focus:border-blue-400"
             />
           </div>
           <div>
@@ -157,7 +157,7 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
               type="date"
               value={input.deathDate ?? ""}
               onChange={(e) => setInput({ ...input, deathDate: e.target.value || null })}
-              className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm outline-none focus:border-blue-400"
+              className="w-full rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-900 outline-none focus:border-blue-400"
             />
           </div>
         </div>
@@ -171,7 +171,7 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
             value={input.bio}
             onChange={(e) => setInput({ ...input, bio: e.target.value })}
             rows={4}
-            className="w-full resize-none rounded-lg border border-neutral-300 px-3 py-2 text-sm outline-none focus:border-blue-400"
+            className="w-full resize-none rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-900 outline-none focus:border-blue-400"
           />
         </div>
 

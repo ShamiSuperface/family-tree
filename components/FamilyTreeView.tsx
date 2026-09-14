@@ -50,7 +50,7 @@ export default function FamilyTreeView({ people, rootId, onSelectPerson }: Props
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="חיפוש לפי שם..."
-                className="w-full rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm shadow-md outline-none focus:border-blue-400"
+                className="w-full rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm text-neutral-900 shadow-md outline-none focus:border-blue-400"
               />
               {matches.length > 0 && (
                 <ul className="mt-1 overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-md">
