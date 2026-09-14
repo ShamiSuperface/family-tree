@@ -57,3 +57,14 @@ export async function addMemory(input: MemoryInput): Promise<Memory | null> {
   await getRedis().lpush(LIST_KEY, memory);
   return memory;
 }
+
+export async function deleteMemory(id: string): Promise<void> {
+  const redis = getRedis();
+  const remaining = (await getMemories()).filter((m) => m.id !== id);
+  await redis.del(LIST_KEY);
+  if (remaining.length > 0) {
+    // getMemories() returns newest-first; rpush appends in argument order,
+    // so this preserves that same newest-first order.
+    await redis.rpush(LIST_KEY, ...remaining);
+  }
+}

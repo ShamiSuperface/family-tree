@@ -5,6 +5,9 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import type { Memory, Person } from "@/types/family";
 
+// Editing is only available when running the site locally (`npm run dev`).
+const EDITING_ENABLED = process.env.NODE_ENV === "development";
+
 function formatMemoryDate(iso: string): string {
   return new Date(iso).toLocaleDateString("he-IL", {
     year: "numeric",
@@ -56,6 +59,11 @@ function MemoriesPageContent() {
   }, []);
 
   const peopleById = new Map(people.map((p) => [p.id, p]));
+
+  const handleDeleteMemory = async (id: string) => {
+    await fetch(`/api/memories/${id}`, { method: "DELETE" });
+    setMemories((prev) => (prev ? prev.filter((m) => m.id !== id) : prev));
+  };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -186,7 +194,19 @@ function MemoriesPageContent() {
                   key={memory.id}
                   className="rounded-2xl border-2 border-amber-400 bg-white px-4 py-3 shadow-md"
                 >
-                  <p className="whitespace-pre-line text-stone-800">{memory.text}</p>
+                  <div className="flex items-start justify-between gap-2">
+                    <p className="whitespace-pre-line text-stone-800">{memory.text}</p>
+                    {EDITING_ENABLED && (
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteMemory(memory.id)}
+                        aria-label="מחיקת זיכרון"
+                        className="shrink-0 text-stone-400 hover:text-red-600"
+                      >
+                        🗑
+                      </button>
+                    )}
+                  </div>
                   <p className="mt-2 text-sm font-medium text-amber-800">
                     — {memory.authorName}, {formatMemoryDate(memory.createdAt)}
                     {person ? ` · על ${person.firstName} ${person.lastName}` : ""}

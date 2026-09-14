@@ -45,6 +45,11 @@ export default function PersonDetailPanel({ person, people, onClose, onEdit }: P
     };
   }, [person]);
 
+  const handleDeleteMemory = async (id: string) => {
+    await fetch(`/api/memories/${id}`, { method: "DELETE" });
+    setMemories((prev) => prev.filter((m) => m.id !== id));
+  };
+
   if (!person) return null;
 
   const byId = new Map(people.map((p) => [p.id, p]));
@@ -173,7 +178,19 @@ export default function PersonDetailPanel({ person, people, onClose, onEdit }: P
                   key={memory.id}
                   className="rounded-lg border-2 border-amber-200 bg-amber-50 p-2 text-sm"
                 >
-                  <p className="whitespace-pre-line text-stone-700">{memory.text}</p>
+                  <div className="flex items-start justify-between gap-2">
+                    <p className="whitespace-pre-line text-stone-700">{memory.text}</p>
+                    {onEdit && (
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteMemory(memory.id)}
+                        aria-label="מחיקת זיכרון"
+                        className="shrink-0 text-stone-400 hover:text-red-600"
+                      >
+                        🗑
+                      </button>
+                    )}
+                  </div>
                   <p className="mt-1 text-xs font-medium text-amber-700">— {memory.authorName}</p>
                 </li>
               ))}
