@@ -21,7 +21,7 @@ export default function FamilyTreeView({ people, rootId, onSelectPerson }: Props
   const byId = new Map(people.map((person) => [person.id, person]));
 
   return (
-    <div dir="ltr" className="h-full w-full">
+    <div dir="ltr" className="relative h-full w-full">
       <TransformWrapper
         minScale={0.3}
         maxScale={2}
@@ -29,31 +29,66 @@ export default function FamilyTreeView({ people, rootId, onSelectPerson }: Props
         centerOnInit
         wheel={{ step: 0.15 }}
       >
-        <TransformComponent
-          wrapperStyle={{ width: "100%", height: "100%" }}
-          contentStyle={{ padding: "4rem" }}
-        >
-          <ReactFamilyTree
-            nodes={nodes}
-            rootId={rootId}
-            width={NODE_WIDTH}
-            height={NODE_HEIGHT}
-            renderNode={(node: ExtNode) => {
-              const person = byId.get(node.id);
-              if (!person) return null;
-              return (
-                <PersonNodeCard
-                  key={node.id}
-                  person={person}
-                  node={node}
-                  width={NODE_WIDTH}
-                  height={NODE_HEIGHT}
-                  onClick={() => onSelectPerson(person)}
-                />
-              );
-            }}
-          />
-        </TransformComponent>
+        {({ zoomIn, zoomOut, resetTransform, centerView }) => (
+          <>
+            <div className="absolute bottom-4 right-4 z-10 flex flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-md">
+
+              <button
+                type="button"
+                aria-label="הגדלה"
+                onClick={() => zoomIn()}
+                className="flex h-10 w-10 items-center justify-center text-lg text-neutral-700 hover:bg-neutral-100 active:bg-neutral-200"
+              >
+                +
+              </button>
+              <button
+                type="button"
+                aria-label="הקטנה"
+                onClick={() => zoomOut()}
+                className="flex h-10 w-10 items-center justify-center border-t border-neutral-200 text-lg text-neutral-700 hover:bg-neutral-100 active:bg-neutral-200"
+              >
+                −
+              </button>
+              <button
+                type="button"
+                aria-label="איפוס תצוגה"
+                onClick={() => {
+                  resetTransform();
+                  centerView();
+                }}
+                className="flex h-10 w-10 items-center justify-center border-t border-neutral-200 text-xs text-neutral-700 hover:bg-neutral-100 active:bg-neutral-200"
+              >
+                ⤢
+              </button>
+            </div>
+
+            <TransformComponent
+              wrapperStyle={{ width: "100%", height: "100%" }}
+              contentStyle={{ padding: "4rem" }}
+            >
+              <ReactFamilyTree
+                nodes={nodes}
+                rootId={rootId}
+                width={NODE_WIDTH}
+                height={NODE_HEIGHT}
+                renderNode={(node: ExtNode) => {
+                  const person = byId.get(node.id);
+                  if (!person) return null;
+                  return (
+                    <PersonNodeCard
+                      key={node.id}
+                      person={person}
+                      node={node}
+                      width={NODE_WIDTH}
+                      height={NODE_HEIGHT}
+                      onClick={() => onSelectPerson(person)}
+                    />
+                  );
+                }}
+              />
+            </TransformComponent>
+          </>
+        )}
       </TransformWrapper>
     </div>
   );
