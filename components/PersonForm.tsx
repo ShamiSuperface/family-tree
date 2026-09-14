@@ -89,8 +89,8 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex h-full flex-col">
-      <div className="flex-1 space-y-4 overflow-y-auto">
+    <form onSubmit={handleSubmit} className="flex min-h-0 flex-1 flex-col">
+      <div className="min-h-0 flex-1 space-y-4 overflow-y-auto">
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label htmlFor={`${uid}-firstName`} className="mb-1 block text-sm font-medium text-neutral-700">

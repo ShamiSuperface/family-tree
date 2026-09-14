@@ -19,10 +19,10 @@ export default function PersonFormPanel({ open, people, editing, onClose, onSubm
   return (
     <div className="fixed inset-0 z-50 flex justify-end bg-black/40" onClick={onClose}>
       <div
-        className="h-full w-full max-w-md overflow-hidden bg-white p-6 shadow-xl"
+        className="flex h-full w-full max-w-md flex-col overflow-hidden bg-white p-6 shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="mb-4 flex items-center justify-between">
+        <div className="mb-4 flex shrink-0 items-center justify-between">
           <h2 className="text-lg font-semibold text-neutral-900">
             {editing ? `עריכת ${editing.firstName} ${editing.lastName}` : "הוספת קרוב משפחה"}
           </h2>
