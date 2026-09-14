@@ -21,6 +21,13 @@ export function dateYear(date: string | null): string {
   return date.slice(0, 4);
 }
 
+/** Current age for a living person, or null if deceased or the birth year isn't known. */
+export function livingAge(birthDate: string | null, deathDate: string | null): number | null {
+  if (deathDate || !birthDate || isMonthDayOnly(birthDate)) return null;
+  const birthYear = Number(birthDate.slice(0, 4));
+  return new Date().getFullYear() - birthYear;
+}
+
 export function formatPersonDate(date: string | null): string {
   if (!date) return "לא ידוע";
   if (isYearOnly(date)) return date;

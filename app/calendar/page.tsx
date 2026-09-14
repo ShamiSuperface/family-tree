@@ -46,15 +46,15 @@ export default function CalendarPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-orange-50">
-      <header className="flex items-center justify-between border-b border-amber-200 bg-gradient-to-l from-amber-100 via-orange-50 to-amber-50 px-6 py-4 shadow-sm">
+    <div className="min-h-screen bg-gradient-to-b from-amber-100 to-orange-100">
+      <header className="flex items-center justify-between border-b-2 border-amber-400 bg-gradient-to-l from-amber-200 via-orange-100 to-amber-100 px-6 py-4 shadow-md">
         <div>
-          <h1 className="text-xl font-semibold text-amber-900">לוח אירועים משפחתי</h1>
-          <p className="text-sm text-amber-700/80">ימי הולדת, ימי זיכרון וימי נישואין, מהקרוב לרחוק</p>
+          <h1 className="text-xl font-semibold text-amber-950">לוח אירועים משפחתי</h1>
+          <p className="text-sm font-medium text-amber-900">ימי הולדת, ימי זיכרון וימי נישואין, מהקרוב לרחוק</p>
         </div>
         <Link
           href="/"
-          className="rounded-lg border border-amber-300 px-4 py-2 text-sm text-amber-800 hover:bg-amber-100"
+          className="rounded-lg border-2 border-amber-500 bg-white px-4 py-2 text-sm font-medium text-amber-900 hover:bg-amber-50"
         >
           חזרה לעץ
         </Link>
@@ -62,9 +62,9 @@ export default function CalendarPage() {
 
       <main className="mx-auto max-w-2xl px-4 py-8">
         {!events ? (
-          <p className="text-center text-amber-700">טוען...</p>
+          <p className="text-center text-amber-900">טוען...</p>
         ) : events.length === 0 ? (
-          <p className="text-center text-amber-700">
+          <p className="text-center text-amber-900">
             עדיין אין תאריכים בעץ המשפחה (תאריכי לידה, פטירה או נישואין)
           </p>
         ) : (
@@ -72,12 +72,12 @@ export default function CalendarPage() {
             {events.map((event) => (
               <li
                 key={event.id}
-                className="flex items-center gap-4 rounded-2xl border border-amber-200 bg-white px-4 py-3 shadow-sm"
+                className="flex items-center gap-4 rounded-2xl border-2 border-amber-400 bg-white px-4 py-3 shadow-md"
               >
                 <span className="text-3xl">{TYPE_ICON[event.type]}</span>
                 <div className="min-w-0 flex-1">
                   <p className="truncate font-medium text-stone-900">{event.title}</p>
-                  <p className="text-sm text-amber-700">
+                  <p className="text-sm font-medium text-amber-800">
                     {formatWhen(event.daysUntil, event.nextDate)}
                     {eventYearsLabel(event) && ` · ${eventYearsLabel(event)}`}
                   </p>

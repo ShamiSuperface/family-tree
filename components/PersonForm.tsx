@@ -46,7 +46,7 @@ function RelationPicker({
       {options.length === 0 ? (
         <p className="text-sm text-stone-400">אין עדיין אנשים אחרים במערכת</p>
       ) : (
-        <div className="max-h-32 space-y-1 overflow-y-auto rounded-lg border border-amber-200 p-2">
+        <div className="max-h-32 space-y-1 overflow-y-auto rounded-lg border-2 border-amber-300 p-2">
           {options.map((person) => (
             <label key={person.id} className="flex items-center gap-2 text-sm">
               <input
@@ -88,7 +88,7 @@ function SpousePicker({
       {options.length === 0 ? (
         <p className="text-sm text-stone-400">אין עדיין אנשים אחרים במערכת</p>
       ) : (
-        <div className="max-h-40 space-y-1 overflow-y-auto rounded-lg border border-amber-200 p-2">
+        <div className="max-h-40 space-y-1 overflow-y-auto rounded-lg border-2 border-amber-300 p-2">
           {options.map((person) => {
             const checked = selected.includes(person.id);
             return (
@@ -178,9 +178,9 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
             <img
               src={input.photo}
               alt=""
-              className="h-16 w-16 rounded-full bg-amber-50 object-cover ring-2 ring-amber-200"
+              className="h-16 w-16 rounded-full bg-amber-50 object-cover ring-2 ring-amber-300"
             />
-            <label className="cursor-pointer rounded-lg border border-amber-300 px-3 py-2 text-sm text-amber-800 hover:bg-amber-50">
+            <label className="cursor-pointer rounded-lg border-2 border-amber-500 px-3 py-2 text-sm font-medium text-amber-900 hover:bg-amber-50">
               {uploading ? "מעלה..." : "בחירת תמונה"}
               <input
                 type="file"
@@ -205,7 +205,7 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
               type="text"
               value={input.firstName}
               onChange={(e) => setInput({ ...input, firstName: e.target.value })}
-              className="w-full rounded-lg border border-amber-200 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-500"
+              className="w-full rounded-lg border-2 border-amber-400 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-600"
             />
           </div>
           <div>
@@ -218,7 +218,7 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
               type="text"
               value={input.lastName}
               onChange={(e) => setInput({ ...input, lastName: e.target.value })}
-              className="w-full rounded-lg border border-amber-200 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-500"
+              className="w-full rounded-lg border-2 border-amber-400 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-600"
             />
           </div>
         </div>
@@ -231,7 +231,7 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
             id={`${uid}-gender`}
             value={input.gender}
             onChange={(e) => setInput({ ...input, gender: e.target.value as "male" | "female" })}
-            className="w-full rounded-lg border border-amber-200 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-500"
+            className="w-full rounded-lg border-2 border-amber-400 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-600"
           >
             <option value="male">זכר</option>
             <option value="female">נקבה</option>
@@ -262,7 +262,7 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
             value={input.bio}
             onChange={(e) => setInput({ ...input, bio: e.target.value })}
             rows={4}
-            className="w-full resize-none rounded-lg border border-amber-200 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-500"
+            className="w-full resize-none rounded-lg border-2 border-amber-400 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-600"
           />
         </div>
 
@@ -298,18 +298,18 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
         {error && <p className="text-sm text-red-600">{error}</p>}
       </div>
 
-      <div className="mt-4 flex items-center gap-2 border-t border-amber-200 pt-4">
+      <div className="mt-4 flex items-center gap-2 border-t-2 border-amber-400 pt-4">
         <button
           type="submit"
           disabled={saving}
-          className="flex-1 rounded-lg bg-amber-700 px-4 py-2 text-sm font-medium text-white hover:bg-amber-800 disabled:opacity-50"
+          className="flex-1 rounded-lg bg-amber-800 px-4 py-2 text-sm font-medium text-white hover:bg-amber-900 disabled:opacity-50"
         >
           {saving ? "שומר..." : "שמירה"}
         </button>
         <button
           type="button"
           onClick={onCancel}
-          className="rounded-lg border border-amber-300 px-4 py-2 text-sm text-amber-800 hover:bg-amber-50"
+          className="rounded-lg border-2 border-amber-500 px-4 py-2 text-sm font-medium text-amber-900 hover:bg-amber-50"
         >
           ביטול
         </button>

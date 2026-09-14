@@ -50,10 +50,10 @@ export default function FamilyTreeView({ people, rootId, onSelectPerson }: Props
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="חיפוש לפי שם..."
-                className="w-full rounded-xl border border-amber-200 bg-white px-3 py-2 text-sm text-stone-900 shadow-md outline-none focus:border-amber-500"
+                className="w-full rounded-xl border-2 border-amber-400 bg-white px-3 py-2 text-sm text-stone-900 shadow-md outline-none focus:border-amber-600"
               />
               {matches.length > 0 && (
-                <ul className="mt-1 overflow-hidden rounded-xl border border-amber-200 bg-white shadow-md">
+                <ul className="mt-1 overflow-hidden rounded-xl border-2 border-amber-400 bg-white shadow-md">
                   {matches.map((person) => (
                     <li key={person.id}>
                       <button
@@ -73,12 +73,12 @@ export default function FamilyTreeView({ people, rootId, onSelectPerson }: Props
               )}
             </div>
 
-            <div className="absolute bottom-4 right-4 z-10 flex flex-col overflow-hidden rounded-xl border border-amber-200 bg-white shadow-md">
+            <div className="absolute bottom-4 right-4 z-10 flex flex-col overflow-hidden rounded-xl border-2 border-amber-400 bg-white shadow-md">
               <button
                 type="button"
                 aria-label="הגדלה"
                 onClick={() => zoomIn()}
-                className="flex h-10 w-10 items-center justify-center text-lg text-amber-800 hover:bg-amber-50 active:bg-amber-100"
+                className="flex h-10 w-10 items-center justify-center text-lg font-medium text-amber-900 hover:bg-amber-50 active:bg-amber-100"
               >
                 +
               </button>
@@ -86,7 +86,7 @@ export default function FamilyTreeView({ people, rootId, onSelectPerson }: Props
                 type="button"
                 aria-label="הקטנה"
                 onClick={() => zoomOut()}
-                className="flex h-10 w-10 items-center justify-center border-t border-amber-200 text-lg text-amber-800 hover:bg-amber-50 active:bg-amber-100"
+                className="flex h-10 w-10 items-center justify-center border-t-2 border-amber-400 text-lg font-medium text-amber-900 hover:bg-amber-50 active:bg-amber-100"
               >
                 −
               </button>
@@ -97,7 +97,7 @@ export default function FamilyTreeView({ people, rootId, onSelectPerson }: Props
                   resetTransform();
                   centerView();
                 }}
-                className="flex h-10 w-10 items-center justify-center border-t border-amber-200 text-xs text-amber-800 hover:bg-amber-50 active:bg-amber-100"
+                className="flex h-10 w-10 items-center justify-center border-t-2 border-amber-400 text-xs font-medium text-amber-900 hover:bg-amber-50 active:bg-amber-100"
               >
                 ⤢
               </button>

@@ -50,11 +50,11 @@ export default function PartialDateInput({ id, label, value, onChange, compact }
   };
 
   const inputClass = compact
-    ? "rounded border border-amber-200 bg-white px-1.5 py-0.5 text-xs text-stone-900 outline-none focus:border-amber-500"
-    : "w-full rounded-lg border border-amber-200 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-500";
+    ? "rounded border-2 border-amber-400 bg-white px-1.5 py-0.5 text-xs text-stone-900 outline-none focus:border-amber-600"
+    : "w-full rounded-lg border-2 border-amber-400 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-600";
   const selectClass = compact
-    ? "rounded border border-amber-200 bg-white px-1 py-0.5 text-xs text-amber-800 outline-none focus:border-amber-500"
-    : "rounded border border-amber-200 bg-white px-1.5 py-0.5 text-xs text-amber-800 outline-none focus:border-amber-500";
+    ? "rounded border-2 border-amber-400 bg-white px-1 py-0.5 text-xs font-medium text-amber-900 outline-none focus:border-amber-600"
+    : "rounded border-2 border-amber-400 bg-white px-1.5 py-0.5 text-xs font-medium text-amber-900 outline-none focus:border-amber-600";
 
   const modeSelect = (
     <select
@@ -117,7 +117,7 @@ export default function PartialDateInput({ id, label, value, onChange, compact }
 
   if (compact) {
     return (
-      <span className="flex flex-wrap items-center gap-1 text-xs text-stone-500">
+      <span className="flex flex-wrap items-center gap-1 text-xs font-medium text-stone-700">
         {label ? `${label}:` : null}
         {fields}
         {modeSelect}

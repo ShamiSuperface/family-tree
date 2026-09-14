@@ -22,5 +22,5 @@ body {
 /* Warm connector lines for the family tree (react-family-tree renders
    these as unstyled <i> elements with an inline background color). */
 .family-tree-canvas i {
-  background: #c2874f !important;
+  background: #92400e !important;
 }

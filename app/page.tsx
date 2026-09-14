@@ -89,21 +89,21 @@ export default function Home() {
   const rootId = people?.find((person) => person.parents.length === 0)?.id ?? people?.[0]?.id;
 
   return (
-    <div className="flex h-screen w-screen flex-col bg-gradient-to-b from-amber-50 to-orange-50">
-      <header className="flex items-center justify-between border-b border-amber-200 bg-gradient-to-l from-amber-100 via-orange-50 to-amber-50 px-6 py-4 shadow-sm">
+    <div className="flex h-screen w-screen flex-col bg-gradient-to-b from-amber-100 to-orange-100">
+      <header className="flex items-center justify-between border-b-2 border-amber-400 bg-gradient-to-l from-amber-200 via-orange-100 to-amber-100 px-6 py-4 shadow-md">
         <div className="flex items-center gap-3">
           <TreeIcon />
           <div>
-            <h1 className="text-xl font-semibold text-amber-900">שבט יעקב - עץ המשפחה שלנו</h1>
-            <p className="text-sm text-amber-700/80">
-              גררו וזמזמו כדי לנווט, לחצו על צומת כדי לראות פרטים
+            <h1 className="text-xl font-semibold text-amber-950">שבט יעקב - עץ המשפחה שלנו</h1>
+            <p className="text-sm font-medium text-amber-900">
+              שוטטו בין הדורות, ולחצו על כל בן משפחה כדי להכיר את הסיפור שלו/ה
             </p>
           </div>
         </div>
         <div className="flex items-center gap-2">
           <Link
             href="/calendar"
-            className="rounded-lg border border-amber-300 px-4 py-2 text-sm text-amber-800 hover:bg-amber-100"
+            className="rounded-lg border-2 border-amber-500 bg-white px-4 py-2 text-sm font-medium text-amber-900 hover:bg-amber-50"
           >
             📅 לוח אירועים
           </Link>
@@ -111,7 +111,7 @@ export default function Home() {
             <button
               type="button"
               onClick={openCreateForm}
-              className="rounded-lg bg-amber-700 px-4 py-2 text-sm font-medium text-white hover:bg-amber-800"
+              className="rounded-lg bg-amber-800 px-4 py-2 text-sm font-medium text-white hover:bg-amber-900"
             >
               + הוספת קרוב משפחה
             </button>
@@ -121,15 +121,15 @@ export default function Home() {
 
       <main className="relative flex-1 overflow-hidden">
         {!people ? (
-          <div className="flex h-full items-center justify-center text-amber-700">טוען...</div>
+          <div className="flex h-full items-center justify-center text-amber-900">טוען...</div>
         ) : people.length === 0 || !rootId ? (
-          <div className="flex h-full flex-col items-center justify-center gap-3 text-amber-700">
+          <div className="flex h-full flex-col items-center justify-center gap-3 text-amber-900">
             <p>עדיין אין אנשים בעץ המשפחה</p>
             {EDITING_ENABLED && (
               <button
                 type="button"
                 onClick={openCreateForm}
-                className="rounded-lg bg-amber-700 px-4 py-2 text-sm font-medium text-white hover:bg-amber-800"
+                className="rounded-lg bg-amber-800 px-4 py-2 text-sm font-medium text-white hover:bg-amber-900"
               >
                 הוספת האדם הראשון
               </button>

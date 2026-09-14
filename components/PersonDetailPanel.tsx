@@ -50,7 +50,7 @@ export default function PersonDetailPanel({ person, people, onClose, onEdit }: P
             <button
               type="button"
               onClick={() => onEdit(person)}
-              className="rounded-full border border-amber-300 px-3 py-1 text-sm text-amber-800 hover:bg-amber-100"
+              className="rounded-full border-2 border-amber-500 px-3 py-1 text-sm font-medium text-amber-900 hover:bg-amber-100"
             >
               עריכה ✎
             </button>
@@ -61,14 +61,14 @@ export default function PersonDetailPanel({ person, people, onClose, onEdit }: P
         <img
           src={person.photo}
           alt={`${person.firstName} ${person.lastName}`}
-          className="mx-auto h-40 w-40 rounded-full bg-amber-50 object-cover ring-4 ring-amber-100"
+          className="mx-auto h-40 w-40 rounded-full bg-amber-50 object-cover ring-4 ring-amber-300"
         />
 
         <h2 className="mt-4 text-center text-2xl font-semibold text-stone-900">
           {person.firstName} {person.lastName}
         </h2>
 
-        <p className="mt-1 text-center text-sm text-amber-700">
+        <p className="mt-1 text-center text-sm font-medium text-amber-800">
           {formatPersonDate(person.birthDate)}
           {person.deathDate ? ` – ${formatPersonDate(person.deathDate)}` : ""}
         </p>
