@@ -32,6 +32,7 @@ function computeGenerations(people: Person[]): Map<string, number> {
 export interface FamilyStats {
   peopleCount: number;
   generationCount: number;
+  /** Oldest/youngest currently-living person, by birth year. */
   oldest: { person: Person; year: number } | null;
   youngest: { person: Person; year: number } | null;
   earliestYear: number | null;
@@ -46,11 +47,19 @@ export function computeFamilyStats(people: Person[]): FamilyStats {
     .map((person) => ({ person, year: birthYearOf(person) }))
     .filter((x): x is { person: Person; year: number } => x.year !== null);
 
-  const oldest = withYears.length
+  // The year-span stat covers the family's whole recorded history, so it's
+  // anchored to the earliest-born person overall, living or not.
+  const earliestBorn = withYears.length
     ? withYears.reduce((min, cur) => (cur.year < min.year ? cur : min))
     : null;
-  const youngest = withYears.length
-    ? withYears.reduce((max, cur) => (cur.year > max.year ? cur : max))
+
+  const livingWithYears = withYears.filter((x) => !x.person.deathDate);
+
+  const oldest = livingWithYears.length
+    ? livingWithYears.reduce((min, cur) => (cur.year < min.year ? cur : min))
+    : null;
+  const youngest = livingWithYears.length
+    ? livingWithYears.reduce((max, cur) => (cur.year > max.year ? cur : max))
     : null;
 
   return {
@@ -58,7 +67,7 @@ export function computeFamilyStats(people: Person[]): FamilyStats {
     generationCount,
     oldest,
     youngest,
-    earliestYear: oldest ? oldest.year : null,
-    yearSpan: oldest ? new Date().getFullYear() - oldest.year : null,
+    earliestYear: earliestBorn ? earliestBorn.year : null,
+    yearSpan: earliestBorn ? new Date().getFullYear() - earliestBorn.year : null,
   };
 }
