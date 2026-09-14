@@ -1,87 +1,877 @@
 [
   {
     "id": "p1",
-    "firstName": "דוד",
-    "lastName": "כהן",
+    "firstName": "שם טוב",
+    "lastName": "יעקב",
     "gender": "male",
-    "birthDate": "1945-03-12",
-    "deathDate": "2019-11-02",
-    "photo": "/placeholder-avatar.svg",
-    "bio": "דוד נולד בירושלים וגדל בשכונת מקור ברוך. עבד כנגר במשך ארבעים שנה ואהב לספר סיפורים על ילדותו בשבתות המשפחתיות.",
+    "birthDate": null,
+    "deathDate": "1989-03-01",
+    "photo": "/photos/4be01bd7-eb4d-48ca-866f-af857406374d.jpg",
+    "bio": "תאריך פטירה: כב אדר תשמ\"ט | 27 בפבר׳ 1989\nתל אביב - קרית שאול\nגוש 23, אזור 2, שורה 28, מקום 26\nחברה קדישא תל אביב-יפו והמחוז",
     "parents": [],
     "spouses": [
       "p2"
     ],
     "children": [
-      "p3"
+      "p4",
+      "p8",
+      "p27",
+      "p28",
+      "p29",
+      "p30"
     ]
   },
   {
     "id": "p2",
-    "firstName": "רינה",
-    "lastName": "כהן",
+    "firstName": "רחל",
+    "lastName": "יעקב",
     "gender": "female",
-    "birthDate": "1948-07-22",
-    "deathDate": null,
-    "photo": "/placeholder-avatar.svg",
-    "bio": "רינה הייתה מורה לספרות במשך שלושים שנה. היא אוהבת לבשל ארוחות שבת גדולות ולפגוש את כל הנכדים סביב השולחן.",
+    "birthDate": null,
+    "deathDate": "1994-09-14",
+    "photo": "/photos/283a9b10-892b-454f-ae33-b9ad7f25ac21.jpg",
+    "bio": "תאריך פטירה: ט תשרי תשנ\"ה | 14 בספט׳ 1994\nתל אביב - ירקון\nגוש 7, אזור 3, שורה 8, מקום 29\n",
     "parents": [],
     "spouses": [
       "p1"
     ],
     "children": [
-      "p3"
+      "p4",
+      "p8",
+      "p27",
+      "p28",
+      "p29",
+      "p30"
     ]
   },
   {
     "id": "p3",
-    "firstName": "יוסי",
-    "lastName": "כהן",
+    "firstName": "נתן",
+    "lastName": "נתן",
     "gender": "male",
-    "birthDate": "1972-01-30",
+    "birthDate": null,
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
-    "bio": "יוסי הוא הבן היחיד של דוד ורינה. עבד כמהנדס תוכנה ועבר לתל אביב בשנות ה-90. אוהב טיולים בטבע ובישול איטלקי.",
+    "bio": "",
+    "parents": [],
+    "spouses": [
+      "p4"
+    ],
+    "children": [
+      "p5",
+      "p6",
+      "p7"
+    ]
+  },
+  {
+    "id": "p4",
+    "firstName": "תקווה",
+    "lastName": "נתן",
+    "gender": "female",
+    "birthDate": "1935-04-01",
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
     "parents": [
       "p1",
       "p2"
     ],
     "spouses": [
-      "p4"
-    ],
-    "children": [
-      "p5"
-    ]
-  },
-  {
-    "id": "p4",
-    "firstName": "מיכל",
-    "lastName": "כהן",
-    "gender": "female",
-    "birthDate": "1975-09-14",
-    "deathDate": null,
-    "photo": "/placeholder-avatar.svg",
-    "bio": "מיכל נולדה בחיפה ועובדת כרופאת ילדים. נפגשה עם יוסי בטיול לפריז והם נישאו כעבור שנתיים.",
-    "parents": [],
-    "spouses": [
       "p3"
     ],
     "children": [
-      "p5"
+      "p5",
+      "p6",
+      "p7"
     ]
   },
   {
     "id": "p5",
-    "firstName": "נועה",
-    "lastName": "כהן",
+    "firstName": "ענת",
+    "lastName": "נתן",
     "gender": "female",
-    "birthDate": "2005-05-19",
+    "birthDate": null,
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
-    "bio": "נועה היא הנכדה הבכורה של דוד ורינה. סטודנטית לעיצוב, ומקימת האתר הזה כדי לתעד את סיפור המשפחה לדורות הבאים.",
+    "bio": "",
     "parents": [
       "p3",
       "p4"
+    ],
+    "spouses": [],
+    "children": [
+      "p12",
+      "p13",
+      "p14"
+    ]
+  },
+  {
+    "id": "p6",
+    "firstName": "שירלי",
+    "lastName": "גונן",
+    "gender": "female",
+    "birthDate": null,
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p3",
+      "p4"
+    ],
+    "spouses": [
+      "p16"
+    ],
+    "children": [
+      "p15",
+      "p17",
+      "p18"
+    ]
+  },
+  {
+    "id": "p7",
+    "firstName": "בת חן",
+    "lastName": "נתן",
+    "gender": "female",
+    "birthDate": null,
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p3",
+      "p4"
+    ],
+    "spouses": [
+      "p19"
+    ],
+    "children": [
+      "p20"
+    ]
+  },
+  {
+    "id": "p8",
+    "firstName": "עמירה",
+    "lastName": "אוסטרובסקי",
+    "gender": "female",
+    "birthDate": "1945-09-15",
+    "deathDate": "2025-09-23",
+    "photo": "/placeholder-avatar.svg",
+    "bio": "תאריך פטירה: א תשרי תשפ\"ו | 23 בספט׳ 2025\nתל אביב - ירקון\nגוש בניין גפן, אזור ג1, שורה 55, מקום 30\nחברה קדישא תל אביב-יפו והמחוז\n\n",
+    "parents": [
+      "p1",
+      "p2"
+    ],
+    "spouses": [
+      "p9"
+    ],
+    "children": [
+      "p10",
+      "p11"
+    ]
+  },
+  {
+    "id": "p9",
+    "firstName": "ברוך",
+    "lastName": "אוסטרובסקי",
+    "gender": "male",
+    "birthDate": "1943-08-31",
+    "deathDate": "2017-01-07",
+    "photo": "/placeholder-avatar.svg",
+    "bio": "תאריך פטירה: ט טבת תשע\"ז | 7 בינו׳ 2017\nתל אביב - ירקון\nגוש בניין גפן, אזור ג1, שורה 55, מקום 30\nחברה קדישא תל אביב-יפו והמחוז",
+    "parents": [],
+    "spouses": [
+      "p8"
+    ],
+    "children": [
+      "p10",
+      "p11"
+    ]
+  },
+  {
+    "id": "p10",
+    "firstName": "מתן",
+    "lastName": "אוסטרובסקי",
+    "gender": "male",
+    "birthDate": "1974-03-07",
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p8",
+      "p9"
+    ],
+    "spouses": [
+      "p21"
+    ],
+    "children": [
+      "p22",
+      "p23"
+    ]
+  },
+  {
+    "id": "p11",
+    "firstName": "שמי",
+    "lastName": "אוסטרובסקי",
+    "gender": "male",
+    "birthDate": "1977-01-22",
+    "deathDate": null,
+    "photo": "/photos/615cad94-c42e-4971-ab5c-5e955ef1c83e.png",
+    "bio": "",
+    "parents": [
+      "p8",
+      "p9"
+    ],
+    "spouses": [
+      "p24"
+    ],
+    "children": [
+      "p25",
+      "p26"
+    ]
+  },
+  {
+    "id": "p12",
+    "firstName": "יונתן",
+    "lastName": "ון קולם",
+    "gender": "male",
+    "birthDate": null,
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p5"
+    ],
+    "spouses": [],
+    "children": []
+  },
+  {
+    "id": "p13",
+    "firstName": "נועה",
+    "lastName": "ון קולם",
+    "gender": "female",
+    "birthDate": null,
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p5"
+    ],
+    "spouses": [],
+    "children": []
+  },
+  {
+    "id": "p14",
+    "firstName": "דניאל",
+    "lastName": "ון קולם",
+    "gender": "female",
+    "birthDate": null,
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p5"
+    ],
+    "spouses": [],
+    "children": []
+  },
+  {
+    "id": "p15",
+    "firstName": "גל",
+    "lastName": "גונן",
+    "gender": "female",
+    "birthDate": null,
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p6"
+    ],
+    "spouses": [],
+    "children": []
+  },
+  {
+    "id": "p16",
+    "firstName": "תומר",
+    "lastName": "גונן",
+    "gender": "male",
+    "birthDate": null,
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [],
+    "spouses": [
+      "p6"
+    ],
+    "children": [
+      "p17",
+      "p18"
+    ]
+  },
+  {
+    "id": "p17",
+    "firstName": "מאיה",
+    "lastName": "גונן",
+    "gender": "female",
+    "birthDate": null,
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p6",
+      "p16"
+    ],
+    "spouses": [],
+    "children": []
+  },
+  {
+    "id": "p18",
+    "firstName": "גל",
+    "lastName": "גונן",
+    "gender": "female",
+    "birthDate": null,
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p6",
+      "p16"
+    ],
+    "spouses": [],
+    "children": []
+  },
+  {
+    "id": "p19",
+    "firstName": "עוזי",
+    "lastName": "מלימובקה",
+    "gender": "male",
+    "birthDate": null,
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [],
+    "spouses": [
+      "p7"
+    ],
+    "children": [
+      "p20"
+    ]
+  },
+  {
+    "id": "p20",
+    "firstName": "יאיר",
+    "lastName": "מלימובקה",
+    "gender": "male",
+    "birthDate": null,
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p19",
+      "p7"
+    ],
+    "spouses": [],
+    "children": []
+  },
+  {
+    "id": "p21",
+    "firstName": "ענת",
+    "lastName": "רכס",
+    "gender": "female",
+    "birthDate": null,
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [],
+    "spouses": [
+      "p10"
+    ],
+    "children": [
+      "p22",
+      "p23"
+    ]
+  },
+  {
+    "id": "p22",
+    "firstName": "שני",
+    "lastName": "רכס אוסטרובסקי",
+    "gender": "female",
+    "birthDate": "2008-01-02",
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p10",
+      "p21"
+    ],
+    "spouses": [],
+    "children": []
+  },
+  {
+    "id": "p23",
+    "firstName": "נועם",
+    "lastName": "רכס אוסטרובסקי",
+    "gender": "male",
+    "birthDate": null,
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p10",
+      "p21"
+    ],
+    "spouses": [],
+    "children": []
+  },
+  {
+    "id": "p24",
+    "firstName": "שירי",
+    "lastName": "אוסטרובסקי",
+    "gender": "female",
+    "birthDate": "1984-02-17",
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [],
+    "spouses": [
+      "p11"
+    ],
+    "children": [
+      "p25",
+      "p26"
+    ]
+  },
+  {
+    "id": "p25",
+    "firstName": "גאיה",
+    "lastName": "אוסטרובסקי",
+    "gender": "female",
+    "birthDate": "2011-11-24",
+    "deathDate": null,
+    "photo": "/photos/f622f808-f156-4edd-bd51-35935a82c853.png",
+    "bio": "",
+    "parents": [
+      "p11",
+      "p24"
+    ],
+    "spouses": [],
+    "children": []
+  },
+  {
+    "id": "p26",
+    "firstName": "עומר",
+    "lastName": "אוסטרובסקי",
+    "gender": "female",
+    "birthDate": "2015-10-22",
+    "deathDate": null,
+    "photo": "/photos/ffc4c11c-8526-425a-bfe8-04c5b14768a0.png",
+    "bio": "",
+    "parents": [
+      "p11",
+      "p24"
+    ],
+    "spouses": [],
+    "children": []
+  },
+  {
+    "id": "p27",
+    "firstName": "אלי",
+    "lastName": "יעקב",
+    "gender": "male",
+    "birthDate": null,
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p1",
+      "p2"
+    ],
+    "spouses": [
+      "p31"
+    ],
+    "children": [
+      "p35"
+    ]
+  },
+  {
+    "id": "p28",
+    "firstName": "משה",
+    "lastName": "יעקב",
+    "gender": "male",
+    "birthDate": null,
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p1",
+      "p2"
+    ],
+    "spouses": [
+      "p32"
+    ],
+    "children": [
+      "p36",
+      "p37",
+      "p38",
+      "p39"
+    ]
+  },
+  {
+    "id": "p29",
+    "firstName": "סמי",
+    "lastName": "יעקב",
+    "gender": "male",
+    "birthDate": null,
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p1",
+      "p2"
+    ],
+    "spouses": [
+      "p33"
+    ],
+    "children": [
+      "p40",
+      "p41"
+    ]
+  },
+  {
+    "id": "p30",
+    "firstName": "יעקב",
+    "lastName": "יעקב",
+    "gender": "male",
+    "birthDate": null,
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p1",
+      "p2"
+    ],
+    "spouses": [
+      "p34"
+    ],
+    "children": [
+      "p42",
+      "p43",
+      "p44"
+    ]
+  },
+  {
+    "id": "p31",
+    "firstName": "סימה",
+    "lastName": "יעקב",
+    "gender": "female",
+    "birthDate": null,
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [],
+    "spouses": [
+      "p27"
+    ],
+    "children": [
+      "p35"
+    ]
+  },
+  {
+    "id": "p32",
+    "firstName": "פלורה",
+    "lastName": "יעקב",
+    "gender": "female",
+    "birthDate": null,
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [],
+    "spouses": [
+      "p28"
+    ],
+    "children": [
+      "p36",
+      "p37",
+      "p38",
+      "p39"
+    ]
+  },
+  {
+    "id": "p33",
+    "firstName": "שרית",
+    "lastName": "יעקב",
+    "gender": "male",
+    "birthDate": null,
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [],
+    "spouses": [
+      "p29"
+    ],
+    "children": [
+      "p40",
+      "p41"
+    ]
+  },
+  {
+    "id": "p34",
+    "firstName": "רחל",
+    "lastName": "יעקב",
+    "gender": "female",
+    "birthDate": null,
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [],
+    "spouses": [
+      "p30"
+    ],
+    "children": [
+      "p42",
+      "p43",
+      "p44"
+    ]
+  },
+  {
+    "id": "p35",
+    "firstName": "שרון",
+    "lastName": "יעקב",
+    "gender": "male",
+    "birthDate": null,
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p27",
+      "p31"
+    ],
+    "spouses": [],
+    "children": []
+  },
+  {
+    "id": "p36",
+    "firstName": "חגית",
+    "lastName": "יעקב ברדלי",
+    "gender": "female",
+    "birthDate": null,
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p32",
+      "p28"
+    ],
+    "spouses": [],
+    "children": []
+  },
+  {
+    "id": "p37",
+    "firstName": "אורית",
+    "lastName": "וטורי",
+    "gender": "female",
+    "birthDate": null,
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p32",
+      "p28"
+    ],
+    "spouses": [],
+    "children": []
+  },
+  {
+    "id": "p38",
+    "firstName": "ורד",
+    "lastName": "יעקב",
+    "gender": "female",
+    "birthDate": null,
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p28",
+      "p32"
+    ],
+    "spouses": [],
+    "children": []
+  },
+  {
+    "id": "p39",
+    "firstName": "שי",
+    "lastName": "יעקב",
+    "gender": "male",
+    "birthDate": null,
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p32",
+      "p28"
+    ],
+    "spouses": [],
+    "children": []
+  },
+  {
+    "id": "p40",
+    "firstName": "ליאת",
+    "lastName": "יעקב",
+    "gender": "female",
+    "birthDate": null,
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p33",
+      "p29"
+    ],
+    "spouses": [],
+    "children": []
+  },
+  {
+    "id": "p41",
+    "firstName": "מאיה",
+    "lastName": "יעקב",
+    "gender": "female",
+    "birthDate": null,
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p29",
+      "p33"
+    ],
+    "spouses": [],
+    "children": []
+  },
+  {
+    "id": "p42",
+    "firstName": "עודד (דדי)",
+    "lastName": "יעקב",
+    "gender": "male",
+    "birthDate": "1965-01-19",
+    "deathDate": null,
+    "photo": "/photos/47cd5a98-ba1a-4d19-b54e-93b037fefdb3.webp",
+    "bio": "",
+    "parents": [
+      "p30",
+      "p34"
+    ],
+    "spouses": [
+      "p45"
+    ],
+    "children": [
+      "p46",
+      "p48",
+      "p49"
+    ]
+  },
+  {
+    "id": "p43",
+    "firstName": "עמנואל (מנו)",
+    "lastName": "יעקב",
+    "gender": "male",
+    "birthDate": null,
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p34",
+      "p30"
+    ],
+    "spouses": [],
+    "children": []
+  },
+  {
+    "id": "p44",
+    "firstName": "מיכאל (מייקי)",
+    "lastName": "יעקב",
+    "gender": "male",
+    "birthDate": null,
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p30",
+      "p34"
+    ],
+    "spouses": [],
+    "children": []
+  },
+  {
+    "id": "p45",
+    "firstName": "בטינה",
+    "lastName": "יעקב",
+    "gender": "female",
+    "birthDate": "1967-08-23",
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [],
+    "spouses": [
+      "p42"
+    ],
+    "children": [
+      "p46",
+      "p48",
+      "p49"
+    ]
+  },
+  {
+    "id": "p46",
+    "firstName": "נועם",
+    "lastName": "יעקב",
+    "gender": "female",
+    "birthDate": "2000-05-29",
+    "deathDate": null,
+    "photo": "/photos/139f2560-4c7f-444d-9742-1882d1887d99.png",
+    "bio": "",
+    "parents": [
+      "p42",
+      "p45"
+    ],
+    "spouses": [],
+    "children": []
+  },
+  {
+    "id": "p47",
+    "firstName": "ברק",
+    "lastName": "יעקב",
+    "gender": "male",
+    "birthDate": "1995-10-29",
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [],
+    "spouses": [],
+    "children": []
+  },
+  {
+    "id": "p48",
+    "firstName": "יובל",
+    "lastName": "יעקב",
+    "gender": "male",
+    "birthDate": "2000-05-29",
+    "deathDate": null,
+    "photo": "/photos/afa200f6-baaa-4398-95f0-325cb867af86.png",
+    "bio": "",
+    "parents": [
+      "p45",
+      "p42"
+    ],
+    "spouses": [],
+    "children": []
+  },
+  {
+    "id": "p49",
+    "firstName": "ברק",
+    "lastName": "יעקב",
+    "gender": "male",
+    "birthDate": "1995-10-29",
+    "deathDate": null,
+    "photo": "/photos/5b9cb6d9-3521-4992-a7eb-cd13ae067738.png",
+    "bio": "",
+    "parents": [
+      "p45",
+      "p42"
     ],
     "spouses": [],
     "children": []
