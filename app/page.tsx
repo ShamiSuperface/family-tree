@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import type { Person } from "@/types/family";
 import type { PersonInput } from "@/lib/peopleStore";
 import { computeFamilyStats } from "@/lib/stats";
-import FamilyTreeView from "@/components/FamilyTreeView";
+import FamilyTreeView, { type FamilyTreeViewHandle } from "@/components/FamilyTreeView";
 import PersonDetailPanel from "@/components/PersonDetailPanel";
 import PersonFormPanel from "@/components/PersonFormPanel";
 import StatsBar from "@/components/StatsBar";
@@ -30,6 +30,22 @@ export default function Home() {
   const [selectedPerson, setSelectedPerson] = useState<Person | null>(null);
   const [formOpen, setFormOpen] = useState(false);
   const [editingPerson, setEditingPerson] = useState<Person | undefined>(undefined);
+  const [query, setQuery] = useState("");
+  const treeRef = useRef<FamilyTreeViewHandle>(null);
+
+  const matches = useMemo(() => {
+    const q = query.trim();
+    if (!q || !people) return [];
+    return people
+      .filter((person) => `${person.firstName} ${person.lastName}`.includes(q))
+      .slice(0, 6);
+  }, [people, query]);
+
+  const selectSearchResult = (person: Person) => {
+    treeRef.current?.zoomToPerson(person.id);
+    setSelectedPerson(person);
+    setQuery("");
+  };
 
   const fetchPeople = async (): Promise<Person[]> => {
     const res = await fetch("/api/people");
@@ -113,41 +129,69 @@ export default function Home() {
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-1.5 sm:gap-2">
-          <Link
-            href="/calendar"
-            title="לוח אירועים"
-            className="rounded-lg border-2 border-amber-500 bg-white px-2.5 py-1.5 text-sm font-medium text-amber-900 hover:bg-amber-50 sm:px-4 sm:py-2"
-          >
-            📅 <span className="hidden sm:inline">לוח אירועים</span>
-          </Link>
-          <Link
-            href="/memories"
-            title="פינת זיכרונות"
-            className="rounded-lg border-2 border-amber-500 bg-white px-2.5 py-1.5 text-sm font-medium text-amber-900 hover:bg-amber-50 sm:px-4 sm:py-2"
-          >
-            💬 <span className="hidden sm:inline">פינת זיכרונות</span>
-          </Link>
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
           {people && people.length > 0 && (
-            <button
-              type="button"
-              onClick={handleBackup}
-              title="גיבוי JSON"
-              className="rounded-lg border-2 border-amber-500 bg-white px-2.5 py-1.5 text-sm font-medium text-amber-900 hover:bg-amber-50 sm:px-4 sm:py-2"
-            >
-              💾 <span className="hidden sm:inline">גיבוי JSON</span>
-            </button>
+            <div className="relative w-full sm:w-56">
+              <input
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="חיפוש לפי שם..."
+                className="w-full rounded-lg border-2 border-amber-400 bg-white px-3 py-1.5 text-sm text-stone-900 outline-none focus:border-amber-600 sm:py-2"
+              />
+              {matches.length > 0 && (
+                <ul className="absolute z-20 mt-1 w-full overflow-hidden rounded-xl border-2 border-amber-400 bg-white shadow-md">
+                  {matches.map((person) => (
+                    <li key={person.id}>
+                      <button
+                        type="button"
+                        onClick={() => selectSearchResult(person)}
+                        className="block w-full px-3 py-2 text-start text-sm text-stone-800 hover:bg-amber-50"
+                      >
+                        {person.firstName} {person.lastName}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
           )}
-          {EDITING_ENABLED && (
-            <button
-              type="button"
-              onClick={openCreateForm}
-              title="הוספת קרוב משפחה"
-              className="rounded-lg bg-amber-800 px-2.5 py-1.5 text-sm font-medium text-white hover:bg-amber-900 sm:px-4 sm:py-2"
-            >
-              + <span className="hidden sm:inline">הוספת קרוב משפחה</span>
-            </button>
-          )}
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <Link
+                href="/calendar"
+                title="לוח אירועים"
+                className="rounded-lg border-2 border-amber-500 bg-white px-2.5 py-1.5 text-sm font-medium text-amber-900 hover:bg-amber-50 sm:px-4 sm:py-2"
+              >
+                📅 <span className="hidden sm:inline">לוח אירועים</span>
+              </Link>
+              <Link
+                href="/memories"
+                title="פינת זיכרונות"
+                className="rounded-lg border-2 border-amber-500 bg-white px-2.5 py-1.5 text-sm font-medium text-amber-900 hover:bg-amber-50 sm:px-4 sm:py-2"
+              >
+                💬 <span className="hidden sm:inline">פינת זיכרונות</span>
+              </Link>
+              {people && people.length > 0 && (
+                <button
+                  type="button"
+                  onClick={handleBackup}
+                  title="גיבוי JSON"
+                  className="rounded-lg border-2 border-amber-500 bg-white px-2.5 py-1.5 text-sm font-medium text-amber-900 hover:bg-amber-50 sm:px-4 sm:py-2"
+                >
+                  💾 <span className="hidden sm:inline">גיבוי JSON</span>
+                </button>
+              )}
+              {EDITING_ENABLED && (
+                <button
+                  type="button"
+                  onClick={openCreateForm}
+                  title="הוספת קרוב משפחה"
+                  className="rounded-lg bg-amber-800 px-2.5 py-1.5 text-sm font-medium text-white hover:bg-amber-900 sm:px-4 sm:py-2"
+                >
+                  + <span className="hidden sm:inline">הוספת קרוב משפחה</span>
+                </button>
+              )}
+            </div>
         </div>
       </header>
 
@@ -170,7 +214,7 @@ export default function Home() {
             )}
           </div>
         ) : (
-          <FamilyTreeView people={people} rootId={rootId} onSelectPerson={setSelectedPerson} />
+          <FamilyTreeView ref={treeRef} people={people} rootId={rootId} onSelectPerson={setSelectedPerson} />
         )}
       </main>
 
