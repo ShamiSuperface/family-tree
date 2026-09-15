@@ -9,6 +9,7 @@ import FamilyTreeView, { type FamilyTreeViewHandle } from "@/components/FamilyTr
 import PersonDetailPanel from "@/components/PersonDetailPanel";
 import PersonFormPanel from "@/components/PersonFormPanel";
 import StatsBar from "@/components/StatsBar";
+import ThemeToggle from "@/components/ThemeToggle";
 
 // Editing is only available when running the site locally (`npm run dev`).
 // The publicly deployed production build is view-only.
@@ -17,10 +18,10 @@ const EDITING_ENABLED = process.env.NODE_ENV === "development";
 function TreeIcon() {
   return (
     <svg viewBox="0 0 32 32" className="h-9 w-9 shrink-0" aria-hidden="true">
-      <rect x="14" y="19" width="4" height="11" rx="1.5" fill="#92400e" />
-      <circle cx="16" cy="10" r="9" fill="#d97706" />
-      <circle cx="9" cy="15" r="6" fill="#f59e0b" />
-      <circle cx="23" cy="15" r="6" fill="#f59e0b" />
+      <rect x="14" y="19" width="4" height="11" rx="1.5" fill="var(--color-amber-800)" />
+      <circle cx="16" cy="10" r="9" fill="var(--color-amber-600)" />
+      <circle cx="9" cy="15" r="6" fill="var(--color-amber-500)" />
+      <circle cx="23" cy="15" r="6" fill="var(--color-amber-500)" />
     </svg>
   );
 }
@@ -137,10 +138,10 @@ export default function Home() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="חיפוש לפי שם..."
-                className="w-full rounded-lg border-2 border-amber-400 bg-white px-3 py-1.5 text-sm text-stone-900 outline-none focus:border-amber-600 sm:py-2"
+                className="w-full rounded-lg border-2 border-amber-400 bg-[var(--surface)] px-3 py-1.5 text-sm text-stone-900 outline-none focus:border-amber-600 sm:py-2"
               />
               {matches.length > 0 && (
-                <ul className="absolute z-20 mt-1 w-full overflow-hidden rounded-xl border-2 border-amber-400 bg-white shadow-md">
+                <ul className="absolute z-20 mt-1 w-full overflow-hidden rounded-xl border-2 border-amber-400 bg-[var(--surface)] shadow-md">
                   {matches.map((person) => (
                     <li key={person.id}>
                       <button
@@ -157,17 +158,18 @@ export default function Home() {
             </div>
           )}
             <div className="flex items-center gap-1.5 sm:gap-2">
+              <ThemeToggle />
               <Link
                 href="/calendar"
                 title="לוח אירועים"
-                className="rounded-lg border-2 border-amber-500 bg-white px-2.5 py-1.5 text-sm font-medium text-amber-900 hover:bg-amber-50 sm:px-4 sm:py-2"
+                className="rounded-lg border-2 border-amber-500 bg-[var(--surface)] px-2.5 py-1.5 text-sm font-medium text-amber-900 hover:bg-amber-50 sm:px-4 sm:py-2"
               >
                 📅 <span className="hidden sm:inline">לוח אירועים</span>
               </Link>
               <Link
                 href="/memories"
                 title="פינת זיכרונות"
-                className="rounded-lg border-2 border-amber-500 bg-white px-2.5 py-1.5 text-sm font-medium text-amber-900 hover:bg-amber-50 sm:px-4 sm:py-2"
+                className="rounded-lg border-2 border-amber-500 bg-[var(--surface)] px-2.5 py-1.5 text-sm font-medium text-amber-900 hover:bg-amber-50 sm:px-4 sm:py-2"
               >
                 💬 <span className="hidden sm:inline">פינת זיכרונות</span>
               </Link>
@@ -176,7 +178,7 @@ export default function Home() {
                   type="button"
                   onClick={handleBackup}
                   title="גיבוי JSON"
-                  className="rounded-lg border-2 border-amber-500 bg-white px-2.5 py-1.5 text-sm font-medium text-amber-900 hover:bg-amber-50 sm:px-4 sm:py-2"
+                  className="rounded-lg border-2 border-amber-500 bg-[var(--surface)] px-2.5 py-1.5 text-sm font-medium text-amber-900 hover:bg-amber-50 sm:px-4 sm:py-2"
                 >
                   💾 <span className="hidden sm:inline">גיבוי JSON</span>
                 </button>
@@ -186,7 +188,7 @@ export default function Home() {
                   type="button"
                   onClick={openCreateForm}
                   title="הוספת קרוב משפחה"
-                  className="rounded-lg bg-amber-800 px-2.5 py-1.5 text-sm font-medium text-white hover:bg-amber-900 sm:px-4 sm:py-2"
+                  className="rounded-lg bg-[var(--accent)] px-2.5 py-1.5 text-sm font-medium text-white hover:bg-[var(--accent-hover)] sm:px-4 sm:py-2"
                 >
                   + <span className="hidden sm:inline">הוספת קרוב משפחה</span>
                 </button>
@@ -207,7 +209,7 @@ export default function Home() {
               <button
                 type="button"
                 onClick={openCreateForm}
-                className="rounded-lg bg-amber-800 px-4 py-2 text-sm font-medium text-white hover:bg-amber-900"
+                className="rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--accent-hover)]"
               >
                 הוספת האדם הראשון
               </button>

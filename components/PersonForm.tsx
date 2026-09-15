@@ -241,7 +241,7 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
               type="text"
               value={input.firstName}
               onChange={(e) => setInput({ ...input, firstName: e.target.value })}
-              className="w-full rounded-lg border-2 border-amber-400 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-600"
+              className="w-full rounded-lg border-2 border-amber-400 bg-[var(--surface)] px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-600"
             />
           </div>
           <div>
@@ -254,7 +254,7 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
               type="text"
               value={input.lastName}
               onChange={(e) => setInput({ ...input, lastName: e.target.value })}
-              className="w-full rounded-lg border-2 border-amber-400 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-600"
+              className="w-full rounded-lg border-2 border-amber-400 bg-[var(--surface)] px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-600"
             />
           </div>
         </div>
@@ -267,7 +267,7 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
             id={`${uid}-gender`}
             value={input.gender}
             onChange={(e) => setInput({ ...input, gender: e.target.value as "male" | "female" })}
-            className="w-full rounded-lg border-2 border-amber-400 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-600"
+            className="w-full rounded-lg border-2 border-amber-400 bg-[var(--surface)] px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-600"
           >
             <option value="male">זכר</option>
             <option value="female">נקבה</option>
@@ -298,7 +298,7 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
             value={input.bio}
             onChange={(e) => setInput({ ...input, bio: e.target.value })}
             rows={4}
-            className="w-full resize-none rounded-lg border-2 border-amber-400 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-600"
+            className="w-full resize-none rounded-lg border-2 border-amber-400 bg-[var(--surface)] px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-600"
           />
         </div>
 
@@ -392,7 +392,7 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
         <button
           type="submit"
           disabled={saving}
-          className="flex-1 rounded-lg bg-amber-800 px-2.5 py-2 text-sm font-medium text-white hover:bg-amber-900 disabled:opacity-50 sm:px-4"
+          className="flex-1 rounded-lg bg-[var(--accent)] px-2.5 py-2 text-sm font-medium text-white hover:bg-[var(--accent-hover)] disabled:opacity-50 sm:px-4"
         >
           {saving ? "שומר..." : "שמירה"}
         </button>

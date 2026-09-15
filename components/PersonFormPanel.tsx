@@ -17,9 +17,9 @@ export default function PersonFormPanel({ open, people, editing, onClose, onSubm
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-stone-900/40" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex justify-end bg-black/40" onClick={onClose}>
       <div
-        className="flex h-full w-full max-w-md flex-col overflow-hidden bg-gradient-to-b from-amber-50 to-white p-4 shadow-xl sm:p-6"
+        className="flex h-full w-full max-w-md flex-col overflow-hidden bg-gradient-to-b from-amber-50 to-[var(--surface)] p-4 shadow-xl sm:p-6"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="mb-4 flex shrink-0 items-center justify-between">

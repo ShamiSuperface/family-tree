@@ -34,7 +34,7 @@ export default function PersonNodeCard({ person, node, width, height, onClick }:
         type="button"
         onClick={onClick}
         title={fullName}
-        className="flex h-full w-full items-center gap-2.5 rounded-2xl border-2 border-amber-400 bg-white px-2.5 py-2 text-start shadow-md transition hover:border-amber-600 hover:shadow-lg"
+        className="flex h-full w-full items-center gap-2.5 rounded-2xl border-2 border-amber-400 bg-[var(--surface)] px-2.5 py-2 text-start shadow-md transition hover:border-amber-600 hover:shadow-lg"
         style={{ margin: GAP / 2, width: width - GAP, height: height - GAP }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}

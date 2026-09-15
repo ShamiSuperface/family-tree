@@ -3,6 +3,9 @@
 :root {
   --background: #fffbeb;
   --foreground: #292524;
+  --surface: #ffffff;
+  --accent: oklch(47.3% 0.137 46.201); /* = amber-800 */
+  --accent-hover: oklch(41.4% 0.112 45.904); /* = amber-900 */
   color-scheme: light;
 }
 
@@ -22,5 +25,74 @@ body {
 /* Warm connector lines for the family tree (react-family-tree renders
    these as unstyled <i> elements with an inline background color). */
 .family-tree-canvas i {
-  background: #92400e !important;
+  background: var(--accent) !important;
+}
+
+/* ---- Dark theme: warm, dark wood tones ---- */
+:root[data-theme="dark"] {
+  --background: oklch(15% 0.02 55);
+  --foreground: oklch(90% 0.01 60);
+  --surface: oklch(21% 0.025 55);
+  --accent: oklch(58% 0.16 55);
+  --accent-hover: oklch(52% 0.15 55);
+  color-scheme: dark;
+
+  --color-amber-50: oklch(15% 0.02 55);
+  --color-amber-100: oklch(19% 0.025 52);
+  --color-amber-200: oklch(24% 0.03 52);
+  --color-amber-300: oklch(33% 0.045 55);
+  --color-amber-400: oklch(55% 0.14 58);
+  --color-amber-500: oklch(61% 0.15 58);
+  --color-amber-600: oklch(67% 0.16 60);
+  --color-amber-700: oklch(72% 0.13 62);
+  --color-amber-800: oklch(80% 0.13 70);
+  --color-amber-900: oklch(88% 0.09 75);
+  --color-amber-950: oklch(96% 0.03 82);
+
+  --color-orange-100: oklch(19% 0.03 50);
+  --color-orange-500: oklch(66% 0.17 45);
+
+  --color-stone-400: oklch(50% 0.008 60);
+  --color-stone-600: oklch(66% 0.008 60);
+  --color-stone-700: oklch(74% 0.008 60);
+  --color-stone-800: oklch(82% 0.006 60);
+  --color-stone-900: oklch(92% 0.004 60);
+
+  --color-red-50: oklch(20% 0.05 25);
+  --color-red-200: oklch(32% 0.1 25);
+  --color-red-300: oklch(42% 0.13 25);
+  --color-red-500: oklch(60% 0.19 25);
+  --color-red-600: oklch(64% 0.2 25);
+  --color-red-700: oklch(70% 0.18 25);
+}
+
+/* ---- Colorful theme: bright, cheerful, varied hues ---- */
+:root[data-theme="colorful"] {
+  --background: oklch(97% 0.02 60);
+  --foreground: oklch(30% 0.08 300);
+  --surface: #fffdfa;
+  --accent: oklch(62% 0.19 350);
+  --accent-hover: oklch(55% 0.19 350);
+  color-scheme: light;
+
+  --color-amber-50: oklch(97% 0.02 60);
+  --color-amber-100: oklch(94% 0.05 30);
+  --color-amber-200: oklch(90% 0.06 190);
+  --color-amber-300: oklch(84% 0.1 340);
+  --color-amber-400: oklch(72% 0.18 340);
+  --color-amber-500: oklch(74% 0.19 40);
+  --color-amber-600: oklch(66% 0.16 190);
+  --color-amber-700: oklch(52% 0.16 300);
+  --color-amber-800: oklch(45% 0.15 300);
+  --color-amber-900: oklch(38% 0.14 280);
+  --color-amber-950: oklch(28% 0.1 280);
+
+  --color-orange-100: oklch(93% 0.06 50);
+  --color-orange-500: oklch(72% 0.19 40);
+
+  --color-stone-400: oklch(65% 0.02 300);
+  --color-stone-600: oklch(48% 0.03 300);
+  --color-stone-700: oklch(40% 0.04 300);
+  --color-stone-800: oklch(32% 0.04 300);
+  --color-stone-900: oklch(24% 0.05 300);
 }

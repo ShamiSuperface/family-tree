@@ -4,6 +4,7 @@ import { Suspense, useEffect, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import type { Memory, Person } from "@/types/family";
+import ThemeToggle from "@/components/ThemeToggle";
 
 // Editing is only available when running the site locally (`npm run dev`).
 const EDITING_ENABLED = process.env.NODE_ENV === "development";
@@ -104,12 +105,15 @@ function MemoriesPageContent() {
             כל בן משפחה מוזמן לשתף זיכרון, סיפור או אנקדוטה
           </p>
         </div>
-        <Link
-          href="/"
-          className="self-start rounded-lg border-2 border-amber-500 bg-white px-4 py-2 text-sm font-medium text-amber-900 hover:bg-amber-50"
-        >
-          חזרה לעץ
-        </Link>
+        <div className="flex items-center gap-2 self-start">
+          <ThemeToggle />
+          <Link
+            href="/"
+            className="rounded-lg border-2 border-amber-500 bg-[var(--surface)] px-4 py-2 text-sm font-medium text-amber-900 hover:bg-amber-50"
+          >
+            חזרה לעץ
+          </Link>
+        </div>
       </header>
 
       <main className="mx-auto max-w-2xl px-4 py-8">
@@ -121,7 +125,7 @@ function MemoriesPageContent() {
 
         <form
           onSubmit={handleSubmit}
-          className="mb-8 space-y-3 rounded-2xl border-2 border-amber-400 bg-white p-4 shadow-md"
+          className="mb-8 space-y-3 rounded-2xl border-2 border-amber-400 bg-[var(--surface)] p-4 shadow-md"
         >
           <h2 className="text-sm font-semibold text-amber-900">הוספת זיכרון</h2>
 
@@ -133,12 +137,12 @@ function MemoriesPageContent() {
               value={authorName}
               onChange={(e) => setAuthorName(e.target.value)}
               maxLength={60}
-              className="w-full rounded-lg border-2 border-amber-400 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-600"
+              className="w-full rounded-lg border-2 border-amber-400 bg-[var(--surface)] px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-600"
             />
             <select
               value={personId}
               onChange={(e) => setPersonId(e.target.value)}
-              className="w-full rounded-lg border-2 border-amber-400 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-600"
+              className="w-full rounded-lg border-2 border-amber-400 bg-[var(--surface)] px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-600"
             >
               <option value="">כלל המשפחה</option>
               {people.map((p) => (
@@ -156,7 +160,7 @@ function MemoriesPageContent() {
             onChange={(e) => setText(e.target.value)}
             rows={4}
             maxLength={2000}
-            className="w-full resize-none rounded-lg border-2 border-amber-400 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-600"
+            className="w-full resize-none rounded-lg border-2 border-amber-400 bg-[var(--surface)] px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-600"
           />
 
           {/* Honeypot — hidden from real visitors, catches simple bots. */}
@@ -175,7 +179,7 @@ function MemoriesPageContent() {
           <button
             type="submit"
             disabled={submitting || memoriesUnavailable}
-            className="rounded-lg bg-amber-800 px-4 py-2 text-sm font-medium text-white hover:bg-amber-900 disabled:opacity-50"
+            className="rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--accent-hover)] disabled:opacity-50"
           >
             {submitting ? "שולח..." : "שליחת זיכרון"}
           </button>
@@ -192,7 +196,7 @@ function MemoriesPageContent() {
               return (
                 <li
                   key={memory.id}
-                  className="rounded-2xl border-2 border-amber-400 bg-white px-4 py-3 shadow-md"
+                  className="rounded-2xl border-2 border-amber-400 bg-[var(--surface)] px-4 py-3 shadow-md"
                 >
                   <div className="flex items-start justify-between gap-2">
                     <p className="whitespace-pre-line text-stone-800">{memory.text}</p>

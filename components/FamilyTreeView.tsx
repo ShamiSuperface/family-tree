@@ -47,7 +47,7 @@ const FamilyTreeView = forwardRef<FamilyTreeViewHandle, Props>(function FamilyTr
       >
         {({ zoomIn, zoomOut, resetTransform, centerView }) => (
           <>
-            <div className="absolute bottom-4 right-4 z-10 flex flex-col overflow-hidden rounded-xl border-2 border-amber-400 bg-white shadow-md">
+            <div className="absolute bottom-4 right-4 z-10 flex flex-col overflow-hidden rounded-xl border-2 border-amber-400 bg-[var(--surface)] shadow-md">
               <button
                 type="button"
                 aria-label="הגדלה"

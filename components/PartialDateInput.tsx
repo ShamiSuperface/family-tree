@@ -50,11 +50,11 @@ export default function PartialDateInput({ id, label, value, onChange, compact }
   };
 
   const inputClass = compact
-    ? "rounded border-2 border-amber-400 bg-white px-1.5 py-0.5 text-xs text-stone-900 outline-none focus:border-amber-600"
-    : "w-full rounded-lg border-2 border-amber-400 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-600";
+    ? "rounded border-2 border-amber-400 bg-[var(--surface)] px-1.5 py-0.5 text-xs text-stone-900 outline-none focus:border-amber-600"
+    : "w-full rounded-lg border-2 border-amber-400 bg-[var(--surface)] px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-600";
   const selectClass = compact
-    ? "rounded border-2 border-amber-400 bg-white px-1 py-0.5 text-xs font-medium text-amber-900 outline-none focus:border-amber-600"
-    : "rounded border-2 border-amber-400 bg-white px-1.5 py-0.5 text-xs font-medium text-amber-900 outline-none focus:border-amber-600";
+    ? "rounded border-2 border-amber-400 bg-[var(--surface)] px-1 py-0.5 text-xs font-medium text-amber-900 outline-none focus:border-amber-600"
+    : "rounded border-2 border-amber-400 bg-[var(--surface)] px-1.5 py-0.5 text-xs font-medium text-amber-900 outline-none focus:border-amber-600";
 
   const modeSelect = (
     <select
