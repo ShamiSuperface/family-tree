@@ -6,7 +6,13 @@ function birthYearOf(person: Person): number | null {
   return Number(person.birthDate.slice(0, 4));
 }
 
-/** Generation 0 = people with no recorded parents; each child is parent's generation + 1. */
+/**
+ * Generation 0 = the family's founders (no recorded parents); each child is
+ * one more than the max of their parents' generations. Someone who married
+ * in also has no recorded parents, so this first pass puts them at 0 too —
+ * as a second pass, anyone with no recorded parents who has a spouse with a
+ * higher generation is moved to sit alongside that spouse instead.
+ */
 export function computeGenerations(people: Person[]): Map<string, number> {
   const byId = new Map(people.map((p) => [p.id, p]));
   const generation = new Map<string, number>();
@@ -26,6 +32,24 @@ export function computeGenerations(people: Person[]): Map<string, number> {
   }
 
   for (const person of people) resolve(person.id, new Set());
+
+  let changed = true;
+  while (changed) {
+    changed = false;
+    for (const person of people) {
+      if (person.parents.length > 0) continue; // has a real, parent-derived generation
+      const spouseGens = person.spouses
+        .map((sid) => generation.get(sid))
+        .filter((g): g is number => g !== undefined);
+      if (spouseGens.length === 0) continue;
+      const best = Math.max(...spouseGens);
+      if (best > (generation.get(person.id) as number)) {
+        generation.set(person.id, best);
+        changed = true;
+      }
+    }
+  }
+
   return generation;
 }
 
