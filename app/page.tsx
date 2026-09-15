@@ -103,26 +103,26 @@ export default function Home() {
 
   return (
     <div className="flex h-screen w-screen flex-col bg-gradient-to-b from-amber-100 to-orange-100">
-      <header className="flex items-center justify-between border-b-2 border-amber-400 bg-gradient-to-l from-amber-200 via-orange-100 to-amber-100 px-6 py-4 shadow-md">
-        <div className="flex items-center gap-3">
+      <header className="flex flex-col gap-2 border-b-2 border-amber-400 bg-gradient-to-l from-amber-200 via-orange-100 to-amber-100 px-4 py-3 shadow-md sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:px-6 sm:py-4">
+        <div className="flex items-center gap-2.5 sm:gap-3">
           <TreeIcon />
-          <div>
-            <h1 className="text-xl font-semibold text-amber-950">שבט יעקב - עץ המשפחה שלנו</h1>
-            <p className="text-sm font-medium text-amber-900">
+          <div className="min-w-0">
+            <h1 className="text-base font-semibold text-amber-950 sm:text-xl">שבט יעקב - עץ המשפחה שלנו</h1>
+            <p className="hidden text-sm font-medium text-amber-900 sm:block">
               שוטטו בין הדורות, ולחצו על כל בן משפחה כדי להכיר את הסיפור שלו/ה
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
           <Link
             href="/calendar"
-            className="rounded-lg border-2 border-amber-500 bg-white px-4 py-2 text-sm font-medium text-amber-900 hover:bg-amber-50"
+            className="rounded-lg border-2 border-amber-500 bg-white px-2.5 py-1.5 text-xs font-medium text-amber-900 hover:bg-amber-50 sm:px-4 sm:py-2 sm:text-sm"
           >
             📅 לוח אירועים
           </Link>
           <Link
             href="/memories"
-            className="rounded-lg border-2 border-amber-500 bg-white px-4 py-2 text-sm font-medium text-amber-900 hover:bg-amber-50"
+            className="rounded-lg border-2 border-amber-500 bg-white px-2.5 py-1.5 text-xs font-medium text-amber-900 hover:bg-amber-50 sm:px-4 sm:py-2 sm:text-sm"
           >
             💬 פינת זיכרונות
           </Link>
@@ -130,7 +130,7 @@ export default function Home() {
             <button
               type="button"
               onClick={handleBackup}
-              className="rounded-lg border-2 border-amber-500 bg-white px-4 py-2 text-sm font-medium text-amber-900 hover:bg-amber-50"
+              className="rounded-lg border-2 border-amber-500 bg-white px-2.5 py-1.5 text-xs font-medium text-amber-900 hover:bg-amber-50 sm:px-4 sm:py-2 sm:text-sm"
             >
               💾 גיבוי JSON
             </button>
@@ -139,7 +139,7 @@ export default function Home() {
             <button
               type="button"
               onClick={openCreateForm}
-              className="rounded-lg bg-amber-800 px-4 py-2 text-sm font-medium text-white hover:bg-amber-900"
+              className="rounded-lg bg-amber-800 px-2.5 py-1.5 text-xs font-medium text-white hover:bg-amber-900 sm:px-4 sm:py-2 sm:text-sm"
             >
               + הוספת קרוב משפחה
             </button>

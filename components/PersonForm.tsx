@@ -388,18 +388,18 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
         {error && <p className="text-sm text-red-600">{error}</p>}
       </div>
 
-      <div className="mt-4 flex items-center gap-2 border-t-2 border-amber-400 pt-4">
+      <div className="mt-4 flex items-center gap-1.5 border-t-2 border-amber-400 pt-4 sm:gap-2">
         <button
           type="submit"
           disabled={saving}
-          className="flex-1 rounded-lg bg-amber-800 px-4 py-2 text-sm font-medium text-white hover:bg-amber-900 disabled:opacity-50"
+          className="flex-1 rounded-lg bg-amber-800 px-2.5 py-2 text-sm font-medium text-white hover:bg-amber-900 disabled:opacity-50 sm:px-4"
         >
           {saving ? "שומר..." : "שמירה"}
         </button>
         <button
           type="button"
           onClick={onCancel}
-          className="rounded-lg border-2 border-amber-500 px-4 py-2 text-sm font-medium text-amber-900 hover:bg-amber-50"
+          className="rounded-lg border-2 border-amber-500 px-2.5 py-2 text-sm font-medium text-amber-900 hover:bg-amber-50 sm:px-4"
         >
           ביטול
         </button>
@@ -407,7 +407,7 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
           <button
             type="button"
             onClick={onDelete}
-            className="rounded-lg border border-red-200 px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+            className="rounded-lg border border-red-200 px-2.5 py-2 text-sm text-red-600 hover:bg-red-50 sm:px-4"
           >
             מחיקה
           </button>

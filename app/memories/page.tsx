@@ -97,16 +97,16 @@ function MemoriesPageContent() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-100 to-orange-100">
-      <header className="flex items-center justify-between border-b-2 border-amber-400 bg-gradient-to-l from-amber-200 via-orange-100 to-amber-100 px-6 py-4 shadow-md">
+      <header className="flex flex-col gap-2 border-b-2 border-amber-400 bg-gradient-to-l from-amber-200 via-orange-100 to-amber-100 px-4 py-3 shadow-md sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-4">
         <div>
-          <h1 className="text-xl font-semibold text-amber-950">פינת זיכרונות</h1>
+          <h1 className="text-lg font-semibold text-amber-950 sm:text-xl">פינת זיכרונות</h1>
           <p className="text-sm font-medium text-amber-900">
             כל בן משפחה מוזמן לשתף זיכרון, סיפור או אנקדוטה
           </p>
         </div>
         <Link
           href="/"
-          className="rounded-lg border-2 border-amber-500 bg-white px-4 py-2 text-sm font-medium text-amber-900 hover:bg-amber-50"
+          className="self-start rounded-lg border-2 border-amber-500 bg-white px-4 py-2 text-sm font-medium text-amber-900 hover:bg-amber-50"
         >
           חזרה לעץ
         </Link>
