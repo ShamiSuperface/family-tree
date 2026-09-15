@@ -147,23 +147,38 @@ export default function PersonDetailPanel({ person, people, onClose, onEdit }: P
           <div className="mt-6">
             <h3 className="mb-2 text-sm font-semibold text-amber-900">גלריה</h3>
             <div className="grid grid-cols-3 gap-2">
-              {person.gallery.map((item) =>
-                item.type === "photo" ? (
-                  <a
-                    key={item.id}
-                    href={item.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    title={item.filename}
-                  >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+              {person.gallery.map((item) => {
+                if (item.type === "photo") {
+                  return (
+                    <a
+                      key={item.id}
+                      href={item.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      title={item.filename}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={item.url}
+                        alt={item.filename}
+                        className="h-20 w-full rounded-lg border-2 border-amber-300 object-cover"
+                      />
+                    </a>
+                  );
+                }
+                if (item.type === "video") {
+                  return (
+                    <video
+                      key={item.id}
                       src={item.url}
-                      alt={item.filename}
-                      className="h-20 w-full rounded-lg border-2 border-amber-300 object-cover"
+                      controls
+                      preload="metadata"
+                      title={item.filename}
+                      className="col-span-3 h-48 w-full rounded-lg border-2 border-amber-300 bg-black"
                     />
-                  </a>
-                ) : (
+                  );
+                }
+                return (
                   <a
                     key={item.id}
                     href={item.url}
@@ -177,8 +192,8 @@ export default function PersonDetailPanel({ person, people, onClose, onEdit }: P
                       {item.filename}
                     </span>
                   </a>
-                ),
-              )}
+                );
+              })}
             </div>
           </div>
         )}

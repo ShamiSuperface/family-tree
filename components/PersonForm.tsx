@@ -184,10 +184,15 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
         const res = await fetch("/api/upload", { method: "POST", body: formData });
         const data = (await res.json()) as { path?: string; error?: string };
         if (!res.ok || !data.path) throw new Error(data.error ?? `שגיאה בהעלאת ${file.name}`);
+        const type = file.type.startsWith("video/")
+          ? "video"
+          : file.type === "application/pdf"
+            ? "document"
+            : "photo";
         uploaded.push({
           id: crypto.randomUUID(),
           url: data.path,
-          type: file.type === "application/pdf" ? "document" : "photo",
+          type,
           filename: file.name,
         });
       }
@@ -304,7 +309,7 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
 
         <div>
           <label className="mb-1 block text-sm font-medium text-stone-700">
-            גלריה (תמונות ומסמכים נוספים)
+            גלריה (תמונות, סרטונים ומסמכים נוספים)
           </label>
           {input.gallery.length > 0 && (
             <ul className="mb-2 grid grid-cols-3 gap-2">
@@ -316,6 +321,13 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
                       src={item.url}
                       alt={item.filename}
                       className="h-16 w-full rounded object-cover"
+                    />
+                  ) : item.type === "video" ? (
+                    <video
+                      src={item.url}
+                      muted
+                      preload="metadata"
+                      className="h-16 w-full rounded bg-black object-cover"
                     />
                   ) : (
                     <a
@@ -343,10 +355,10 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
             </ul>
           )}
           <label className="inline-block cursor-pointer rounded-lg border-2 border-amber-500 px-3 py-2 text-sm font-medium text-amber-900 hover:bg-amber-50">
-            {galleryUploading ? "מעלה..." : "+ הוספת תמונות/מסמכים"}
+            {galleryUploading ? "מעלה..." : "+ הוספת תמונות/סרטונים/מסמכים"}
             <input
               type="file"
-              accept="image/*,application/pdf"
+              accept="image/*,video/*,application/pdf"
               multiple
               onChange={handleGalleryChange}
               disabled={galleryUploading}

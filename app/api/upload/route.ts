@@ -9,8 +9,12 @@ const ALLOWED_TYPES: Record<string, string> = {
   "image/webp": "webp",
   "image/gif": "gif",
   "application/pdf": "pdf",
+  "video/mp4": "mp4",
+  "video/quicktime": "mov",
+  "video/webm": "webm",
 };
 const MAX_SIZE = 5 * 1024 * 1024;
+const MAX_VIDEO_SIZE = 40 * 1024 * 1024;
 
 export async function POST(request: Request) {
   if (process.env.NODE_ENV !== "development") {
@@ -25,10 +29,13 @@ export async function POST(request: Request) {
 
   const ext = ALLOWED_TYPES[file.type];
   if (!ext) {
-    return NextResponse.json({ error: "סוג קובץ לא נתמך (רק תמונות או PDF)" }, { status: 400 });
+    return NextResponse.json({ error: "סוג קובץ לא נתמך (רק תמונות, סרטונים או PDF)" }, { status: 400 });
   }
-  if (file.size > MAX_SIZE) {
-    return NextResponse.json({ error: "הקובץ גדול מדי (מקסימום 5MB)" }, { status: 400 });
+  const isVideo = file.type.startsWith("video/");
+  const maxSize = isVideo ? MAX_VIDEO_SIZE : MAX_SIZE;
+  if (file.size > maxSize) {
+    const limitLabel = isVideo ? "40MB" : "5MB";
+    return NextResponse.json({ error: `הקובץ גדול מדי (מקסימום ${limitLabel})` }, { status: 400 });
   }
 
   const dir = path.join(process.cwd(), "public", "photos");
