@@ -100,7 +100,7 @@ const FamilyTreeView = forwardRef<FamilyTreeViewHandle, Props>(function FamilyTr
                       width={NODE_WIDTH}
                       height={NODE_HEIGHT}
                       onClick={() => onSelectPerson(person)}
-                      familyColor={familyColors.get(person.id)}
+                      familyHue={familyColors.get(person.id)}
                     />
                   );
                 }}

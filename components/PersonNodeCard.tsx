@@ -10,8 +10,8 @@ interface Props {
   width: number;
   height: number;
   onClick: () => void;
-  /** Color representing this person's nuclear family (see lib/familyColors.ts). */
-  familyColor?: string;
+  /** Hue representing this person's family branch (see lib/familyColors.ts). */
+  familyHue?: number;
 }
 
 const GAP = 10;
@@ -22,12 +22,14 @@ export default function PersonNodeCard({
   width,
   height,
   onClick,
-  familyColor,
+  familyHue,
 }: Props) {
   const birthYear = dateYear(person.birthDate);
   const deathYear = person.deathDate ? dateYear(person.deathDate) : null;
   const age = livingAge(person.birthDate, person.deathDate);
   const fullName = `${person.firstName} ${person.lastName}`;
+  const branchStyle =
+    familyHue !== undefined ? { backgroundColor: `hsl(${familyHue} 75% 88%)` } : undefined;
 
   return (
     <div
@@ -48,7 +50,7 @@ export default function PersonNodeCard({
           margin: GAP / 2,
           width: width - GAP,
           height: height - GAP,
-          borderColor: familyColor,
+          ...branchStyle,
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
