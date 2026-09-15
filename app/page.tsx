@@ -102,7 +102,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex h-screen w-screen flex-col bg-gradient-to-b from-amber-100 to-orange-100">
+    <div className="flex h-dvh w-screen flex-col bg-gradient-to-b from-amber-100 to-orange-100">
       <header className="flex flex-col gap-2 border-b-2 border-amber-400 bg-gradient-to-l from-amber-200 via-orange-100 to-amber-100 px-4 py-3 shadow-md sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:px-6 sm:py-4">
         <div className="flex items-center gap-2.5 sm:gap-3">
           <TreeIcon />
@@ -113,35 +113,39 @@ export default function Home() {
             </p>
           </div>
         </div>
-        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2">
           <Link
             href="/calendar"
-            className="rounded-lg border-2 border-amber-500 bg-white px-2.5 py-1.5 text-xs font-medium text-amber-900 hover:bg-amber-50 sm:px-4 sm:py-2 sm:text-sm"
+            title="לוח אירועים"
+            className="rounded-lg border-2 border-amber-500 bg-white px-2.5 py-1.5 text-sm font-medium text-amber-900 hover:bg-amber-50 sm:px-4 sm:py-2"
           >
-            📅 לוח אירועים
+            📅 <span className="hidden sm:inline">לוח אירועים</span>
           </Link>
           <Link
             href="/memories"
-            className="rounded-lg border-2 border-amber-500 bg-white px-2.5 py-1.5 text-xs font-medium text-amber-900 hover:bg-amber-50 sm:px-4 sm:py-2 sm:text-sm"
+            title="פינת זיכרונות"
+            className="rounded-lg border-2 border-amber-500 bg-white px-2.5 py-1.5 text-sm font-medium text-amber-900 hover:bg-amber-50 sm:px-4 sm:py-2"
           >
-            💬 פינת זיכרונות
+            💬 <span className="hidden sm:inline">פינת זיכרונות</span>
           </Link>
           {people && people.length > 0 && (
             <button
               type="button"
               onClick={handleBackup}
-              className="rounded-lg border-2 border-amber-500 bg-white px-2.5 py-1.5 text-xs font-medium text-amber-900 hover:bg-amber-50 sm:px-4 sm:py-2 sm:text-sm"
+              title="גיבוי JSON"
+              className="rounded-lg border-2 border-amber-500 bg-white px-2.5 py-1.5 text-sm font-medium text-amber-900 hover:bg-amber-50 sm:px-4 sm:py-2"
             >
-              💾 גיבוי JSON
+              💾 <span className="hidden sm:inline">גיבוי JSON</span>
             </button>
           )}
           {EDITING_ENABLED && (
             <button
               type="button"
               onClick={openCreateForm}
-              className="rounded-lg bg-amber-800 px-2.5 py-1.5 text-xs font-medium text-white hover:bg-amber-900 sm:px-4 sm:py-2 sm:text-sm"
+              title="הוספת קרוב משפחה"
+              className="rounded-lg bg-amber-800 px-2.5 py-1.5 text-sm font-medium text-white hover:bg-amber-900 sm:px-4 sm:py-2"
             >
-              + הוספת קרוב משפחה
+              + <span className="hidden sm:inline">הוספת קרוב משפחה</span>
             </button>
           )}
         </div>

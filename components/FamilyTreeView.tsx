@@ -43,14 +43,14 @@ export default function FamilyTreeView({ people, rootId, onSelectPerson }: Props
           <>
             <div
               dir="rtl"
-              className="absolute top-4 right-4 z-10 w-56 sm:w-64"
+              className="absolute top-2 right-2 z-10 w-36 sm:top-4 sm:right-4 sm:w-64"
             >
               <input
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="חיפוש לפי שם..."
-                className="w-full rounded-xl border-2 border-amber-400 bg-white px-3 py-2 text-sm text-stone-900 shadow-md outline-none focus:border-amber-600"
+                className="w-full rounded-xl border-2 border-amber-400 bg-white px-2.5 py-1.5 text-xs text-stone-900 shadow-md outline-none focus:border-amber-600 sm:px-3 sm:py-2 sm:text-sm"
               />
               {matches.length > 0 && (
                 <ul className="mt-1 overflow-hidden rounded-xl border-2 border-amber-400 bg-white shadow-md">
