@@ -32,6 +32,8 @@ export default function Home() {
   const [formOpen, setFormOpen] = useState(false);
   const [editingPerson, setEditingPerson] = useState<Person | undefined>(undefined);
   const [query, setQuery] = useState("");
+  const [exportMenuOpen, setExportMenuOpen] = useState(false);
+  const [exporting, setExporting] = useState<"png" | "pdf" | false>(false);
   const treeRef = useRef<FamilyTreeViewHandle>(null);
 
   const matches = useMemo(() => {
@@ -106,6 +108,16 @@ export default function Home() {
   };
 
   const rootId = people?.find((person) => person.parents.length === 0)?.id ?? people?.[0]?.id;
+
+  const handleExport = async (format: "png" | "pdf") => {
+    setExporting(format);
+    try {
+      await treeRef.current?.exportTree(format);
+    } finally {
+      setExporting(false);
+      setExportMenuOpen(false);
+    }
+  };
 
   const handleBackup = () => {
     if (!people) return;
@@ -187,6 +199,45 @@ export default function Home() {
               >
                 📖 <span className="hidden sm:inline">סיפור המשפחה</span>
               </Link>
+              {people && people.length > 0 && (
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={() => setExportMenuOpen((open) => !open)}
+                    title="ייצוא/הדפסה"
+                    className="rounded-lg border-2 border-amber-500 bg-[var(--surface)] px-2.5 py-1.5 text-sm font-medium text-amber-900 hover:bg-amber-50 sm:px-4 sm:py-2"
+                  >
+                    🖨️ <span className="hidden sm:inline">ייצוא/הדפסה</span>
+                  </button>
+                  {exportMenuOpen && (
+                    <>
+                      <div className="fixed inset-0 z-10" onClick={() => setExportMenuOpen(false)} />
+                      <ul className="absolute end-0 z-20 mt-1 w-48 overflow-hidden rounded-xl border-2 border-amber-400 bg-[var(--surface)] shadow-md">
+                        <li>
+                          <button
+                            type="button"
+                            onClick={() => handleExport("png")}
+                            disabled={exporting !== false}
+                            className="block w-full px-3 py-2 text-start text-sm text-stone-800 hover:bg-amber-50 disabled:opacity-50"
+                          >
+                            🖼️ {exporting === "png" ? "מייצא תמונה..." : "שמירה כתמונה (PNG)"}
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                            type="button"
+                            onClick={() => handleExport("pdf")}
+                            disabled={exporting !== false}
+                            className="block w-full px-3 py-2 text-start text-sm text-stone-800 hover:bg-amber-50 disabled:opacity-50"
+                          >
+                            📄 {exporting === "pdf" ? "מייצא PDF..." : "שמירה כ-PDF"}
+                          </button>
+                        </li>
+                      </ul>
+                    </>
+                  )}
+                </div>
+              )}
               {people && people.length > 0 && (
                 <button
                   type="button"
