@@ -28,7 +28,7 @@ const FamilyTreeView = forwardRef<FamilyTreeViewHandle, Props>(function FamilyTr
 ) {
   const nodes = buildTreeNodes(people) as unknown as Node[];
   const byId = new Map(people.map((person) => [person.id, person]));
-  const familyColors = computeFamilyColors(people);
+  const familyColors = computeFamilyColors(people, rootId);
   const transformRef = useRef<ReactZoomPanPinchRef>(null);
 
   useImperativeHandle(ref, () => ({
