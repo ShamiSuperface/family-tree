@@ -20,7 +20,8 @@
       "p29",
       "p30"
     ],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p2",
@@ -30,7 +31,7 @@
     "birthDate": "1915-01-01",
     "deathDate": "1994-09-14",
     "photo": "/photos/283a9b10-892b-454f-ae33-b9ad7f25ac21.jpg",
-    "bio": "תאריך פטירה: ט תשרי תשנ\"ה | 14 בספט׳ 1994\nתל אביב - ירקון\nגוש 7, אזור 3, שורה 8, מקום 29\n",
+    "bio": "תאריך פטירה: ט תשרי תשנ\"ה | 14 בספט׳ 1994\nתל אביב - ירקון\nגוש 7 יקינטון, אזור 3, שורה 8, מקום 29\n",
     "parents": [],
     "spouses": [
       "p1"
@@ -43,17 +44,25 @@
       "p29",
       "p30"
     ],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": [
+      {
+        "id": "60b53d16-f1a6-49d7-a572-4aec3637766c",
+        "url": "/photos/854a2707-c2b3-4e75-9ca4-cb54bbbac8ec.jpg",
+        "type": "photo",
+        "filename": "Gemini_Generated_Image_ayj5b1ayj5b1ayj5.jpg"
+      }
+    ]
   },
   {
     "id": "p3",
     "firstName": "נתן",
     "lastName": "נתן",
     "gender": "male",
-    "birthDate": null,
-    "deathDate": null,
+    "birthDate": "1930",
+    "deathDate": "2018-07-01",
     "photo": "/placeholder-avatar.svg",
-    "bio": "",
+    "bio": "נפטר י\"ח בתמוז תשע\"ח",
     "parents": [],
     "spouses": [
       "p4"
@@ -63,7 +72,8 @@
       "p6",
       "p7"
     ],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p4",
@@ -73,7 +83,7 @@
     "birthDate": "1939-04-01",
     "deathDate": "2025-07-03",
     "photo": "/placeholder-avatar.svg",
-    "bio": "",
+    "bio": "נפטרה ז' בתמוז תשפ\"ה",
     "parents": [
       "p1",
       "p2"
@@ -86,7 +96,8 @@
       "p6",
       "p7"
     ],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p5",
@@ -107,7 +118,8 @@
       "p13",
       "p14"
     ],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p6",
@@ -130,14 +142,15 @@
       "p17",
       "p18"
     ],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p7",
     "firstName": "בת חן",
     "lastName": "נתן",
     "gender": "female",
-    "birthDate": null,
+    "birthDate": "1977-09-29",
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
@@ -151,7 +164,8 @@
     "children": [
       "p20"
     ],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p8",
@@ -175,7 +189,8 @@
     ],
     "marriageDates": {
       "p9": "1969-12-20"
-    }
+    },
+    "gallery": []
   },
   {
     "id": "p9",
@@ -196,7 +211,8 @@
     ],
     "marriageDates": {
       "p8": "1969-12-20"
-    }
+    },
+    "gallery": []
   },
   {
     "id": "p10",
@@ -220,7 +236,8 @@
     ],
     "marriageDates": {
       "p21": "2005-09-19"
-    }
+    },
+    "gallery": []
   },
   {
     "id": "p11",
@@ -244,7 +261,8 @@
     ],
     "marriageDates": {
       "p24": "2009-09-09"
-    }
+    },
+    "gallery": []
   },
   {
     "id": "p12",
@@ -260,7 +278,8 @@
     ],
     "spouses": [],
     "children": [],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p13",
@@ -276,7 +295,8 @@
     ],
     "spouses": [],
     "children": [],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p14",
@@ -292,7 +312,8 @@
     ],
     "spouses": [],
     "children": [],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p15",
@@ -308,7 +329,8 @@
     ],
     "spouses": [],
     "children": [],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p16",
@@ -327,7 +349,8 @@
       "p17",
       "p18"
     ],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p17",
@@ -344,7 +367,8 @@
     ],
     "spouses": [],
     "children": [],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p18",
@@ -361,14 +385,15 @@
     ],
     "spouses": [],
     "children": [],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p19",
     "firstName": "עוזי",
     "lastName": "מלימובקה",
     "gender": "male",
-    "birthDate": null,
+    "birthDate": "1967-06-14",
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
@@ -379,14 +404,15 @@
     "children": [
       "p20"
     ],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p20",
     "firstName": "יאיר",
     "lastName": "מלימובקה",
     "gender": "male",
-    "birthDate": null,
+    "birthDate": "2016-11-14",
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
@@ -396,7 +422,8 @@
     ],
     "spouses": [],
     "children": [],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p21",
@@ -417,7 +444,8 @@
     ],
     "marriageDates": {
       "p10": "2005-09-19"
-    }
+    },
+    "gallery": []
   },
   {
     "id": "p22",
@@ -434,7 +462,8 @@
     ],
     "spouses": [],
     "children": [],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p23",
@@ -451,7 +480,8 @@
     ],
     "spouses": [],
     "children": [],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p24",
@@ -472,7 +502,8 @@
     ],
     "marriageDates": {
       "p11": "2009-09-09"
-    }
+    },
+    "gallery": []
   },
   {
     "id": "p25",
@@ -489,7 +520,8 @@
     ],
     "spouses": [],
     "children": [],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p26",
@@ -506,7 +538,8 @@
     ],
     "spouses": [],
     "children": [],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p27",
@@ -527,17 +560,18 @@
     "children": [
       "p35"
     ],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p28",
     "firstName": "משה",
     "lastName": "יעקב",
     "gender": "male",
-    "birthDate": null,
-    "deathDate": null,
+    "birthDate": "1943",
+    "deathDate": "2004-10-19",
     "photo": "/placeholder-avatar.svg",
-    "bio": "",
+    "bio": "תאריך פטירה: ד חשון תשס\"ה | 18 באוק׳ 2004\nתל אביב - ירקון\nגוש 19, אזור 10, שורה 19, מקום 4",
     "parents": [
       "p1",
       "p2"
@@ -551,7 +585,8 @@
       "p38",
       "p39"
     ],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p29",
@@ -573,7 +608,8 @@
       "p40",
       "p41"
     ],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p30",
@@ -596,7 +632,8 @@
       "p43",
       "p44"
     ],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p31",
@@ -614,14 +651,15 @@
     "children": [
       "p35"
     ],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p32",
     "firstName": "פלורה",
     "lastName": "יעקב",
     "gender": "female",
-    "birthDate": null,
+    "birthDate": "1949-10-06",
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
@@ -635,7 +673,8 @@
       "p38",
       "p39"
     ],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p33",
@@ -654,7 +693,8 @@
       "p40",
       "p41"
     ],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p34",
@@ -674,7 +714,8 @@
       "p43",
       "p44"
     ],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p35",
@@ -691,14 +732,15 @@
     ],
     "spouses": [],
     "children": [],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p36",
     "firstName": "חגית",
     "lastName": "יעקב ברדלי",
     "gender": "female",
-    "birthDate": "04-21",
+    "birthDate": "1970-04-20",
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
@@ -707,15 +749,19 @@
       "p28"
     ],
     "spouses": [],
-    "children": [],
-    "marriageDates": {}
+    "children": [
+      "p64",
+      "p65"
+    ],
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p37",
     "firstName": "אורית",
     "lastName": "וטורי",
     "gender": "female",
-    "birthDate": null,
+    "birthDate": "1974-08-21",
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
@@ -726,8 +772,14 @@
     "spouses": [
       "p57"
     ],
-    "children": [],
-    "marriageDates": {}
+    "children": [
+      "p58",
+      "p59",
+      "p61",
+      "p62"
+    ],
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p38",
@@ -744,14 +796,15 @@
     ],
     "spouses": [],
     "children": [],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p39",
     "firstName": "שי",
     "lastName": "יעקב",
     "gender": "male",
-    "birthDate": null,
+    "birthDate": "1983-07-28",
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
@@ -761,7 +814,8 @@
     ],
     "spouses": [],
     "children": [],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p40",
@@ -778,7 +832,8 @@
     ],
     "spouses": [],
     "children": [],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p41",
@@ -795,7 +850,8 @@
     ],
     "spouses": [],
     "children": [],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p42",
@@ -820,7 +876,8 @@
     ],
     "marriageDates": {
       "p45": "08-05"
-    }
+    },
+    "gallery": []
   },
   {
     "id": "p43",
@@ -844,7 +901,8 @@
       "p55",
       "p56"
     ],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p44",
@@ -865,7 +923,8 @@
     "children": [],
     "marriageDates": {
       "p51": "03-24"
-    }
+    },
+    "gallery": []
   },
   {
     "id": "p45",
@@ -888,7 +947,8 @@
     ],
     "marriageDates": {
       "p42": "08-05"
-    }
+    },
+    "gallery": []
   },
   {
     "id": "p46",
@@ -905,7 +965,8 @@
     ],
     "spouses": [],
     "children": [],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p48",
@@ -922,7 +983,8 @@
     ],
     "spouses": [],
     "children": [],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p49",
@@ -939,7 +1001,8 @@
     ],
     "spouses": [],
     "children": [],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p50",
@@ -959,7 +1022,8 @@
       "p55",
       "p56"
     ],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p51",
@@ -977,7 +1041,8 @@
     "children": [],
     "marriageDates": {
       "p44": "03-24"
-    }
+    },
+    "gallery": []
   },
   {
     "id": "p52",
@@ -991,7 +1056,8 @@
     "parents": [],
     "spouses": [],
     "children": [],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p53",
@@ -1008,7 +1074,8 @@
     ],
     "spouses": [],
     "children": [],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p54",
@@ -1025,7 +1092,8 @@
     ],
     "spouses": [],
     "children": [],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p55",
@@ -1042,7 +1110,8 @@
     ],
     "spouses": [],
     "children": [],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p56",
@@ -1059,14 +1128,15 @@
     ],
     "spouses": [],
     "children": [],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
   },
   {
     "id": "p57",
     "firstName": "יוסף",
     "lastName": "וטורי",
     "gender": "male",
-    "birthDate": null,
+    "birthDate": "1973-08-14",
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
@@ -1074,7 +1144,254 @@
     "spouses": [
       "p37"
     ],
+    "children": [
+      "p58",
+      "p59",
+      "p61",
+      "p62"
+    ],
+    "marriageDates": {},
+    "gallery": []
+  },
+  {
+    "id": "p58",
+    "firstName": "טל",
+    "lastName": "וטורי",
+    "gender": "male",
+    "birthDate": "1998-06-09",
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p57",
+      "p37"
+    ],
+    "spouses": [
+      "p69"
+    ],
+    "children": [
+      "p70",
+      "p71"
+    ],
+    "marriageDates": {},
+    "gallery": []
+  },
+  {
+    "id": "p59",
+    "firstName": "ניס",
+    "lastName": "וטורי",
+    "gender": "male",
+    "birthDate": "1999-06-24",
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p57",
+      "p37"
+    ],
+    "spouses": [],
     "children": [],
-    "marriageDates": {}
+    "marriageDates": {},
+    "gallery": []
+  },
+  {
+    "id": "p61",
+    "firstName": "יובל",
+    "lastName": "וטורי",
+    "gender": "female",
+    "birthDate": "2004-06-12",
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p57",
+      "p37"
+    ],
+    "spouses": [
+      "p66"
+    ],
+    "children": [
+      "p68"
+    ],
+    "marriageDates": {},
+    "gallery": []
+  },
+  {
+    "id": "p62",
+    "firstName": "ניתאי",
+    "lastName": "וטורי",
+    "gender": "male",
+    "birthDate": "2016-11-14",
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p57",
+      "p37"
+    ],
+    "spouses": [],
+    "children": [],
+    "marriageDates": {},
+    "gallery": []
+  },
+  {
+    "id": "p63",
+    "firstName": "ירדן",
+    "lastName": "ברדלי",
+    "gender": "male",
+    "birthDate": "2008-09-26",
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [],
+    "spouses": [],
+    "children": [],
+    "marriageDates": {},
+    "gallery": []
+  },
+  {
+    "id": "p64",
+    "firstName": "ירדן",
+    "lastName": "ברדלי",
+    "gender": "male",
+    "birthDate": "2008-08-26",
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p36"
+    ],
+    "spouses": [],
+    "children": [],
+    "marriageDates": {},
+    "gallery": []
+  },
+  {
+    "id": "p65",
+    "firstName": "ליאור",
+    "lastName": "ברדלי",
+    "gender": "female",
+    "birthDate": "2013-02-26",
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p36"
+    ],
+    "spouses": [],
+    "children": [],
+    "marriageDates": {},
+    "gallery": []
+  },
+  {
+    "id": "p66",
+    "firstName": "ליאל יצחק",
+    "lastName": "בבזרה",
+    "gender": "male",
+    "birthDate": "2004-05-17",
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [],
+    "spouses": [
+      "p61"
+    ],
+    "children": [
+      "p67",
+      "p68"
+    ],
+    "marriageDates": {},
+    "gallery": []
+  },
+  {
+    "id": "p67",
+    "firstName": "ליאור לוי ",
+    "lastName": "בבזרה",
+    "gender": "male",
+    "birthDate": "2026-04-27",
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p66"
+    ],
+    "spouses": [],
+    "children": [],
+    "marriageDates": {},
+    "gallery": []
+  },
+  {
+    "id": "p68",
+    "firstName": "ליאור לוי ",
+    "lastName": "בבזרה",
+    "gender": "male",
+    "birthDate": "2026-04-27",
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p66",
+      "p61"
+    ],
+    "spouses": [],
+    "children": [],
+    "marriageDates": {},
+    "gallery": []
+  },
+  {
+    "id": "p69",
+    "firstName": "אפרת",
+    "lastName": "וטורי",
+    "gender": "female",
+    "birthDate": "03-16",
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [],
+    "spouses": [
+      "p58"
+    ],
+    "children": [
+      "p70",
+      "p71"
+    ],
+    "marriageDates": {},
+    "gallery": []
+  },
+  {
+    "id": "p70",
+    "firstName": "שניאור זלמן",
+    "lastName": "וטורי",
+    "gender": "male",
+    "birthDate": "2024-03-06",
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p69",
+      "p58"
+    ],
+    "spouses": [],
+    "children": [],
+    "marriageDates": {},
+    "gallery": []
+  },
+  {
+    "id": "p71",
+    "firstName": "שלום דובער",
+    "lastName": "וטורי",
+    "gender": "male",
+    "birthDate": "2025-11-03",
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [
+      "p69",
+      "p58"
+    ],
+    "spouses": [],
+    "children": [],
+    "marriageDates": {},
+    "gallery": []
   }
 ]
