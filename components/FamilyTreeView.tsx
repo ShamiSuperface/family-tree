@@ -53,19 +53,23 @@ const FamilyTreeView = forwardRef<FamilyTreeViewHandle, Props>(function FamilyTr
         getComputedStyle(document.documentElement).getPropertyValue("--background").trim() ||
         "#fffbeb";
 
-      // The tree can be far wider than tall (many siblings, few generations),
-      // so cap the longer side instead of using a flat pixelRatio — otherwise
-      // a big family produces a huge, slow-to-share file.
-      const MAX_DIMENSION = 4500;
-      const longerSide = Math.max(canvas.offsetWidth, canvas.offsetHeight, 1);
-      const pixelRatio = Math.min(2, MAX_DIMENSION / longerSide);
       const today = new Date().toISOString().slice(0, 10);
 
       if (format === "png") {
-        const dataUrl = await toPng(canvas, { backgroundColor: background, pixelRatio });
+        // Full retina resolution — a wide tree still lands well under 1MB,
+        // so there's no reason to sacrifice text sharpness here.
+        const dataUrl = await toPng(canvas, { backgroundColor: background, pixelRatio: 2 });
         downloadDataUrl(dataUrl, `עץ-המשפחה-${today}.png`);
         return;
       }
+
+      // jsPDF's page-size cap is 14400pt; with the px_scaling hotfix below,
+      // "px" means real CSS px (×0.75 internally), so the usable ceiling is
+      // 14400 / 0.75 = 19200px. Only back off pixelRatio (never below 1x —
+      // the tree's own layout resolution — to avoid blurring the text) when
+      // a very wide tree would exceed that.
+      const longerSide = Math.max(canvas.offsetWidth, canvas.offsetHeight, 1);
+      const pixelRatio = Math.max(1, Math.min(2, 19000 / longerSide));
 
       // JPEG keeps the PDF a reasonable size to email or share — a lossless
       // PNG of a large, photo-heavy tree can balloon to tens of megabytes.
@@ -79,6 +83,7 @@ const FamilyTreeView = forwardRef<FamilyTreeViewHandle, Props>(function FamilyTr
         orientation: image.width >= image.height ? "landscape" : "portrait",
         unit: "px",
         format: [image.width, image.height],
+        hotfixes: ["px_scaling"],
       });
       pdf.addImage(dataUrl, "JPEG", 0, 0, image.width, image.height);
       pdf.save(`עץ-המשפחה-${today}.pdf`);
