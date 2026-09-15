@@ -126,7 +126,7 @@
     "firstName": "שירלי",
     "lastName": "גונן",
     "gender": "female",
-    "birthDate": null,
+    "birthDate": "1969-08-01",
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
@@ -142,7 +142,9 @@
       "p17",
       "p18"
     ],
-    "marriageDates": {},
+    "marriageDates": {
+      "p16": "1994-07-28"
+    },
     "gallery": []
   },
   {
@@ -164,7 +166,9 @@
     "children": [
       "p20"
     ],
-    "marriageDates": {},
+    "marriageDates": {
+      "p19": "2015-07-03"
+    },
     "gallery": []
   },
   {
@@ -337,7 +341,7 @@
     "firstName": "תומר",
     "lastName": "גונן",
     "gender": "male",
-    "birthDate": null,
+    "birthDate": "1969-08-14",
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
@@ -349,7 +353,9 @@
       "p17",
       "p18"
     ],
-    "marriageDates": {},
+    "marriageDates": {
+      "p6": "1994-07-28"
+    },
     "gallery": []
   },
   {
@@ -357,7 +363,7 @@
     "firstName": "מאיה",
     "lastName": "גונן",
     "gender": "female",
-    "birthDate": null,
+    "birthDate": "2004-04-20",
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
@@ -375,7 +381,7 @@
     "firstName": "גל",
     "lastName": "גונן",
     "gender": "female",
-    "birthDate": null,
+    "birthDate": "2000-11-14",
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
@@ -404,7 +410,9 @@
     "children": [
       "p20"
     ],
-    "marriageDates": {},
+    "marriageDates": {
+      "p7": "2015-07-03"
+    },
     "gallery": []
   },
   {
@@ -430,7 +438,7 @@
     "firstName": "ענת",
     "lastName": "רכס",
     "gender": "female",
-    "birthDate": null,
+    "birthDate": "1975-09-27",
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
@@ -470,7 +478,7 @@
     "firstName": "נועם",
     "lastName": "רכס אוסטרובסקי",
     "gender": "male",
-    "birthDate": null,
+    "birthDate": "2010-03-12",
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
@@ -531,7 +539,7 @@
     "birthDate": "2015-10-22",
     "deathDate": null,
     "photo": "/photos/ffc4c11c-8526-425a-bfe8-04c5b14768a0.png",
-    "bio": "",
+    "bio": "שחקנית תיאטרוניסטית לעתיד :)",
     "parents": [
       "p11",
       "p24"
@@ -1189,7 +1197,9 @@
       "p57",
       "p37"
     ],
-    "spouses": [],
+    "spouses": [
+      "p73"
+    ],
     "children": [],
     "marriageDates": {},
     "gallery": []
@@ -1197,7 +1207,7 @@
   {
     "id": "p61",
     "firstName": "יובל",
-    "lastName": "וטורי",
+    "lastName": "בברזה",
     "gender": "female",
     "birthDate": "2004-06-12",
     "deathDate": null,
@@ -1390,6 +1400,23 @@
       "p58"
     ],
     "spouses": [],
+    "children": [],
+    "marriageDates": {},
+    "gallery": []
+  },
+  {
+    "id": "p73",
+    "firstName": "סתיו",
+    "lastName": "וטורי",
+    "gender": "female",
+    "birthDate": "2001-09-23",
+    "deathDate": null,
+    "photo": "/placeholder-avatar.svg",
+    "bio": "",
+    "parents": [],
+    "spouses": [
+      "p59"
+    ],
     "children": [],
     "marriageDates": {},
     "gallery": []
