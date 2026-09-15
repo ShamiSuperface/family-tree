@@ -10,6 +10,7 @@ export interface TaskInput {
   text: string;
   personId: string | null;
   authorName: string;
+  autoCheck?: Task["autoCheck"];
   /** Honeypot field: real visitors leave it empty. */
   website?: string;
 }
@@ -39,6 +40,7 @@ export async function addTask(input: TaskInput): Promise<Task | null> {
     authorName: input.authorName.trim(),
     createdAt: new Date().toISOString(),
     done: false,
+    ...(input.autoCheck ? { autoCheck: input.autoCheck } : {}),
   };
   await getRedis().lpush(LIST_KEY, task);
   return task;

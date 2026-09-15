@@ -21,7 +21,11 @@ const tasksToAdd = [];
 
 for (const p of people) {
   if (!p.birthDate) {
-    tasksToAdd.push({ text: `חסר תאריך לידה ל${fullName(p)}`, personId: p.id });
+    tasksToAdd.push({
+      text: `חסר תאריך לידה ל${fullName(p)}`,
+      personId: p.id,
+      autoCheck: { field: "birthDate" },
+    });
   }
 }
 
@@ -35,7 +39,11 @@ for (const p of people) {
     if (!hasDate) {
       const spouse = byId.get(spouseId);
       const spouseName = spouse ? fullName(spouse) : spouseId;
-      tasksToAdd.push({ text: `חסר תאריך נישואין של ${fullName(p)} ו${spouseName}`, personId: p.id });
+      tasksToAdd.push({
+        text: `חסר תאריך נישואין של ${fullName(p)} ו${spouseName}`,
+        personId: p.id,
+        autoCheck: { field: "marriageDate", spouseId },
+      });
     }
   }
 }

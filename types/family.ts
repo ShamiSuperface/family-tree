@@ -41,4 +41,9 @@ export interface Task {
   authorName: string;
   createdAt: string;
   done: boolean;
+  /**
+   * Lets the daily cron job verify completion against the actual family
+   * data (instead of parsing free text) and remove the task automatically.
+   */
+  autoCheck?: { field: "birthDate" | "marriageDate"; spouseId?: string };
 }
