@@ -7,7 +7,7 @@ function birthYearOf(person: Person): number | null {
 }
 
 /** Generation 0 = people with no recorded parents; each child is parent's generation + 1. */
-function computeGenerations(people: Person[]): Map<string, number> {
+export function computeGenerations(people: Person[]): Map<string, number> {
   const byId = new Map(people.map((p) => [p.id, p]));
   const generation = new Map<string, number>();
 
