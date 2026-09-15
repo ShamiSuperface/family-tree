@@ -32,3 +32,13 @@ export interface Memory {
   personId: string | null;
   createdAt: string;
 }
+
+export interface Task {
+  id: string;
+  text: string;
+  /** The person this task relates to, or null for a general family task. */
+  personId: string | null;
+  authorName: string;
+  createdAt: string;
+  done: boolean;
+}

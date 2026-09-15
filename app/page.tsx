@@ -173,6 +173,13 @@ export default function Home() {
               >
                 💬 <span className="hidden sm:inline">פינת זיכרונות</span>
               </Link>
+              <Link
+                href="/tasks"
+                title="לוח משימות"
+                className="rounded-lg border-2 border-amber-500 bg-[var(--surface)] px-2.5 py-1.5 text-sm font-medium text-amber-900 hover:bg-amber-50 sm:px-4 sm:py-2"
+              >
+                📋 <span className="hidden sm:inline">לוח משימות</span>
+              </Link>
               {people && people.length > 0 && (
                 <button
                   type="button"

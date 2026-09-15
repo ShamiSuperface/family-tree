@@ -1,24 +1,10 @@
-import { Redis } from "@upstash/redis";
 import crypto from "crypto";
 import type { Memory } from "@/types/family";
+import { getRedis } from "@/lib/redis";
 
 const LIST_KEY = "family:memories";
 const MAX_NAME_LENGTH = 60;
 const MAX_TEXT_LENGTH = 2000;
-
-let redis: Redis | null = null;
-
-function getRedis(): Redis {
-  if (!redis) {
-    const url = process.env.UPSTASH_REDIS_REST_URL;
-    const token = process.env.UPSTASH_REDIS_REST_TOKEN;
-    if (!url || !token) {
-      throw new Error("פינת הזיכרונות לא מוגדרת עדיין (חסרים משתני סביבה של Upstash)");
-    }
-    redis = new Redis({ url, token });
-  }
-  return redis;
-}
 
 export interface MemoryInput {
   authorName: string;

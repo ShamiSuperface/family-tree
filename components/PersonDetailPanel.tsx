@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import type { Memory, Person } from "@/types/family";
+import type { Memory, Person, Task } from "@/types/family";
 import { formatPersonDate } from "@/lib/dateUtils";
 import { toHebrewDateString } from "@/lib/hebrewDate";
 
@@ -21,6 +21,7 @@ function formatDateLine(date: string | null): string {
 
 export default function PersonDetailPanel({ person, people, onClose, onEdit }: Props) {
   const [memories, setMemories] = useState<Memory[]>([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
 
   useEffect(() => {
     if (!person) return;
@@ -45,9 +46,32 @@ export default function PersonDetailPanel({ person, people, onClose, onEdit }: P
     };
   }, [person]);
 
+  useEffect(() => {
+    if (!person) return;
+    let cancelled = false;
+    fetch("/api/tasks")
+      .then((res) => (res.ok ? (res.json() as Promise<Task[]>) : []))
+      .then((all) => {
+        if (!cancelled) setTasks(all.filter((t) => t.personId === person.id && !t.done));
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [person]);
+
   const handleDeleteMemory = async (id: string) => {
     await fetch(`/api/memories/${id}`, { method: "DELETE" });
     setMemories((prev) => prev.filter((m) => m.id !== id));
+  };
+
+  const handleToggleTaskDone = async (task: Task) => {
+    setTasks((prev) => prev.filter((t) => t.id !== task.id));
+    await fetch(`/api/tasks/${task.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ done: true }),
+    });
   };
 
   if (!person) return null;
@@ -197,6 +221,39 @@ export default function PersonDetailPanel({ person, people, onClose, onEdit }: P
             </ul>
           )}
         </div>
+
+        {tasks.length > 0 && (
+          <div className="mt-6">
+            <div className="mb-2 flex items-center justify-between">
+              <h3 className="text-sm font-semibold text-amber-900">📋 משימות פתוחות</h3>
+              <Link
+                href={`/tasks?personId=${person.id}`}
+                className="text-xs font-medium text-amber-700 hover:underline"
+              >
+                + הוספת משימה
+              </Link>
+            </div>
+            <ul className="space-y-2">
+              {tasks.map((task) => (
+                <li
+                  key={task.id}
+                  className="flex items-start gap-2 rounded-lg border-2 border-amber-200 bg-amber-50 p-2 text-sm"
+                >
+                  <input
+                    type="checkbox"
+                    checked={false}
+                    onChange={() => handleToggleTaskDone(task)}
+                    className="mt-0.5 h-4 w-4 shrink-0"
+                  />
+                  <div className="min-w-0">
+                    <p className="text-stone-700">{task.text}</p>
+                    <p className="mt-1 text-xs font-medium text-amber-700">— {task.authorName}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );
