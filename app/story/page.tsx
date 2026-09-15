@@ -34,13 +34,13 @@ export default function StoryPage() {
     };
   }, []);
 
-  const withBio = (people ?? []).filter((p) => p.bio.trim());
-  const generations = computeGenerations(people ?? []);
+  const allPeople = people ?? [];
+  const generations = computeGenerations(allPeople);
   const generationCount = generations.size > 0 ? Math.max(...generations.values()) + 1 : 0;
 
   const chapters = Array.from({ length: generationCount }, (_, genIndex) => ({
     genIndex,
-    people: withBio
+    people: allPeople
       .filter((p) => generations.get(p.id) === genIndex)
       .sort((a, b) => {
         const parentKeyA = [...a.parents].sort().join("|");
@@ -72,9 +72,7 @@ export default function StoryPage() {
         {!people ? (
           <p className="text-center text-amber-900">טוען...</p>
         ) : chapters.length === 0 ? (
-          <p className="text-center text-amber-900">
-            עדיין אין סיפורים בעץ. אפשר להוסיף ביוגרפיה לכל אדם דרך עריכת הפרטים שלו/ה.
-          </p>
+          <p className="text-center text-amber-900">עדיין אין אנשים בעץ המשפחה.</p>
         ) : (
           <div className="space-y-10">
             {chapters.map(({ genIndex, people: chapterPeople }) => {
@@ -106,9 +104,15 @@ export default function StoryPage() {
                             </p>
                           </div>
                         </div>
-                        <p className="mt-3 whitespace-pre-line leading-relaxed text-stone-700">
-                          {person.bio}
-                        </p>
+                        {person.bio.trim() ? (
+                          <p className="mt-3 whitespace-pre-line leading-relaxed text-stone-700">
+                            {person.bio}
+                          </p>
+                        ) : (
+                          <p className="mt-3 text-sm text-stone-400 italic">
+                            עדיין אין סיפור על {person.firstName}
+                          </p>
+                        )}
                       </div>
                     ))}
                   </div>

@@ -1,7 +1,7 @@
 export interface MediaItem {
   id: string;
   url: string;
-  type: "photo" | "document";
+  type: "photo" | "video" | "document";
   /** Original uploaded filename, shown for documents and used as photo alt text. */
   filename: string;
 }

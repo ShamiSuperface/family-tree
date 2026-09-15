@@ -1053,39 +1053,6 @@
     "gallery": []
   },
   {
-    "id": "p52",
-    "firstName": "בנימין",
-    "lastName": "יעקב",
-    "gender": "male",
-    "birthDate": "2014-04-11",
-    "deathDate": null,
-    "photo": "/placeholder-avatar.svg",
-    "bio": "",
-    "parents": [],
-    "spouses": [],
-    "children": [],
-    "marriageDates": {},
-    "gallery": []
-  },
-  {
-    "id": "p53",
-    "firstName": "בנימין",
-    "lastName": "יעקב",
-    "gender": "male",
-    "birthDate": "2014-04-11",
-    "deathDate": null,
-    "photo": "/placeholder-avatar.svg",
-    "bio": "",
-    "parents": [
-      "p45",
-      "p43"
-    ],
-    "spouses": [],
-    "children": [],
-    "marriageDates": {},
-    "gallery": []
-  },
-  {
     "id": "p54",
     "firstName": "בנימין",
     "lastName": "יעקב",
@@ -1239,21 +1206,6 @@
       "p57",
       "p37"
     ],
-    "spouses": [],
-    "children": [],
-    "marriageDates": {},
-    "gallery": []
-  },
-  {
-    "id": "p63",
-    "firstName": "ירדן",
-    "lastName": "ברדלי",
-    "gender": "male",
-    "birthDate": "2008-09-26",
-    "deathDate": null,
-    "photo": "/placeholder-avatar.svg",
-    "bio": "",
-    "parents": [],
     "spouses": [],
     "children": [],
     "marriageDates": {},

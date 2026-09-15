@@ -33,6 +33,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="he"
       dir="rtl"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      // The inline theme script below sets data-theme before React hydrates
+      // (to avoid a flash of the wrong theme), which will always differ from
+      // the server-rendered <html> — that mismatch is expected, not a bug.
+      suppressHydrationWarning
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
