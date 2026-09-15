@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import type { ExtNode } from "relatives-tree/lib/types";
 import type { Person } from "@/types/family";
 import { ageWord, dateYear, livingAge } from "@/lib/dateUtils";
@@ -28,8 +29,15 @@ export default function PersonNodeCard({
   const deathYear = person.deathDate ? dateYear(person.deathDate) : null;
   const age = livingAge(person.birthDate, person.deathDate);
   const fullName = `${person.firstName} ${person.lastName}`;
+  // Saturation/lightness come from theme-scoped CSS variables (see
+  // globals.css) so the fill stays legible against the theme's text colors.
   const branchStyle =
-    familyHue !== undefined ? { backgroundColor: `hsl(${familyHue} 75% 88%)` } : undefined;
+    familyHue !== undefined
+      ? ({
+          backgroundColor: "hsl(var(--branch-hue) var(--branch-sat) var(--branch-light))",
+          "--branch-hue": familyHue,
+        } as CSSProperties)
+      : undefined;
 
   return (
     <div

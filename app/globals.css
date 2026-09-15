@@ -7,6 +7,11 @@
   --accent: oklch(47.3% 0.137 46.201); /* = amber-800 */
   --accent-hover: oklch(41.4% 0.112 45.904); /* = amber-900 */
   color-scheme: light;
+
+  /* Family-branch card fill (components/PersonNodeCard.tsx sets --branch-hue
+     per card); saturation/lightness flip per theme so text stays legible. */
+  --branch-sat: 75%;
+  --branch-light: 88%;
 }
 
 @theme inline {
@@ -64,6 +69,9 @@ body {
   --color-red-500: oklch(60% 0.19 25);
   --color-red-600: oklch(64% 0.2 25);
   --color-red-700: oklch(70% 0.18 25);
+
+  --branch-sat: 35%;
+  --branch-light: 24%;
 }
 
 /* ---- Colorful theme: bright, cheerful, varied hues ---- */
