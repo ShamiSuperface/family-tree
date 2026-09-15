@@ -6,6 +6,7 @@ import type { Person } from "@/types/family";
 import { ageWord } from "@/lib/dateUtils";
 import { hebrewDateOf } from "@/lib/hebrewDate";
 import { buildEvents, type FamilyEvent } from "@/lib/events";
+import { buildIcsContent } from "@/lib/ics";
 
 const TYPE_ICON: Record<FamilyEvent["type"], string> = {
   birthday: "🎂",
@@ -38,6 +39,7 @@ function formatWhen(daysUntil: number, date: Date): string {
 }
 
 export default function CalendarPage() {
+  const [people, setPeople] = useState<Person[]>([]);
   const [events, setEvents] = useState<FamilyEvent[] | null>(null);
   const [peopleById, setPeopleById] = useState<Map<string, Person>>(new Map());
 
@@ -45,16 +47,27 @@ export default function CalendarPage() {
     let cancelled = false;
     fetch("/api/people")
       .then((res) => res.json())
-      .then((people: Person[]) => {
+      .then((data: Person[]) => {
         if (!cancelled) {
-          setEvents(buildEvents(people));
-          setPeopleById(new Map(people.map((p) => [p.id, p])));
+          setPeople(data);
+          setEvents(buildEvents(data));
+          setPeopleById(new Map(data.map((p) => [p.id, p])));
         }
       });
     return () => {
       cancelled = true;
     };
   }, []);
+
+  const handleExportIcs = () => {
+    const blob = new Blob([buildIcsContent(people)], { type: "text/calendar;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "family-tree-events.ics";
+    a.click();
+    URL.revokeObjectURL(url);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-100 to-orange-100">
@@ -63,12 +76,24 @@ export default function CalendarPage() {
           <h1 className="text-lg font-semibold text-amber-950 sm:text-xl">לוח אירועים משפחתי</h1>
           <p className="text-sm font-medium text-amber-900">ימי הולדת, ימי זיכרון וימי נישואין, מהקרוב לרחוק</p>
         </div>
-        <Link
-          href="/"
-          className="self-start rounded-lg border-2 border-amber-500 bg-white px-4 py-2 text-sm font-medium text-amber-900 hover:bg-amber-50"
-        >
-          חזרה לעץ
-        </Link>
+        <div className="flex items-center gap-2 self-start">
+          {events && events.length > 0 && (
+            <button
+              type="button"
+              onClick={handleExportIcs}
+              title="ייצוא ליומן Google"
+              className="rounded-lg border-2 border-amber-500 bg-white px-2.5 py-1.5 text-sm font-medium text-amber-900 hover:bg-amber-50 sm:px-4 sm:py-2"
+            >
+              📆 <span className="hidden sm:inline">ייצוא ליומן</span>
+            </button>
+          )}
+          <Link
+            href="/"
+            className="rounded-lg border-2 border-amber-500 bg-white px-2.5 py-1.5 text-sm font-medium text-amber-900 hover:bg-amber-50 sm:px-4 sm:py-2"
+          >
+            חזרה לעץ
+          </Link>
+        </div>
       </header>
 
       <main className="mx-auto max-w-2xl px-4 py-8">

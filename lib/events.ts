@@ -35,16 +35,17 @@ function fullName(person: Person): string {
   return `${person.firstName} ${person.lastName}`;
 }
 
-interface RawEvent {
+export interface RawEvent {
   type: FamilyEventType;
   title: string;
   personIds: string[];
+  /** "YYYY-MM-DD" or "MM-DD" — never year-only, those are excluded upstream. */
   dateStr: string;
   deceased: boolean;
 }
 
-export function buildEvents(people: Person[], now: Date = new Date()): FamilyEvent[] {
-  const today = startOfDay(now);
+/** The underlying yearly-recurring events, before resolving a "next occurrence" date. */
+export function collectRawEvents(people: Person[]): RawEvent[] {
   const byId = new Map(people.map((p) => [p.id, p]));
   const raw: RawEvent[] = [];
 
@@ -83,6 +84,13 @@ export function buildEvents(people: Person[], now: Date = new Date()): FamilyEve
       }
     }
   }
+
+  return raw;
+}
+
+export function buildEvents(people: Person[], now: Date = new Date()): FamilyEvent[] {
+  const today = startOfDay(now);
+  const raw = collectRawEvents(people);
 
   return raw
     .map((item) => {
