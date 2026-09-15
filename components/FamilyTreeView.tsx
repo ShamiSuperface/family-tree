@@ -6,6 +6,7 @@ import { TransformWrapper, TransformComponent, type ReactZoomPanPinchRef } from 
 import type { ExtNode, Node } from "relatives-tree/lib/types";
 import type { Person } from "@/types/family";
 import { buildTreeNodes } from "@/lib/familyTreeAdapter";
+import { computeFamilyColors } from "@/lib/familyColors";
 import PersonNodeCard from "./PersonNodeCard";
 
 const NODE_WIDTH = 230;
@@ -27,6 +28,7 @@ const FamilyTreeView = forwardRef<FamilyTreeViewHandle, Props>(function FamilyTr
 ) {
   const nodes = buildTreeNodes(people) as unknown as Node[];
   const byId = new Map(people.map((person) => [person.id, person]));
+  const familyColors = computeFamilyColors(people);
   const transformRef = useRef<ReactZoomPanPinchRef>(null);
 
   useImperativeHandle(ref, () => ({
@@ -98,6 +100,7 @@ const FamilyTreeView = forwardRef<FamilyTreeViewHandle, Props>(function FamilyTr
                       width={NODE_WIDTH}
                       height={NODE_HEIGHT}
                       onClick={() => onSelectPerson(person)}
+                      familyColor={familyColors.get(person.id)}
                     />
                   );
                 }}

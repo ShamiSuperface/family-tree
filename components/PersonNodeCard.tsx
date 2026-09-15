@@ -10,11 +10,20 @@ interface Props {
   width: number;
   height: number;
   onClick: () => void;
+  /** Color representing this person's nuclear family (see lib/familyColors.ts). */
+  familyColor?: string;
 }
 
 const GAP = 10;
 
-export default function PersonNodeCard({ person, node, width, height, onClick }: Props) {
+export default function PersonNodeCard({
+  person,
+  node,
+  width,
+  height,
+  onClick,
+  familyColor,
+}: Props) {
   const birthYear = dateYear(person.birthDate);
   const deathYear = person.deathDate ? dateYear(person.deathDate) : null;
   const age = livingAge(person.birthDate, person.deathDate);
@@ -34,8 +43,13 @@ export default function PersonNodeCard({ person, node, width, height, onClick }:
         type="button"
         onClick={onClick}
         title={fullName}
-        className="flex h-full w-full items-center gap-2.5 rounded-2xl border-2 border-amber-400 bg-[var(--surface)] px-2.5 py-2 text-start shadow-md transition hover:border-amber-600 hover:shadow-lg"
-        style={{ margin: GAP / 2, width: width - GAP, height: height - GAP }}
+        className="flex h-full w-full items-center gap-2.5 rounded-2xl border-2 border-amber-400 bg-[var(--surface)] px-2.5 py-2 text-start shadow-md transition hover:shadow-lg"
+        style={{
+          margin: GAP / 2,
+          width: width - GAP,
+          height: height - GAP,
+          borderColor: familyColor,
+        }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
