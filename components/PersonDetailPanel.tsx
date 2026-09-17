@@ -91,7 +91,9 @@ export default function PersonDetailPanel({ person, people, onClose, onEdit, onS
 
   return (
     <div
-      className="fixed inset-0 z-50 flex justify-end bg-black/40"
+      // Leaflet's own controls/panes go up to z-index 1000 (see leaflet.css),
+      // so this needs to clear that to sit above the map on /map.
+      className="fixed inset-0 z-[1100] flex justify-end bg-black/40"
       onClick={onClose}
     >
       <div
