@@ -199,6 +199,13 @@ export default function Home() {
               >
                 📜 <span className="hidden sm:inline">ציר זמן</span>
               </Link>
+              <Link
+                href="/map"
+                title="מפת המשפחה"
+                className="rounded-lg border-2 border-amber-500 bg-[var(--surface)] px-2.5 py-1.5 text-sm font-medium text-amber-900 hover:bg-amber-50 sm:px-4 sm:py-2"
+              >
+                🗺️ <span className="hidden sm:inline">מפה</span>
+              </Link>
               {people && people.length > 0 && (
                 <div className="relative">
                   <button
