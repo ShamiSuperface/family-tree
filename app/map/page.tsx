@@ -7,6 +7,7 @@ import type { Person } from "@/types/family";
 import { groupByResidence } from "@/lib/familyMap";
 import type { MapMarker } from "@/components/FamilyMapView";
 import ThemeToggle from "@/components/ThemeToggle";
+import PersonDetailPanel from "@/components/PersonDetailPanel";
 
 const FamilyMapView = dynamic(() => import("@/components/FamilyMapView"), {
   ssr: false,
@@ -16,6 +17,7 @@ const FamilyMapView = dynamic(() => import("@/components/FamilyMapView"), {
 export default function MapPage() {
   const [people, setPeople] = useState<Person[] | null>(null);
   const [markers, setMarkers] = useState<MapMarker[] | null>(null);
+  const [selectedPerson, setSelectedPerson] = useState<Person | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -82,9 +84,16 @@ export default function MapPage() {
         ) : !markers ? (
           <div className="flex h-full items-center justify-center text-amber-900">מאתר מקומות על המפה...</div>
         ) : (
-          <FamilyMapView markers={markers} />
+          <FamilyMapView markers={markers} onSelectPerson={setSelectedPerson} />
         )}
       </main>
+
+      <PersonDetailPanel
+        person={selectedPerson}
+        people={people ?? []}
+        onClose={() => setSelectedPerson(null)}
+        onSelectPerson={setSelectedPerson}
+      />
     </div>
   );
 }
