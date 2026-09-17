@@ -169,7 +169,7 @@ export default function Home() {
               )}
             </div>
           )}
-            <div className="flex items-center gap-1.5 sm:gap-2">
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
               <ThemeToggle />
               <Link
                 href="/calendar"
