@@ -12,6 +12,8 @@ export interface PersonInput {
   deathDate: string | null;
   photo: string;
   bio: string;
+  residence: string;
+  occupation: string;
   parents: string[];
   spouses: string[];
   children: string[];
@@ -22,11 +24,13 @@ export interface PersonInput {
 export async function readPeople(): Promise<Person[]> {
   const raw = await readFile(DATA_PATH, "utf-8");
   const people = JSON.parse(raw) as Person[];
-  // Backward-compatible with records saved before marriageDates/gallery existed.
+  // Backward-compatible with records saved before these fields existed.
   return people.map((person) => ({
     ...person,
     marriageDates: person.marriageDates ?? {},
     gallery: person.gallery ?? [],
+    residence: person.residence ?? "",
+    occupation: person.occupation ?? "",
   }));
 }
 

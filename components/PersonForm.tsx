@@ -22,6 +22,8 @@ function toInput(person?: Person): PersonInput {
     deathDate: person?.deathDate ?? null,
     photo: person?.photo ?? "/placeholder-avatar.svg",
     bio: person?.bio ?? "",
+    residence: person?.residence ?? "",
+    occupation: person?.occupation ?? "",
     parents: person?.parents ?? [],
     spouses: person?.spouses ?? [],
     children: person?.children ?? [],
@@ -292,6 +294,33 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
             value={input.deathDate}
             onChange={(value) => setInput({ ...input, deathDate: value })}
           />
+        </div>
+
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <label htmlFor={`${uid}-residence`} className="mb-1 block text-sm font-medium text-stone-700">
+              מקום מגורים
+            </label>
+            <input
+              id={`${uid}-residence`}
+              type="text"
+              value={input.residence}
+              onChange={(e) => setInput({ ...input, residence: e.target.value })}
+              className="w-full rounded-lg border-2 border-amber-400 bg-[var(--surface)] px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-600"
+            />
+          </div>
+          <div>
+            <label htmlFor={`${uid}-occupation`} className="mb-1 block text-sm font-medium text-stone-700">
+              מקצוע
+            </label>
+            <input
+              id={`${uid}-occupation`}
+              type="text"
+              value={input.occupation}
+              onChange={(e) => setInput({ ...input, occupation: e.target.value })}
+              className="w-full rounded-lg border-2 border-amber-400 bg-[var(--surface)] px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-600"
+            />
+          </div>
         </div>
 
         <div>

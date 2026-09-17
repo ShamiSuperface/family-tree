@@ -15,6 +15,8 @@ export interface Person {
   deathDate: string | null;
   photo: string;
   bio: string;
+  residence: string;
+  occupation: string;
   parents: string[];
   spouses: string[];
   children: string[];
