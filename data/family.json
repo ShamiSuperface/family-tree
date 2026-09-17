@@ -21,7 +21,9 @@
       "p30"
     ],
     "marriageDates": {},
-    "gallery": []
+    "gallery": [],
+    "residence": "",
+    "occupation": ""
   },
   {
     "id": "p2",
@@ -52,7 +54,9 @@
         "type": "photo",
         "filename": "Gemini_Generated_Image_ayj5b1ayj5b1ayj5.jpg"
       }
-    ]
+    ],
+    "residence": "",
+    "occupation": ""
   },
   {
     "id": "p3",
@@ -73,7 +77,9 @@
       "p7"
     ],
     "marriageDates": {},
-    "gallery": []
+    "gallery": [],
+    "residence": "",
+    "occupation": ""
   },
   {
     "id": "p4",
@@ -97,17 +103,21 @@
       "p7"
     ],
     "marriageDates": {},
-    "gallery": []
+    "gallery": [],
+    "residence": "",
+    "occupation": ""
   },
   {
     "id": "p5",
     "firstName": "ענת",
     "lastName": "נתן",
     "gender": "female",
-    "birthDate": null,
+    "birthDate": "1966-10-24",
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
+    "residence": "רמת השרון",
+    "occupation": "",
     "parents": [
       "p3",
       "p4"
@@ -130,6 +140,8 @@
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
+    "residence": "הרצליה",
+    "occupation": "",
     "parents": [
       "p3",
       "p4"
@@ -156,6 +168,8 @@
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
+    "residence": "גבעת שמואל",
+    "occupation": "",
     "parents": [
       "p3",
       "p4"
@@ -179,7 +193,9 @@
     "birthDate": "1945-09-15",
     "deathDate": "2025-09-23",
     "photo": "/placeholder-avatar.svg",
-    "bio": "תאריך פטירה: א תשרי תשפ\"ו | 23 בספט׳ 2025\nתל אביב - ירקון\nגוש בניין גפן, אזור ג1, שורה 55, מקום 30\nחברה קדישא תל אביב-יפו והמחוז\n\n",
+    "bio": "בית עלמין ירקון, בניין גפן, אזור ג1, שורה 55, מקום 30.\n\n",
+    "residence": "",
+    "occupation": "",
     "parents": [
       "p1",
       "p2"
@@ -204,7 +220,9 @@
     "birthDate": "1943-08-31",
     "deathDate": "2017-01-07",
     "photo": "/placeholder-avatar.svg",
-    "bio": "תאריך פטירה: ט טבת תשע\"ז | 7 בינו׳ 2017\nתל אביב - ירקון\nגוש בניין גפן, אזור ג1, שורה 55, מקום 30\nחברה קדישא תל אביב-יפו והמחוז",
+    "bio": "בית עלמין ירקון, בניין גפן, אזור ג1, שורה 55, מקום 30.",
+    "residence": "",
+    "occupation": "",
     "parents": [],
     "spouses": [
       "p8"
@@ -227,6 +245,8 @@
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
+    "residence": "פרדס חנה",
+    "occupation": "",
     "parents": [
       "p8",
       "p9"
@@ -252,6 +272,8 @@
     "deathDate": null,
     "photo": "/photos/615cad94-c42e-4971-ab5c-5e955ef1c83e.png",
     "bio": "",
+    "residence": "רמת גן",
+    "occupation": "",
     "parents": [
       "p8",
       "p9"
@@ -273,10 +295,12 @@
     "firstName": "יונתן",
     "lastName": "ון קולם",
     "gender": "male",
-    "birthDate": null,
+    "birthDate": "2010-10-26",
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
+    "residence": "רמת השרון",
+    "occupation": "",
     "parents": [
       "p5"
     ],
@@ -290,10 +314,12 @@
     "firstName": "נועה",
     "lastName": "ון קולם",
     "gender": "female",
-    "birthDate": null,
+    "birthDate": "2012-08-17",
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
+    "residence": "רמת השרון",
+    "occupation": "",
     "parents": [
       "p5"
     ],
@@ -307,10 +333,12 @@
     "firstName": "דניאל",
     "lastName": "ון קולם",
     "gender": "female",
-    "birthDate": null,
+    "birthDate": "2012-08-17",
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
+    "residence": "רמת השרון",
+    "occupation": "",
     "parents": [
       "p5"
     ],
@@ -334,7 +362,9 @@
     "spouses": [],
     "children": [],
     "marriageDates": {},
-    "gallery": []
+    "gallery": [],
+    "residence": "",
+    "occupation": ""
   },
   {
     "id": "p16",
@@ -345,6 +375,8 @@
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
+    "residence": "הרצליה",
+    "occupation": "",
     "parents": [],
     "spouses": [
       "p6"
@@ -367,6 +399,8 @@
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
+    "residence": "הרצליה",
+    "occupation": "",
     "parents": [
       "p6",
       "p16"
@@ -385,6 +419,8 @@
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
+    "residence": "הרצליה",
+    "occupation": "",
     "parents": [
       "p6",
       "p16"
@@ -403,6 +439,8 @@
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
+    "residence": "גבעת שמואל",
+    "occupation": "",
     "parents": [],
     "spouses": [
       "p7"
@@ -422,8 +460,10 @@
     "gender": "male",
     "birthDate": "2016-11-14",
     "deathDate": null,
-    "photo": "/placeholder-avatar.svg",
+    "photo": "/photos/5c35a589-14fe-4b3f-b965-de070b906c90.jpg",
     "bio": "",
+    "residence": "גבעת שמואל",
+    "occupation": "",
     "parents": [
       "p19",
       "p7"
@@ -442,6 +482,8 @@
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
+    "residence": "פרדס חנה",
+    "occupation": "",
     "parents": [],
     "spouses": [
       "p10"
@@ -464,6 +506,8 @@
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
+    "residence": "פרדס חנה",
+    "occupation": "",
     "parents": [
       "p10",
       "p21"
@@ -482,6 +526,8 @@
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
+    "residence": "פרדס חנה",
+    "occupation": "",
     "parents": [
       "p10",
       "p21"
@@ -500,6 +546,8 @@
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
+    "residence": "רמת גן",
+    "occupation": "",
     "parents": [],
     "spouses": [
       "p11"
@@ -522,6 +570,8 @@
     "deathDate": null,
     "photo": "/photos/aaeb836f-53b1-4b59-8c47-dc10a0f28c1b.png",
     "bio": "",
+    "residence": "רמת גן",
+    "occupation": "",
     "parents": [
       "p11",
       "p24"
@@ -540,6 +590,8 @@
     "deathDate": null,
     "photo": "/photos/ffc4c11c-8526-425a-bfe8-04c5b14768a0.png",
     "bio": "שחקנית תיאטרוניסטית לעתיד :)",
+    "residence": "רמת גן",
+    "occupation": "",
     "parents": [
       "p11",
       "p24"
@@ -558,6 +610,8 @@
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
+    "residence": "סביון",
+    "occupation": "",
     "parents": [
       "p1",
       "p2"
@@ -579,7 +633,9 @@
     "birthDate": "1943",
     "deathDate": "2004-10-19",
     "photo": "/placeholder-avatar.svg",
-    "bio": "תאריך פטירה: ד חשון תשס\"ה | 18 באוק׳ 2004\nתל אביב - ירקון\nגוש 19, אזור 10, שורה 19, מקום 4",
+    "bio": "בית עלמין ירקון, גוש 19, אזור 10, שורה 19, מקום 4.",
+    "residence": "",
+    "occupation": "",
     "parents": [
       "p1",
       "p2"
@@ -605,6 +661,8 @@
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
+    "residence": "טורונטו",
+    "occupation": "",
     "parents": [
       "p1",
       "p2"
@@ -641,7 +699,9 @@
       "p44"
     ],
     "marriageDates": {},
-    "gallery": []
+    "gallery": [],
+    "residence": "",
+    "occupation": ""
   },
   {
     "id": "p31",
@@ -652,6 +712,8 @@
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
+    "residence": "סביון",
+    "occupation": "",
     "parents": [],
     "spouses": [
       "p27"
@@ -671,6 +733,8 @@
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
+    "residence": "בת ים",
+    "occupation": "",
     "parents": [],
     "spouses": [
       "p28"
@@ -693,6 +757,8 @@
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
+    "residence": "טורונטו",
+    "occupation": "",
     "parents": [],
     "spouses": [
       "p29"
@@ -713,6 +779,8 @@
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
+    "residence": "רמת השרון",
+    "occupation": "",
     "parents": [],
     "spouses": [
       "p30"
@@ -734,6 +802,8 @@
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
+    "residence": "גבעתיים",
+    "occupation": "",
     "parents": [
       "p27",
       "p31"
@@ -762,7 +832,9 @@
       "p65"
     ],
     "marriageDates": {},
-    "gallery": []
+    "gallery": [],
+    "residence": "",
+    "occupation": ""
   },
   {
     "id": "p37",
@@ -787,7 +859,9 @@
       "p62"
     ],
     "marriageDates": {},
-    "gallery": []
+    "gallery": [],
+    "residence": "",
+    "occupation": ""
   },
   {
     "id": "p38",
@@ -798,6 +872,8 @@
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
+    "residence": "יהוד",
+    "occupation": "",
     "parents": [
       "p28",
       "p32"
@@ -816,6 +892,8 @@
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
+    "residence": "בת ים",
+    "occupation": "",
     "parents": [
       "p32",
       "p28"
@@ -834,6 +912,8 @@
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
+    "residence": "טורונטו",
+    "occupation": "",
     "parents": [
       "p33",
       "p29"
@@ -852,6 +932,8 @@
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
+    "residence": "טורונטו",
+    "occupation": "",
     "parents": [
       "p29",
       "p33"
@@ -870,6 +952,8 @@
     "deathDate": null,
     "photo": "/photos/47cd5a98-ba1a-4d19-b54e-93b037fefdb3.webp",
     "bio": "",
+    "residence": "טורונטו",
+    "occupation": "",
     "parents": [
       "p30",
       "p34"
@@ -910,7 +994,9 @@
       "p56"
     ],
     "marriageDates": {},
-    "gallery": []
+    "gallery": [],
+    "residence": "",
+    "occupation": ""
   },
   {
     "id": "p44",
@@ -921,6 +1007,8 @@
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
+    "residence": "אזור",
+    "occupation": "",
     "parents": [
       "p30",
       "p34"
@@ -956,7 +1044,9 @@
     "marriageDates": {
       "p42": "08-05"
     },
-    "gallery": []
+    "gallery": [],
+    "residence": "",
+    "occupation": ""
   },
   {
     "id": "p46",
@@ -967,6 +1057,8 @@
     "deathDate": null,
     "photo": "/photos/139f2560-4c7f-444d-9742-1882d1887d99.png",
     "bio": "",
+    "residence": "רמת השרון",
+    "occupation": "",
     "parents": [
       "p42",
       "p45"
@@ -985,6 +1077,8 @@
     "deathDate": null,
     "photo": "/photos/afa200f6-baaa-4398-95f0-325cb867af86.png",
     "bio": "",
+    "residence": "טורונטו",
+    "occupation": "",
     "parents": [
       "p45",
       "p42"
@@ -1003,6 +1097,8 @@
     "deathDate": null,
     "photo": "/photos/5b9cb6d9-3521-4992-a7eb-cd13ae067738.png",
     "bio": "",
+    "residence": "טורונטו",
+    "occupation": "",
     "parents": [
       "p45",
       "p42"
@@ -1031,7 +1127,9 @@
       "p56"
     ],
     "marriageDates": {},
-    "gallery": []
+    "gallery": [],
+    "residence": "",
+    "occupation": ""
   },
   {
     "id": "p51",
@@ -1042,6 +1140,8 @@
     "deathDate": null,
     "photo": "/placeholder-avatar.svg",
     "bio": "",
+    "residence": "אזור",
+    "occupation": "",
     "parents": [],
     "spouses": [
       "p44"
@@ -1068,7 +1168,9 @@
     "spouses": [],
     "children": [],
     "marriageDates": {},
-    "gallery": []
+    "gallery": [],
+    "residence": "",
+    "occupation": ""
   },
   {
     "id": "p55",
@@ -1086,7 +1188,9 @@
     "spouses": [],
     "children": [],
     "marriageDates": {},
-    "gallery": []
+    "gallery": [],
+    "residence": "",
+    "occupation": ""
   },
   {
     "id": "p56",
@@ -1104,7 +1208,9 @@
     "spouses": [],
     "children": [],
     "marriageDates": {},
-    "gallery": []
+    "gallery": [],
+    "residence": "",
+    "occupation": ""
   },
   {
     "id": "p57",
@@ -1126,7 +1232,9 @@
       "p62"
     ],
     "marriageDates": {},
-    "gallery": []
+    "gallery": [],
+    "residence": "",
+    "occupation": ""
   },
   {
     "id": "p58",
@@ -1149,7 +1257,9 @@
       "p71"
     ],
     "marriageDates": {},
-    "gallery": []
+    "gallery": [],
+    "residence": "",
+    "occupation": ""
   },
   {
     "id": "p59",
@@ -1169,7 +1279,9 @@
     ],
     "children": [],
     "marriageDates": {},
-    "gallery": []
+    "gallery": [],
+    "residence": "",
+    "occupation": ""
   },
   {
     "id": "p61",
@@ -1191,7 +1303,9 @@
       "p68"
     ],
     "marriageDates": {},
-    "gallery": []
+    "gallery": [],
+    "residence": "",
+    "occupation": ""
   },
   {
     "id": "p62",
@@ -1209,7 +1323,9 @@
     "spouses": [],
     "children": [],
     "marriageDates": {},
-    "gallery": []
+    "gallery": [],
+    "residence": "",
+    "occupation": ""
   },
   {
     "id": "p64",
@@ -1226,7 +1342,9 @@
     "spouses": [],
     "children": [],
     "marriageDates": {},
-    "gallery": []
+    "gallery": [],
+    "residence": "",
+    "occupation": ""
   },
   {
     "id": "p65",
@@ -1243,7 +1361,9 @@
     "spouses": [],
     "children": [],
     "marriageDates": {},
-    "gallery": []
+    "gallery": [],
+    "residence": "",
+    "occupation": ""
   },
   {
     "id": "p66",
@@ -1263,7 +1383,9 @@
       "p68"
     ],
     "marriageDates": {},
-    "gallery": []
+    "gallery": [],
+    "residence": "",
+    "occupation": ""
   },
   {
     "id": "p67",
@@ -1280,7 +1402,9 @@
     "spouses": [],
     "children": [],
     "marriageDates": {},
-    "gallery": []
+    "gallery": [],
+    "residence": "",
+    "occupation": ""
   },
   {
     "id": "p68",
@@ -1298,7 +1422,9 @@
     "spouses": [],
     "children": [],
     "marriageDates": {},
-    "gallery": []
+    "gallery": [],
+    "residence": "",
+    "occupation": ""
   },
   {
     "id": "p69",
@@ -1318,7 +1444,9 @@
       "p71"
     ],
     "marriageDates": {},
-    "gallery": []
+    "gallery": [],
+    "residence": "",
+    "occupation": ""
   },
   {
     "id": "p70",
@@ -1336,7 +1464,9 @@
     "spouses": [],
     "children": [],
     "marriageDates": {},
-    "gallery": []
+    "gallery": [],
+    "residence": "",
+    "occupation": ""
   },
   {
     "id": "p71",
@@ -1354,7 +1484,9 @@
     "spouses": [],
     "children": [],
     "marriageDates": {},
-    "gallery": []
+    "gallery": [],
+    "residence": "",
+    "occupation": ""
   },
   {
     "id": "p73",
@@ -1371,6 +1503,8 @@
     ],
     "children": [],
     "marriageDates": {},
-    "gallery": []
+    "gallery": [],
+    "residence": "",
+    "occupation": ""
   }
 ]
