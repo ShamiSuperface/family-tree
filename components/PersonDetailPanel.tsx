@@ -11,6 +11,7 @@ interface Props {
   people: Person[];
   onClose: () => void;
   onEdit?: (person: Person) => void;
+  onSelectPerson?: (person: Person) => void;
 }
 
 function formatDateLine(date: string | null): string {
@@ -19,7 +20,7 @@ function formatDateLine(date: string | null): string {
   return hebrew ? `${gregorian} (${hebrew})` : gregorian;
 }
 
-export default function PersonDetailPanel({ person, people, onClose, onEdit }: Props) {
+export default function PersonDetailPanel({ person, people, onClose, onEdit, onSelectPerson }: Props) {
   const [memories, setMemories] = useState<Memory[]>([]);
   const [tasks, setTasks] = useState<Task[]>([]);
 
@@ -81,6 +82,12 @@ export default function PersonDetailPanel({ person, people, onClose, onEdit }: P
     .map((spouseId) => byId.get(spouseId))
     .filter((spouse): spouse is Person => Boolean(spouse))
     .map((spouse) => ({ spouse, date: person.marriageDates[spouse.id] }));
+  const parents = person.parents
+    .map((id) => byId.get(id))
+    .filter((p): p is Person => Boolean(p));
+  const children = person.children
+    .map((id) => byId.get(id))
+    .filter((p): p is Person => Boolean(p));
 
   return (
     <div
@@ -126,14 +133,83 @@ export default function PersonDetailPanel({ person, people, onClose, onEdit }: P
           {person.deathDate ? ` – ${formatDateLine(person.deathDate)}` : ""}
         </p>
 
+        {(person.residence || person.occupation) && (
+          <p className="mt-1 text-center text-sm text-stone-600">
+            {[
+              person.residence ? `🏠 ${person.residence}` : null,
+              person.occupation ? `💼 ${person.occupation}` : null,
+            ]
+              .filter(Boolean)
+              .join("  ·  ")}
+          </p>
+        )}
+
         {marriages.length > 0 && (
           <div className="mt-3 space-y-1 text-center text-sm text-stone-600">
             {marriages.map(({ spouse, date }) => (
               <p key={spouse.id}>
-                💍 {spouse.firstName} {spouse.lastName}
+                💍{" "}
+                {onSelectPerson ? (
+                  <button
+                    type="button"
+                    onClick={() => onSelectPerson(spouse)}
+                    className="font-medium text-amber-800 hover:underline"
+                  >
+                    {spouse.firstName} {spouse.lastName}
+                  </button>
+                ) : (
+                  `${spouse.firstName} ${spouse.lastName}`
+                )}
                 {date ? ` — נישאו ב-${formatPersonDate(date)}` : ""}
               </p>
             ))}
+          </div>
+        )}
+
+        {(parents.length > 0 || children.length > 0) && (
+          <div className="mt-3 space-y-1 text-center text-sm text-stone-600">
+            {parents.length > 0 && (
+              <p>
+                הורים:{" "}
+                {parents.map((parent, i) => (
+                  <span key={parent.id}>
+                    {i > 0 && ", "}
+                    {onSelectPerson ? (
+                      <button
+                        type="button"
+                        onClick={() => onSelectPerson(parent)}
+                        className="font-medium text-amber-800 hover:underline"
+                      >
+                        {parent.firstName} {parent.lastName}
+                      </button>
+                    ) : (
+                      `${parent.firstName} ${parent.lastName}`
+                    )}
+                  </span>
+                ))}
+              </p>
+            )}
+            {children.length > 0 && (
+              <p>
+                ילדים:{" "}
+                {children.map((child, i) => (
+                  <span key={child.id}>
+                    {i > 0 && ", "}
+                    {onSelectPerson ? (
+                      <button
+                        type="button"
+                        onClick={() => onSelectPerson(child)}
+                        className="font-medium text-amber-800 hover:underline"
+                      >
+                        {child.firstName} {child.lastName}
+                      </button>
+                    ) : (
+                      `${child.firstName} ${child.lastName}`
+                    )}
+                  </span>
+                ))}
+              </p>
+            )}
           </div>
         )}
 

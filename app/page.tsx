@@ -44,7 +44,7 @@ export default function Home() {
       .slice(0, 6);
   }, [people, query]);
 
-  const selectSearchResult = (person: Person) => {
+  const navigateToPerson = (person: Person) => {
     treeRef.current?.zoomToPerson(person.id);
     setSelectedPerson(person);
     setQuery("");
@@ -158,7 +158,7 @@ export default function Home() {
                     <li key={person.id}>
                       <button
                         type="button"
-                        onClick={() => selectSearchResult(person)}
+                        onClick={() => navigateToPerson(person)}
                         className="block w-full px-3 py-2 text-start text-sm text-stone-800 hover:bg-amber-50"
                       >
                         {person.firstName} {person.lastName}
@@ -283,6 +283,7 @@ export default function Home() {
         people={people ?? []}
         onClose={() => setSelectedPerson(null)}
         onEdit={EDITING_ENABLED ? openEditForm : undefined}
+        onSelectPerson={navigateToPerson}
       />
 
       {EDITING_ENABLED && (
