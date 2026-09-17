@@ -27,11 +27,12 @@ export interface MapMarker {
 
 interface Props {
   markers: MapMarker[];
+  onSelectPerson?: (person: Person) => void;
 }
 
 const ISRAEL_CENTER: [number, number] = [31.5, 34.9];
 
-export default function FamilyMapView({ markers }: Props) {
+export default function FamilyMapView({ markers, onSelectPerson }: Props) {
   const bounds = useMemo(() => {
     if (markers.length === 0) return null;
     return L.latLngBounds(markers.map((m) => [m.lat, m.lon]));
@@ -57,7 +58,17 @@ export default function FamilyMapView({ markers }: Props) {
               <ul>
                 {marker.people.map((person) => (
                   <li key={person.id}>
-                    {person.firstName} {person.lastName}
+                    {onSelectPerson ? (
+                      <button
+                        type="button"
+                        onClick={() => onSelectPerson(person)}
+                        className="text-amber-800 hover:underline"
+                      >
+                        {person.firstName} {person.lastName}
+                      </button>
+                    ) : (
+                      `${person.firstName} ${person.lastName}`
+                    )}
                   </li>
                 ))}
               </ul>
