@@ -53,7 +53,10 @@ export default function FamilyMapView({ markers, onSelectPerson }: Props) {
       {markers.map((marker) => (
         <Marker key={marker.place} position={[marker.lat, marker.lon]} icon={markerIcon}>
           <Popup>
-            <div className="text-sm">
+            {/* Fixed colors throughout: the Leaflet popup's background is
+                always white regardless of site theme, but our themed text
+                colors (amber/stone tokens) flip light for dark mode. */}
+            <div className="text-sm text-[#1c1917]">
               <p className="mb-1 font-semibold">{marker.place}</p>
               <ul>
                 {marker.people.map((person) => (
@@ -62,7 +65,7 @@ export default function FamilyMapView({ markers, onSelectPerson }: Props) {
                       <button
                         type="button"
                         onClick={() => onSelectPerson(person)}
-                        className="text-amber-800 hover:underline"
+                        className="text-[#92400e] hover:underline"
                       >
                         {person.firstName} {person.lastName}
                       </button>
