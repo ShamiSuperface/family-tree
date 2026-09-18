@@ -80,7 +80,7 @@ function MemoriesPageContent() {
       const res = await fetch("/api/memories/upload", { method: "POST", body: formData });
       const data = (await res.json()) as MediaItem & { error?: string };
       if (!res.ok) throw new Error(data.error ?? "שגיאה בהעלאת המדיה");
-      setMedia({ id: crypto.randomUUID(), url: data.url, type: data.type, filename: data.filename });
+      setMedia({ id: crypto.randomUUID(), url: data.url, type: data.type, filename: data.filename, year: null });
     } catch (err) {
       setMediaError(err instanceof Error ? err.message : "שגיאה בהעלאת המדיה");
     } finally {
@@ -195,6 +195,17 @@ function MemoriesPageContent() {
                   {media.type === "photo" ? "🖼️" : media.type === "video" ? "🎬" : "📄"}
                 </span>
                 <span className="min-w-0 flex-1 truncate text-sm text-stone-700">{media.filename}</span>
+                <input
+                  type="number"
+                  placeholder="שנה"
+                  value={media.year ?? ""}
+                  onChange={(e) =>
+                    setMedia({ ...media, year: e.target.value ? Number(e.target.value) : null })
+                  }
+                  min={1800}
+                  max={new Date().getFullYear()}
+                  className="w-20 shrink-0 rounded-lg border-2 border-amber-300 bg-[var(--surface)] px-2 py-1 text-sm text-stone-900 outline-none focus:border-amber-600"
+                />
                 <button
                   type="button"
                   onClick={() => setMedia(null)}
@@ -294,6 +305,9 @@ function MemoriesPageContent() {
                         📄 {memory.media.filename}
                       </a>
                     ))}
+                  {memory.media?.year && (
+                    <p className="mt-1 text-xs text-stone-500">מ-{memory.media.year}</p>
+                  )}
                   <p className="mt-2 text-sm font-medium text-amber-800">
                     — {memory.authorName}, {formatMemoryDate(memory.createdAt)}
                     {person ? ` · על ${person.firstName} ${person.lastName}` : ""}

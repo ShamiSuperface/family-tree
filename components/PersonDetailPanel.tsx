@@ -234,6 +234,7 @@ export default function PersonDetailPanel({ person, people, onClose, onEdit, onS
                       target="_blank"
                       rel="noreferrer"
                       title={item.filename}
+                      className="relative block"
                     >
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
@@ -241,19 +242,26 @@ export default function PersonDetailPanel({ person, people, onClose, onEdit, onS
                         alt={item.filename}
                         className="h-20 w-full rounded-lg border-2 border-amber-300 object-cover"
                       />
+                      {item.year && (
+                        <span className="absolute bottom-1 right-1 rounded bg-black/60 px-1 text-[10px] text-white">
+                          {item.year}
+                        </span>
+                      )}
                     </a>
                   );
                 }
                 if (item.type === "video") {
                   return (
-                    <video
-                      key={item.id}
-                      src={item.url}
-                      controls
-                      preload="metadata"
-                      title={item.filename}
-                      className="col-span-3 h-48 w-full rounded-lg border-2 border-amber-300 bg-black"
-                    />
+                    <div key={item.id} className="col-span-3">
+                      <video
+                        src={item.url}
+                        controls
+                        preload="metadata"
+                        title={item.filename}
+                        className="h-48 w-full rounded-lg border-2 border-amber-300 bg-black"
+                      />
+                      {item.year && <p className="mt-0.5 text-xs text-stone-500">מ-{item.year}</p>}
+                    </div>
                   );
                 }
                 return (
@@ -268,6 +276,7 @@ export default function PersonDetailPanel({ person, people, onClose, onEdit, onS
                     <span className="text-2xl">📄</span>
                     <span className="line-clamp-1 w-full text-center text-[10px]">
                       {item.filename}
+                      {item.year ? ` (${item.year})` : ""}
                     </span>
                   </a>
                 );
@@ -335,6 +344,9 @@ export default function PersonDetailPanel({ person, people, onClose, onEdit, onS
                         📄 {memory.media.filename}
                       </a>
                     ))}
+                  {memory.media?.year && (
+                    <p className="mt-0.5 text-xs text-stone-500">מ-{memory.media.year}</p>
+                  )}
                   <p className="mt-1 text-xs font-medium text-amber-700">— {memory.authorName}</p>
                 </li>
               ))}

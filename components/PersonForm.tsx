@@ -196,6 +196,7 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
           url: data.path,
           type,
           filename: file.name,
+          year: null,
         });
       }
       setInput((prev) => ({ ...prev, gallery: [...prev.gallery, ...uploaded] }));
@@ -209,6 +210,13 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
 
   const removeGalleryItem = (id: string) => {
     setInput((prev) => ({ ...prev, gallery: prev.gallery.filter((item) => item.id !== id) }));
+  };
+
+  const setGalleryItemYear = (id: string, year: number | null) => {
+    setInput((prev) => ({
+      ...prev,
+      gallery: prev.gallery.map((item) => (item.id === id ? { ...item, year } : item)),
+    }));
   };
 
   return (
@@ -371,6 +379,17 @@ export default function PersonForm({ people, initial, onSubmit, onCancel, onDele
                   <p className="mt-1 truncate text-center text-xs text-stone-600" title={item.filename}>
                     {item.filename}
                   </p>
+                  <input
+                    type="number"
+                    placeholder="שנה"
+                    value={item.year ?? ""}
+                    onChange={(e) =>
+                      setGalleryItemYear(item.id, e.target.value ? Number(e.target.value) : null)
+                    }
+                    min={1800}
+                    max={new Date().getFullYear()}
+                    className="mt-1 w-full rounded border border-amber-300 bg-[var(--surface)] px-1 py-0.5 text-center text-xs text-stone-900 outline-none focus:border-amber-600"
+                  />
                   <button
                     type="button"
                     onClick={() => removeGalleryItem(item.id)}

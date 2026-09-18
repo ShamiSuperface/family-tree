@@ -4,6 +4,8 @@ export interface MediaItem {
   type: "photo" | "video" | "document";
   /** Original uploaded filename, shown for documents and used as photo alt text. */
   filename: string;
+  /** The year the photo/video/document is from, if known — for a future timeline view. */
+  year: number | null;
 }
 
 export interface Person {

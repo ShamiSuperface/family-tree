@@ -17,8 +17,11 @@ export interface MemoryInput {
 
 export async function getMemories(): Promise<Memory[]> {
   const items = await getRedis().lrange<Memory>(LIST_KEY, 0, -1);
-  // Backward-compatible with memories saved before the media field existed.
-  return items.map((item) => ({ ...item, media: item.media ?? null }));
+  // Backward-compatible with memories saved before the media/year fields existed.
+  return items.map((item) => ({
+    ...item,
+    media: item.media ? { ...item.media, year: item.media.year ?? null } : null,
+  }));
 }
 
 function validate(input: MemoryInput): string | null {

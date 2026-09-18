@@ -31,11 +31,8 @@ export async function POST(request: Request) {
     });
   } catch (err) {
     console.error("Blob upload failed:", err);
-    // TEMPORARY: surfaces the real error to the page while diagnosing the
-    // Blob storage setup — revert to a plain generic message once resolved.
-    const detail = err instanceof Error ? err.message : String(err);
     return NextResponse.json(
-      { error: `העלאת מדיה נכשלה (זמני, לצורך אבחון): ${detail}` },
+      { error: "העלאת מדיה עדיין לא מוגדרת (חסר חיבור לאחסון). זו הגדרה חד-פעמית שצריך להשלים." },
       { status: 503 },
     );
   }

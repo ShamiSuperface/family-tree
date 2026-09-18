@@ -28,7 +28,7 @@ export async function readPeople(): Promise<Person[]> {
   return people.map((person) => ({
     ...person,
     marriageDates: person.marriageDates ?? {},
-    gallery: person.gallery ?? [],
+    gallery: (person.gallery ?? []).map((item) => ({ ...item, year: item.year ?? null })),
     residence: person.residence ?? "",
     occupation: person.occupation ?? "",
   }));
