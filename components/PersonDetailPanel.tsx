@@ -347,6 +347,16 @@ export default function PersonDetailPanel({ person, people, onClose, onEdit, onS
                   {memory.media?.year && (
                     <p className="mt-0.5 text-xs text-stone-500">מ-{memory.media.year}</p>
                   )}
+                  {(() => {
+                    const tagged = memory.personIds
+                      .map((id) => byId.get(id))
+                      .filter((p): p is Person => Boolean(p));
+                    return tagged.length > 1 ? (
+                      <p className="mt-0.5 text-xs text-stone-500">
+                        מתויגים: {tagged.map((p) => `${p.firstName} ${p.lastName}`).join(", ")}
+                      </p>
+                    ) : null;
+                  })()}
                   <p className="mt-1 text-xs font-medium text-amber-700">— {memory.authorName}</p>
                 </li>
               ))}
