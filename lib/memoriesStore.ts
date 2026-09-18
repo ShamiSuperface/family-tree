@@ -9,17 +9,23 @@ const MAX_TEXT_LENGTH = 2000;
 export interface MemoryInput {
   authorName: string;
   text: string;
-  personId: string | null;
+  personIds: string[];
   media: MediaItem | null;
   /** Honeypot field: real visitors leave it empty. */
   website?: string;
 }
 
+/** Shape memories could have been saved in before personIds/media/year existed. */
+interface LegacyMemoryFields {
+  personId?: string | null;
+}
+
 export async function getMemories(): Promise<Memory[]> {
-  const items = await getRedis().lrange<Memory>(LIST_KEY, 0, -1);
-  // Backward-compatible with memories saved before the media/year fields existed.
+  const items = await getRedis().lrange<Memory & LegacyMemoryFields>(LIST_KEY, 0, -1);
+  // Backward-compatible with memories saved before the personIds/media/year fields existed.
   return items.map((item) => ({
     ...item,
+    personIds: item.personIds ?? (item.personId ? [item.personId] : []),
     media: item.media ? { ...item.media, year: item.media.year ?? null } : null,
   }));
 }
@@ -42,7 +48,7 @@ export async function addMemory(input: MemoryInput): Promise<Memory | null> {
     id: crypto.randomUUID(),
     authorName: input.authorName.trim(),
     text: input.text.trim(),
-    personId: input.personId,
+    personIds: [...new Set(input.personIds)],
     createdAt: new Date().toISOString(),
     media: input.media,
   };

@@ -15,9 +15,10 @@ export async function GET() {
 export async function POST(request: Request) {
   const input = (await request.json()) as MemoryInput;
 
-  if (input.personId) {
+  if (input.personIds?.length) {
     const people = await readPeople();
-    if (!people.some((p) => p.id === input.personId)) {
+    const validIds = new Set(people.map((p) => p.id));
+    if (input.personIds.some((id) => !validIds.has(id))) {
       return NextResponse.json({ error: "מזהה קרוב לא קיים" }, { status: 400 });
     }
   }

@@ -32,8 +32,8 @@ export interface Memory {
   id: string;
   authorName: string;
   text: string;
-  /** The person this memory is about, or null for a memory about the family in general. */
-  personId: string | null;
+  /** The people this memory is about, or an empty array for the family in general. */
+  personIds: string[];
   createdAt: string;
   /** An optional photo/video/document attached to the memory. */
   media: MediaItem | null;

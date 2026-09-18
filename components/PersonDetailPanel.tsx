@@ -39,7 +39,7 @@ export default function PersonDetailPanel({ person, people, onClose, onEdit, onS
     fetch("/api/memories")
       .then((res) => (res.ok ? (res.json() as Promise<Memory[]>) : []))
       .then((all) => {
-        if (!cancelled) setMemories(all.filter((m) => m.personId === person.id));
+        if (!cancelled) setMemories(all.filter((m) => m.personIds.includes(person.id)));
       })
       .catch(() => {});
     return () => {

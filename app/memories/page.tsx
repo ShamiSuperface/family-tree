@@ -29,7 +29,10 @@ function MemoriesPageContent() {
   const [memories, setMemories] = useState<Memory[] | null>(null);
   const [memoriesUnavailable, setMemoriesUnavailable] = useState(false);
   const [authorName, setAuthorName] = useState("");
-  const [personId, setPersonId] = useState<string>(searchParams.get("personId") ?? "");
+  const [personIds, setPersonIds] = useState<string[]>(() => {
+    const id = searchParams.get("personId");
+    return id ? [id] : [];
+  });
   const [text, setText] = useState("");
   const [website, setWebsite] = useState(""); // honeypot
   const [submitting, setSubmitting] = useState(false);
@@ -100,7 +103,7 @@ function MemoriesPageContent() {
         body: JSON.stringify({
           authorName,
           text,
-          personId: personId || null,
+          personIds,
           media,
           website,
         }),
@@ -111,7 +114,7 @@ function MemoriesPageContent() {
       }
       setAuthorName("");
       setText("");
-      setPersonId("");
+      setPersonIds([]);
       setMedia(null);
       await loadMemories();
     } catch (err) {
@@ -154,29 +157,39 @@ function MemoriesPageContent() {
         >
           <h2 className="text-sm font-semibold text-amber-900">הוספת זיכרון</h2>
 
-          <div className="grid grid-cols-2 gap-3">
-            <input
-              type="text"
-              required
-              placeholder="השם שלך"
-              value={authorName}
-              onChange={(e) => setAuthorName(e.target.value)}
-              maxLength={60}
-              className="w-full rounded-lg border-2 border-amber-400 bg-[var(--surface)] px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-600"
-            />
-            <select
-              value={personId}
-              onChange={(e) => setPersonId(e.target.value)}
-              className="w-full rounded-lg border-2 border-amber-400 bg-[var(--surface)] px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-600"
-            >
-              <option value="">כלל המשפחה</option>
+          <input
+            type="text"
+            required
+            placeholder="השם שלך"
+            value={authorName}
+            onChange={(e) => setAuthorName(e.target.value)}
+            maxLength={60}
+            className="w-full rounded-lg border-2 border-amber-400 bg-[var(--surface)] px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-600"
+          />
+
+          <fieldset>
+            <legend className="mb-1 text-sm font-medium text-stone-700">
+              על מי זה? (אפשר לסמן כמה אנשים, או להשאיר ריק עבור כלל המשפחה)
+            </legend>
+            <div className="max-h-32 space-y-1 overflow-y-auto rounded-lg border-2 border-amber-300 p-2">
               {people.map((p) => (
-                <option key={p.id} value={p.id}>
+                <label key={p.id} className="flex items-center gap-2 text-sm text-stone-800">
+                  <input
+                    type="checkbox"
+                    checked={personIds.includes(p.id)}
+                    onChange={(e) =>
+                      setPersonIds(
+                        e.target.checked
+                          ? [...personIds, p.id]
+                          : personIds.filter((id) => id !== p.id),
+                      )
+                    }
+                  />
                   {p.firstName} {p.lastName}
-                </option>
+                </label>
               ))}
-            </select>
-          </div>
+            </div>
+          </fieldset>
 
           <textarea
             required
@@ -259,7 +272,9 @@ function MemoriesPageContent() {
         ) : (
           <ul className="space-y-3">
             {memories.map((memory) => {
-              const person = memory.personId ? peopleById.get(memory.personId) : undefined;
+              const taggedPeople = memory.personIds
+                .map((id) => peopleById.get(id))
+                .filter((p): p is Person => Boolean(p));
               return (
                 <li
                   key={memory.id}
@@ -310,7 +325,9 @@ function MemoriesPageContent() {
                   )}
                   <p className="mt-2 text-sm font-medium text-amber-800">
                     — {memory.authorName}, {formatMemoryDate(memory.createdAt)}
-                    {person ? ` · על ${person.firstName} ${person.lastName}` : ""}
+                    {taggedPeople.length > 0
+                      ? ` · על ${taggedPeople.map((p) => `${p.firstName} ${p.lastName}`).join(", ")}`
+                      : ""}
                   </p>
                 </li>
               );
