@@ -30,11 +30,12 @@ export async function POST(request: Request) {
       filename: file.name,
     });
   } catch (err) {
-    // Logged server-side (visible in Vercel's Logs/Observability tab) so a
-    // real misconfiguration is diagnosable — the response stays generic.
     console.error("Blob upload failed:", err);
+    // TEMPORARY: surfaces the real error to the page while diagnosing the
+    // Blob storage setup — revert to a plain generic message once resolved.
+    const detail = err instanceof Error ? err.message : String(err);
     return NextResponse.json(
-      { error: "העלאת מדיה עדיין לא מוגדרת (חסר חיבור לאחסון). זו הגדרה חד-פעמית שצריך להשלים." },
+      { error: `העלאת מדיה נכשלה (זמני, לצורך אבחון): ${detail}` },
       { status: 503 },
     );
   }
