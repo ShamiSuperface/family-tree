@@ -308,6 +308,33 @@ export default function PersonDetailPanel({ person, people, onClose, onEdit, onS
                       </button>
                     )}
                   </div>
+                  {memory.media &&
+                    (memory.media.type === "photo" ? (
+                      <a href={memory.media.url} target="_blank" rel="noreferrer">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={memory.media.url}
+                          alt={memory.media.filename}
+                          className="mt-1 max-h-40 rounded-lg object-cover"
+                        />
+                      </a>
+                    ) : memory.media.type === "video" ? (
+                      <video
+                        src={memory.media.url}
+                        controls
+                        preload="metadata"
+                        className="mt-1 max-h-40 w-full rounded-lg bg-black"
+                      />
+                    ) : (
+                      <a
+                        href={memory.media.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="mt-1 flex items-center gap-2 rounded-lg bg-amber-100 px-2 py-1 text-xs text-amber-800"
+                      >
+                        📄 {memory.media.filename}
+                      </a>
+                    ))}
                   <p className="mt-1 text-xs font-medium text-amber-700">— {memory.authorName}</p>
                 </li>
               ))}

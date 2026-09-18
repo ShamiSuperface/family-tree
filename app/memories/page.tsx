@@ -1,9 +1,9 @@
 "use client";
 
-import { Suspense, useEffect, useState, type FormEvent } from "react";
+import { Suspense, useEffect, useState, type ChangeEvent, type FormEvent } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import type { Memory, Person } from "@/types/family";
+import type { MediaItem, Memory, Person } from "@/types/family";
 import ThemeToggle from "@/components/ThemeToggle";
 
 // Editing is only available when running the site locally (`npm run dev`).
@@ -34,6 +34,9 @@ function MemoriesPageContent() {
   const [website, setWebsite] = useState(""); // honeypot
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [media, setMedia] = useState<MediaItem | null>(null);
+  const [mediaUploading, setMediaUploading] = useState(false);
+  const [mediaError, setMediaError] = useState<string | null>(null);
 
   const loadMemories = async () => {
     const { memories: data, unavailable } = await fetchMemories();
@@ -66,6 +69,26 @@ function MemoriesPageContent() {
     setMemories((prev) => (prev ? prev.filter((m) => m.id !== id) : prev));
   };
 
+  const handleMediaChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setMediaUploading(true);
+    setMediaError(null);
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      const res = await fetch("/api/memories/upload", { method: "POST", body: formData });
+      const data = (await res.json()) as MediaItem & { error?: string };
+      if (!res.ok) throw new Error(data.error ?? "שגיאה בהעלאת המדיה");
+      setMedia({ id: crypto.randomUUID(), url: data.url, type: data.type, filename: data.filename });
+    } catch (err) {
+      setMediaError(err instanceof Error ? err.message : "שגיאה בהעלאת המדיה");
+    } finally {
+      setMediaUploading(false);
+      e.target.value = "";
+    }
+  };
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError(null);
@@ -78,6 +101,7 @@ function MemoriesPageContent() {
           authorName,
           text,
           personId: personId || null,
+          media,
           website,
         }),
       });
@@ -88,6 +112,7 @@ function MemoriesPageContent() {
       setAuthorName("");
       setText("");
       setPersonId("");
+      setMedia(null);
       await loadMemories();
     } catch (err) {
       setError(err instanceof Error ? err.message : "שגיאה בשליחה");
@@ -163,6 +188,37 @@ function MemoriesPageContent() {
             className="w-full resize-none rounded-lg border-2 border-amber-400 bg-[var(--surface)] px-3 py-2 text-sm text-stone-900 outline-none focus:border-amber-600"
           />
 
+          <div>
+            {media ? (
+              <div className="flex items-center gap-2 rounded-lg border-2 border-amber-300 bg-amber-50 px-3 py-2">
+                <span className="text-lg">
+                  {media.type === "photo" ? "🖼️" : media.type === "video" ? "🎬" : "📄"}
+                </span>
+                <span className="min-w-0 flex-1 truncate text-sm text-stone-700">{media.filename}</span>
+                <button
+                  type="button"
+                  onClick={() => setMedia(null)}
+                  aria-label="הסרת המדיה"
+                  className="shrink-0 text-stone-400 hover:text-red-600"
+                >
+                  ✕
+                </button>
+              </div>
+            ) : (
+              <label className="inline-block cursor-pointer rounded-lg border-2 border-amber-500 px-3 py-2 text-sm font-medium text-amber-900 hover:bg-amber-50">
+                {mediaUploading ? "מעלה..." : "+ צירוף תמונה/סרטון/מסמך"}
+                <input
+                  type="file"
+                  accept="image/*,video/*,application/pdf"
+                  onChange={handleMediaChange}
+                  disabled={mediaUploading}
+                  className="hidden"
+                />
+              </label>
+            )}
+            {mediaError && <p className="mt-1 text-sm text-red-600">{mediaError}</p>}
+          </div>
+
           {/* Honeypot — hidden from real visitors, catches simple bots. */}
           <input
             type="text"
@@ -178,7 +234,7 @@ function MemoriesPageContent() {
 
           <button
             type="submit"
-            disabled={submitting || memoriesUnavailable}
+            disabled={submitting || mediaUploading || memoriesUnavailable}
             className="rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--accent-hover)] disabled:opacity-50"
           >
             {submitting ? "שולח..." : "שליחת זיכרון"}
@@ -211,6 +267,33 @@ function MemoriesPageContent() {
                       </button>
                     )}
                   </div>
+                  {memory.media &&
+                    (memory.media.type === "photo" ? (
+                      <a href={memory.media.url} target="_blank" rel="noreferrer">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={memory.media.url}
+                          alt={memory.media.filename}
+                          className="mt-2 max-h-64 rounded-lg border-2 border-amber-300 object-cover"
+                        />
+                      </a>
+                    ) : memory.media.type === "video" ? (
+                      <video
+                        src={memory.media.url}
+                        controls
+                        preload="metadata"
+                        className="mt-2 max-h-64 w-full rounded-lg border-2 border-amber-300 bg-black"
+                      />
+                    ) : (
+                      <a
+                        href={memory.media.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="mt-2 flex items-center gap-2 rounded-lg border-2 border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-800"
+                      >
+                        📄 {memory.media.filename}
+                      </a>
+                    ))}
                   <p className="mt-2 text-sm font-medium text-amber-800">
                     — {memory.authorName}, {formatMemoryDate(memory.createdAt)}
                     {person ? ` · על ${person.firstName} ${person.lastName}` : ""}

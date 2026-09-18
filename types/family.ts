@@ -33,6 +33,8 @@ export interface Memory {
   /** The person this memory is about, or null for a memory about the family in general. */
   personId: string | null;
   createdAt: string;
+  /** An optional photo/video/document attached to the memory. */
+  media: MediaItem | null;
 }
 
 export interface Task {

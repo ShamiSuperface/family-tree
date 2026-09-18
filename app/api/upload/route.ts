@@ -2,19 +2,7 @@ import { NextResponse } from "next/server";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import crypto from "crypto";
-
-const ALLOWED_TYPES: Record<string, string> = {
-  "image/jpeg": "jpg",
-  "image/png": "png",
-  "image/webp": "webp",
-  "image/gif": "gif",
-  "application/pdf": "pdf",
-  "video/mp4": "mp4",
-  "video/quicktime": "mov",
-  "video/webm": "webm",
-};
-const MAX_SIZE = 5 * 1024 * 1024;
-const MAX_VIDEO_SIZE = 40 * 1024 * 1024;
+import { ALLOWED_UPLOAD_TYPES, validateUpload } from "@/lib/uploadLimits";
 
 export async function POST(request: Request) {
   if (process.env.NODE_ENV !== "development") {
@@ -27,20 +15,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "לא נבחר קובץ" }, { status: 400 });
   }
 
-  const ext = ALLOWED_TYPES[file.type];
-  if (!ext) {
-    return NextResponse.json({ error: "סוג קובץ לא נתמך (רק תמונות, סרטונים או PDF)" }, { status: 400 });
-  }
-  const isVideo = file.type.startsWith("video/");
-  const maxSize = isVideo ? MAX_VIDEO_SIZE : MAX_SIZE;
-  if (file.size > maxSize) {
-    const limitLabel = isVideo ? "40MB" : "5MB";
-    return NextResponse.json({ error: `הקובץ גדול מדי (מקסימום ${limitLabel})` }, { status: 400 });
+  const error = validateUpload(file);
+  if (error) {
+    return NextResponse.json({ error }, { status: 400 });
   }
 
   const dir = path.join(process.cwd(), "public", "photos");
   await mkdir(dir, { recursive: true });
-  const filename = `${crypto.randomUUID()}.${ext}`;
+  const filename = `${crypto.randomUUID()}.${ALLOWED_UPLOAD_TYPES[file.type]}`;
   const buffer = Buffer.from(await file.arrayBuffer());
   await writeFile(path.join(dir, filename), buffer);
 

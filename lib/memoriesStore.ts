@@ -1,5 +1,5 @@
 import crypto from "crypto";
-import type { Memory } from "@/types/family";
+import type { Memory, MediaItem } from "@/types/family";
 import { getRedis } from "@/lib/redis";
 
 const LIST_KEY = "family:memories";
@@ -10,13 +10,15 @@ export interface MemoryInput {
   authorName: string;
   text: string;
   personId: string | null;
+  media: MediaItem | null;
   /** Honeypot field: real visitors leave it empty. */
   website?: string;
 }
 
 export async function getMemories(): Promise<Memory[]> {
   const items = await getRedis().lrange<Memory>(LIST_KEY, 0, -1);
-  return items;
+  // Backward-compatible with memories saved before the media field existed.
+  return items.map((item) => ({ ...item, media: item.media ?? null }));
 }
 
 function validate(input: MemoryInput): string | null {
@@ -39,6 +41,7 @@ export async function addMemory(input: MemoryInput): Promise<Memory | null> {
     text: input.text.trim(),
     personId: input.personId,
     createdAt: new Date().toISOString(),
+    media: input.media,
   };
   await getRedis().lpush(LIST_KEY, memory);
   return memory;
