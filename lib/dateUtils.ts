@@ -28,6 +28,25 @@ export function livingAge(birthDate: string | null, deathDate: string | null): n
   return new Date().getFullYear() - birthYear;
 }
 
+/** Age at death, or null if either date's year isn't known. */
+export function ageAtDeath(birthDate: string | null, deathDate: string | null): number | null {
+  if (!birthDate || !deathDate || isMonthDayOnly(birthDate) || isMonthDayOnly(deathDate)) {
+    return null;
+  }
+  const birthYear = Number(birthDate.slice(0, 4));
+  const deathYear = Number(deathDate.slice(0, 4));
+  let age = deathYear - birthYear;
+  // Refine using month/day when both dates are exact, not just year-only.
+  if (birthDate.length === 10 && deathDate.length === 10) {
+    const [, birthMonth, birthDay] = birthDate.split("-").map(Number);
+    const [, deathMonth, deathDay] = deathDate.split("-").map(Number);
+    if (deathMonth < birthMonth || (deathMonth === birthMonth && deathDay < birthDay)) {
+      age -= 1;
+    }
+  }
+  return age;
+}
+
 /** "בן" for a male, "בת" for a female — for phrases like "בן 42" / "בת 42". */
 export function ageWord(gender: "male" | "female"): string {
   return gender === "female" ? "בת" : "בן";

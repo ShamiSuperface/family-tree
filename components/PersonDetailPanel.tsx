@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import type { Memory, Person, Task } from "@/types/family";
-import { formatPersonDate } from "@/lib/dateUtils";
+import { ageAtDeath, formatPersonDate } from "@/lib/dateUtils";
 import { toHebrewDateString } from "@/lib/hebrewDate";
 
 interface Props {
@@ -134,6 +134,16 @@ export default function PersonDetailPanel({ person, people, onClose, onEdit, onS
           {formatDateLine(person.birthDate)}
           {person.deathDate ? ` – ${formatDateLine(person.deathDate)}` : ""}
         </p>
+
+        {person.deathDate &&
+          (() => {
+            const age = ageAtDeath(person.birthDate, person.deathDate);
+            return age !== null ? (
+              <p className="text-center text-sm text-stone-600">
+                נפטר{person.gender === "female" ? "ה" : ""} בגיל {age}
+              </p>
+            ) : null;
+          })()}
 
         {(person.residence || person.occupation) && (
           <p className="mt-1 text-center text-sm text-stone-600">
